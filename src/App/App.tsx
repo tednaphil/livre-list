@@ -7,7 +7,9 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 function App() {
   return (
     <>
-    <h1>LivreList</h1>
+    <nav>
+      <h1>LivreList</h1>
+    </nav>
     <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='*' element={<ErrorPage />}></Route>
