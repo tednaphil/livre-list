@@ -1,10 +1,15 @@
-# Getting Started with Create React App
+# Livre List
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation & Setup
+- Run the following on the command line to clone the repo to your machine and open in your text editor
+    ```
+    git clone git@github.com:tednaphil/livre-list.git
+    cd livre-list
+    npm install
+    code .
+    ```
 
 ## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`
 
