@@ -3,16 +3,15 @@ import { useRef } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import {
-  Input,
   Button,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Stack
 } from '@chakra-ui/react'
 import Home from '../Home/Home';
 import Search from '../Search/Search';
@@ -46,10 +45,12 @@ function App() {
           <DrawerHeader>Menu</DrawerHeader>
 
           <DrawerBody>
-            <div className='navlinks'>
-              <NavLink to='/' onClick={onClose}>Home</NavLink><br/>
+            {/* <div className='navlinks'> */}
+            <Stack>
+              <NavLink to='/' onClick={onClose}>Home</NavLink>
               <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>
-            </div>
+            </Stack>
+            {/* </div> */}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
