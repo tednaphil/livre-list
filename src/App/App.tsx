@@ -1,5 +1,19 @@
 import './App.css';
+import { useRef } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import {
+  Input,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  useDisclosure,
+} from '@chakra-ui/react'
 import Home from '../Home/Home';
 import Search from '../Search/Search';
 import Results from '../Results/Results';
@@ -9,15 +23,42 @@ import Shelf from '../Shelf/Shelf';
 import ErrorPage from '../ErrorPage/ErrorPage';
 
 function App() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef();
+
   return (
     <>
     <nav className='navbar'>
       <h1>LivreList</h1>
       <Search/>
-      <div className='navlinks'>
+      <Button /*ref={btnRef}*/ onClick={onOpen}>
+        <HamburgerIcon />
+      </Button>
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        // finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Menu</DrawerHeader>
+
+          <DrawerBody>
+            <div className='navlinks'>
+              <NavLink to='/' onClick={onClose}>Home</NavLink><br/>
+              <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>
+            </div>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+
+
+      {/* <div className='navlinks'>
         <NavLink to='/'>Home</NavLink>
         <NavLink to='/shelves'>Shelves</NavLink>
-      </div>
+      </div> */}
     </nav>
     <Routes>
       <Route path='/' element={<Home/>}/>

@@ -1,11 +1,15 @@
 .navbar {
+  padding: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  & .navlinks{
+  & .search-form{
+    width: 50%;
+  }
+  /* & .navlinks{
     width: 15%;
     display: flex;
     justify-content: space-between;
-  }
+  } */
 }
