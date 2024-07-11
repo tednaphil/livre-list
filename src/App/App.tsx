@@ -11,11 +11,13 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 function App() {
   return (
     <>
-    <nav>
+    <nav className='navbar'>
       <h1>LivreList</h1>
       <Search/>
-      <NavLink to='/'>Home</NavLink>
-      <NavLink to='/shelves'>Shelves</NavLink>
+      <div className='navlinks'>
+        <NavLink to='/'>Home</NavLink>
+        <NavLink to='/shelves'>Shelves</NavLink>
+      </div>
     </nav>
     <Routes>
       <Route path='/' element={<Home/>}/>
