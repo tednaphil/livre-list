@@ -4,6 +4,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getResults } from '../Util/API_calls';
 import Card from '../Card/Card';
+import SearchCtrl from '../SearchCtrl/SearchCtrl';
 
 function Results() {
   const location = useLocation();
@@ -34,12 +35,14 @@ function Results() {
         title={book.title}
         authors={book.authors}
         image={book.image_links.smallThumbnail}
+        book={book}
       />
     )
   })
 
     return(
         <>
+          <SearchCtrl />
           <h2>{`Search Results - ${searchTerm}`}</h2>
           {books}
         </>
