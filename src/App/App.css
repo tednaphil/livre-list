@@ -1,11 +1,16 @@
 .navbar {
-  padding: 10px;
+  padding: 25px 15px;
+  padding-bottom: 30px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  & .search-form{
-    width: 50%;
+  background-color: #562100;
+  & h1 {
+    padding-right: 10px;
+    color: white;
+    font-family: "Gentium Book Plus", serif;
+    font-size: 2.5rem;
   }
   /* & .navlinks{
     width: 15%;

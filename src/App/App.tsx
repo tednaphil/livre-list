@@ -30,8 +30,8 @@ function App() {
     <nav className='navbar'>
       <h1>LivreList</h1>
       <Search/>
-      <Button /*ref={btnRef}*/ onClick={onOpen}>
-        <HamburgerIcon />
+      <Button /*ref={btnRef}*/ colorScheme='whiteAlpha' variant='ghost' onClick={onOpen}>
+        <HamburgerIcon w={6} h={6} color='white' />
       </Button>
       <Drawer
         isOpen={isOpen}
