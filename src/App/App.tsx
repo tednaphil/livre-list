@@ -1,6 +1,6 @@
 import './App.css';
 import { useRef } from 'react';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route, NavLink, Link } from 'react-router-dom';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import {
   Button,
@@ -28,7 +28,7 @@ function App() {
   return (
     <>
     <nav className='navbar'>
-      <h1>LivreList</h1>
+      <Link to='/'><h1>LivreList</h1></Link>
       <Search/>
       <Button /*ref={btnRef}*/ colorScheme='whiteAlpha' variant='ghost' onClick={onOpen}>
         <HamburgerIcon w={6} h={6} color='white' />
