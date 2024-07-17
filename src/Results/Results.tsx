@@ -2,12 +2,12 @@ import './Results.css';
 import { useParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getResults } from '../Util/API_calls';
+import Card from '../Card/Card';
 
 function Results() {
-  // const searchTerm = useParams().term;
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState(location.state);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<any[]>([]);
   // const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -24,10 +24,23 @@ function Results() {
     }
   }
 
+  const books = results?.map(book => {
+    console.log('books map', book)
+    return (
+      <Card
+        key={book.id}
+        id={book.id}
+        title={book.title}
+        authors={book.authors}
+        image={book.image_links.smallThumbnail}
+      />
+    )
+  })
+
     return(
         <>
-          <h2>Search Results</h2>
-          <h3>{searchTerm}</h3>
+          <h2>{`Search Results - ${searchTerm}`}</h2>
+          {books}
         </>
     )
 }
