@@ -1,4 +1,5 @@
 import './Results.css';
+import { Book } from '../Util/Interfaces';
 import { useParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getResults } from '../Util/API_calls';
@@ -7,7 +8,7 @@ import Card from '../Card/Card';
 function Results() {
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState(location.state);
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<Book[]>([]);
   // const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
