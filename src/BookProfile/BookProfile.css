@@ -1,0 +1,29 @@
+.book-profile {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    & h3 {
+        font-weight: 500;
+        font-size: 2rem;
+    }
+}
+
+.thumbnail-container {
+    padding-top: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    & img {
+        margin-bottom: 30px;
+    }
+}
+
+.book-info {
+    padding: 20px;
+}
+
+.book-details {
+    display: flex;
+    padding-bottom: 15px;
+}
