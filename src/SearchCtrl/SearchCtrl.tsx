@@ -23,8 +23,8 @@ function SearchCtrl({setResults, results}: Props) {
           <CheckboxGroup colorScheme='orange' defaultValue={[]}>
             <Stack spacing={[1, 2]} direction={['column']}>
               <Checkbox value='ebook'>Ebooks</Checkbox>
-              <Checkbox value='term2'>Filter Term 2</Checkbox>
-              <Checkbox value='term3'>Filter Term 3</Checkbox>
+              <Checkbox value='purchaseable'>Purchaseable</Checkbox>
+              {/* <Checkbox value='term3'>Filter Term 3</Checkbox> */}
             </Stack>
           </CheckboxGroup>
         {/* </section> */}
