@@ -14,17 +14,19 @@ function Card({id, title, authors, image, book}: Props) {
 
   const authorList = authors.map(author => {
     return(
-      <p>{author}</p>
+      <p className='author'>{author}</p>
     )});
 
     return(
         <>
-        <Link to={`/books/${title}`}>
-          <img src={image} alt={`${title} book cover`}/>
-          <h3>{title}</h3>
-          {/* <p>Author(s)</p> */}
-          {authorList}
-        </Link>
+        <div className='book-card'>
+          <Link to={`/books/${title}`}>
+            <img src={image} alt={`${title} book cover`}/>
+            <h3>{title}</h3>
+            {/* <p>Author(s)</p> */}
+            {authorList}
+          </Link>
+        </div>
         </>
     )
 }

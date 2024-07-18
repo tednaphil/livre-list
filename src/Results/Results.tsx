@@ -44,7 +44,9 @@ function Results() {
         <>
           <SearchCtrl />
           <h2>{`Search Results - ${searchTerm}`}</h2>
-          {books}
+          <section className='results-section'>
+            {books}
+          </section>
         </>
     )
 }
