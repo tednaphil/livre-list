@@ -42,11 +42,15 @@ function Results() {
 
     return(
         <>
-          <SearchCtrl />
-          <h2>{`Search Results - ${searchTerm}`}</h2>
-          <section className='results-section'>
+          <h2 className='results-header'>{`Search Results - ${searchTerm}`}</h2>
+        <div className='results-container'>
+          <section className='sort-filter'>
+            <SearchCtrl setResults={setResults} results={results}/>
+          </section>
+          <section className='results-gallery'>
             {books}
           </section>
+        </div>
         </>
     )
 }
