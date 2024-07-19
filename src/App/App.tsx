@@ -1,66 +1,18 @@
 import './App.css';
-import { useRef } from 'react';
-import { Routes, Route, NavLink, Link } from 'react-router-dom';
-import { HamburgerIcon } from '@chakra-ui/icons';
-import {
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
-  Stack
-} from '@chakra-ui/react'
+import { Routes, Route } from 'react-router-dom';
 import Home from '../Home/Home';
-import Search from '../Search/Search';
 import Results from '../Results/Results';
 import BookProfile from '../BookProfile/BookProfile';
 import Shelves from '../Shelves/Shelves';
 import Shelf from '../Shelf/Shelf';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import Nav from '../Nav/Nav';
 
 function App() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
 
   return (
     <>
-    <nav className='navbar'>
-      <Link to='/'><h1>LivreList</h1></Link>
-      <Search/>
-      <Button /*ref={btnRef}*/ colorScheme='whiteAlpha' variant='ghost' onClick={onOpen}>
-        <HamburgerIcon w={6} h={6} color='white' />
-      </Button>
-      <Drawer
-        isOpen={isOpen}
-        placement='right'
-        onClose={onClose}
-        // finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Menu</DrawerHeader>
-
-          <DrawerBody>
-            {/* <div className='navlinks'> */}
-            <Stack>
-              <NavLink to='/' onClick={onClose}>Home</NavLink>
-              <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>
-            </Stack>
-            {/* </div> */}
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-
-
-      {/* <div className='navlinks'>
-        <NavLink to='/'>Home</NavLink>
-        <NavLink to='/shelves'>Shelves</NavLink>
-      </div> */}
-    </nav>
+    <Nav/>
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/shelves' element={<Shelves/>}/>
