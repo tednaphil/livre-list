@@ -27,7 +27,7 @@ function Results() {
   }
 
   const books = results?.map(book => {
-    console.log('books map', book)
+    // console.log('books map', book)
     return (
       <Card
         key={book.id}
@@ -42,7 +42,7 @@ function Results() {
 
     return(
         <>
-          <h2 className='results-header'>{`Search Results - ${searchTerm}`}</h2>
+        <h2 className='results-header'>{`Search Results - ${searchTerm}`}</h2>
         <div className='results-container'>
           <section className='sort-filter'>
             <SearchCtrl setResults={setResults} results={results}/>
