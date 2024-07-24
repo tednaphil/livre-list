@@ -1,0 +1,29 @@
+.home-wrapper {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    & img {
+        /* width: 60%; */
+        height: 95vh;
+        /* height: 100%; */
+    }
+}
+
+.home-info {
+    padding: 50px;
+    /* padding-top: 150px; */
+    & p {
+        font-size: 1rem;
+    }
+    & ul {
+        padding: 10px 20px;
+    }
+    & li {
+        font-size: 1rem;
+    }
+    & span {
+        font-weight: bold;
+        /* text-decoration: underline; */
+    }
+}
