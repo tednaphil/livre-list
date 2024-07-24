@@ -12,7 +12,7 @@ function Home() {
               Manage your reading journey with ease.
               LivreList is an app designed to help you find books and organize them into personalized collections called "shelves."
               Whether you're an avid reader, a casual book lover, or building a home library, LivreList is here to streamline your book tracking and inventory management.
-
+            </p>
             <h3>Key Features</h3>
             <ul>
               <li><span>Advanced Search:</span> Search the Google Books collection for your book of choice with our search and filtering functionality.</li>
@@ -20,7 +20,7 @@ function Home() {
               <li><span>Home Library Inventory:</span> Easily manage your personal collection and never lose track of a book again.</li>
             </ul>
 
-            Happy reading!</p>
+           <p> Happy reading!</p>
           </aside>
         </div>
         </>

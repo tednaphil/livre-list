@@ -5,14 +5,22 @@
     /* justify-content: space-between; */
     & img {
         /* width: 60%; */
+        /* max-width: 60%; */
         height: 95vh;
         /* height: 100%; */
     }
 }
 
 .home-info {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    justify-content: center;
     padding: 50px;
     /* padding-top: 150px; */
+    & h2 {
+        padding-bottom: 50px;
+    }
     & p {
         font-size: 1rem;
     }
