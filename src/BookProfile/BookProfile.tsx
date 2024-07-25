@@ -35,7 +35,7 @@ function BookProfile() {
         const data = await getBook(id);
         setBook(data);
         //fetch reccommendations based on data.category[0]
-        //fetch user's shelves and set the shelves state to use to render menu items
+        //fetch user's shelves and set the shelves state with an array of shelf names
       } catch(error: any) {
         setError(`There was a problem getting the book - ${error.message}`)
       }
@@ -64,7 +64,7 @@ function BookProfile() {
               <img src={book?.image_links.extraLarge} alt={`${book?.title} cover`}/>
               <Stack spacing={4} direction='column' align='center'>
                 <Menu>
-                  <MenuButton as={Button} colorScheme='orange' rightIcon={<ChevronDownIcon />}>
+                  <MenuButton as={Button} colorScheme='orange' width='200px' rightIcon={<ChevronDownIcon />}>
                     Add to Shelf
                   </MenuButton>
                   <MenuList>
