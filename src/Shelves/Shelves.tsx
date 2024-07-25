@@ -4,8 +4,14 @@ import './Shelves.css';
 function Shelves() {
     return(
         <>
-          <h2>Shelves</h2>
-          <ShelfCtrl/>
+          <div className='shelves-wrapper'>
+            <section className='sort-filter'>
+              <ShelfCtrl/>
+            </section>
+            <section className='shelves-gallery'>
+              Shelves Gallery
+            </section>
+          </div>
         </>
     )
 }

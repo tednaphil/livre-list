@@ -13,12 +13,14 @@ function ShelfCtrl() {
           </Select>
           <h2>Create a New Shelf</h2>
           <form>
+            <Stack>
             <Input type='text'
             placeholder='Loaned Books'
             required
             value={newShelf}
             onChange={(e) => {setNewShelf(e.target.value)}}/>
-            <Button>Submit</Button>
+            <Button colorScheme='orange'>Submit</Button>
+            </Stack>
           </form>
         </>
     )
