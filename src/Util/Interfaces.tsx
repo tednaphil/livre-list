@@ -8,6 +8,7 @@ export interface Book {
     publisher: string;
     subtitle: string;
     title: string;
+    buy_link: string;
 }
 
 export interface ImgLinks {
