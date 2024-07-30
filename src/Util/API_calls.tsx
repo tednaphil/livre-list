@@ -38,8 +38,8 @@ const getBook = async (bookID: string | undefined) => {
         throw error;
     }
 }
-const getShelves = async (userID: string | undefined) => {
-    userID = "106196942824430802445";
+const getShelves = async (userID: string | undefined = "106196942824430802445") => {
+    // userID = "106196942824430802445";
     try {
         const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/vi/users/${userID}/bookshelves`,
             {

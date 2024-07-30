@@ -19,7 +19,7 @@ function Card({id, title, authors, image, book}: Props) {
 
     return(
         <>
-        <div className='book-card'>
+        <div className='card book-card'>
           <Link to={`/books/${id}`}>
             <img src={image} alt={`${title} book cover`}/>
             <h3>{title}</h3>

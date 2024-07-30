@@ -20,7 +20,7 @@ export interface ImgLinks {
     extraLarge: string;
 }
 
-export interface Shelf {
+export interface Bookshelf {
     id: number;
     title: string;
     access: string;
