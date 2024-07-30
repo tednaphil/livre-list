@@ -38,6 +38,7 @@ const getBook = async (bookID: string | undefined) => {
         throw error;
     }
 }
+
 const getShelves = async (userID: string | undefined = "106196942824430802445") => {
     // userID = "106196942824430802445";
     try {
@@ -58,6 +59,13 @@ const getShelves = async (userID: string | undefined = "106196942824430802445") 
         throw error;
     }
 }
+
+const getShelf = async () => {
+    //get shelf info and get shelf books w/ Promise.all
+
+}
+
+
 
 export {
     getResults,

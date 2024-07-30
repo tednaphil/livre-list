@@ -40,7 +40,7 @@ function Shelves() {
         <>
           <div className='shelves-wrapper'>
             <section className='sort-filter'>
-              <ShelfCtrl/>
+              <ShelfCtrl shelves={shelves} setShelves={setShelves} />
             </section>
             <section className='shelves-gallery'>
               {shelfNames}

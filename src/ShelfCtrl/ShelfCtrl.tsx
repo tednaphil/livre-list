@@ -1,8 +1,14 @@
 import './ShelfCtrl.css';
 import { Select, Stack, Input, Button } from '@chakra-ui/react';
 import { useState } from 'react';
+import { Bookshelf } from '../Util/Interfaces';
 
-function ShelfCtrl() {
+interface Props {
+  setShelves: (shelves: Bookshelf[]) => void;
+  shelves: Bookshelf[] | null;
+}
+
+function ShelfCtrl({ setShelves, shelves }: Props) {
   const [newShelf, setNewShelf] = useState('');
     return(
         <>

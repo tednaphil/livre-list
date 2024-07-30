@@ -17,6 +17,7 @@ function ShelfCard({id, title, bookCount}: Props) {
           <Link to={`/shelves/${id}`}>
             <img src={shelflogo} alt={`illustration of book spines`}/>
             <h3>{title}</h3>
+            <p>{bookCount} Books</p>
           </Link>
         </div>
         </>
