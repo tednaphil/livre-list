@@ -1,5 +1,5 @@
 import './ShelfCtrl.css';
-import { Select, CheckboxGroup, Stack, Checkbox, Input, Button } from '@chakra-ui/react';
+import { Select, Stack, Input, Button } from '@chakra-ui/react';
 import { useState } from 'react';
 
 function ShelfCtrl() {
