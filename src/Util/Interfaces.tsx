@@ -19,3 +19,10 @@ export interface ImgLinks {
     large: string;
     extraLarge: string;
 }
+
+export interface Shelf {
+    id: number;
+    title: string;
+    access: string;
+    book_count: number;
+}
