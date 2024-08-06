@@ -5,6 +5,9 @@ import { Book } from '../Util/Interfaces';
 import { getBook, getRecs } from '../Util/API_calls';
 import { ChevronDownIcon, AddIcon } from '@chakra-ui/icons';
 import { Button, Stack,  } from '@chakra-ui/react';
+import Carousel from '../Carousel/Carousel';
+
+
 import {
   Menu,
   MenuButton,
@@ -96,6 +99,7 @@ function BookProfile() {
           <footer className='recs'>
             <h4>Recommendations</h4>
             {/* render reccommendation cards carousel here */}
+            <Carousel books={recs}/>
           </footer>
           </div>
         </>
