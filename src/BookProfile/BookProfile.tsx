@@ -1,8 +1,8 @@
 import './BookProfile.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Book } from '../Util/Interfaces';
-import { getBook, getRecs } from '../Util/API_calls';
+import { Book, Bookshelf } from '../Util/Interfaces';
+import { getBook, getShelves, getRecs } from '../Util/API_calls';
 import { ChevronDownIcon, AddIcon } from '@chakra-ui/icons';
 import { Button, Stack,  } from '@chakra-ui/react';
 import Carousel from '../Carousel/Carousel';
@@ -24,27 +24,30 @@ function BookProfile() {
     const id = useParams().id;
     const [book, setBook] = useState<Book | null>(null);
     // const [loading, setLoading] = useState(true);
-    // const [user, setUser] = useState();
+    const [user, setUser] = useState({ name: 'Odell', id: "106196942824430802445" });
     // get user data from local storage
-    const [shelves, setShelves] = useState<string[]>([`Bellamy's Favs`, `DNF`, `Christmas Stories`])
+    const [shelves, setShelves] = useState<string[] | null>(null);
     const [error, setError] = useState('');
     const [recs, setRecs] = useState<Book[] | null>(null);
 
 
     useEffect(() => {
+      setBook(null);
+      setRecs(null);
       setError('');
       fetchData()
-    }, [])
+    }, [id])
 
     const fetchData = async () => {
       try {
+        const shelfData = await getShelves(user.id);
+        setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
         const data = await getBook(id);
         setBook(data);
         if(data) {
           const recData = await getRecs(data.categories[0]);
           setRecs(recData.filter((rec: Book) => rec.title !== data.title))
         }
-        //fetch user's shelves and set the shelves state with an array of shelf names
       } catch(error: any) {
         setError(`There was a problem getting the book - ${error.message}`)
       }
@@ -58,7 +61,7 @@ function BookProfile() {
       )
     })
 
-    const userShelves = shelves.map((shelf, index) => {
+    const userShelves = shelves?.map((shelf, index) => {
       return(
         <MenuItem key={index} onClick={() => alert(`Added to ${shelf}`)}>{shelf}</MenuItem>
       )
