@@ -3,6 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Book } from "../Util/Interfaces";
 import Card from "../Card/Card";
+import './Carousel.css';
+
 
 interface Props {
     books: Book[] | null
@@ -12,7 +14,7 @@ function Carousel({books}: Props) {
 
     const bookCards = books?.map(book => {
         return (
-            <div>
+            // <div>
                 <Card
                     key={book.id}
                     id={book.id}
@@ -21,7 +23,7 @@ function Carousel({books}: Props) {
                     image={book.image_links.smallThumbnail}
                     book={book}
                 />
-            </div>
+            // </div>
         )
     })
 
@@ -50,7 +52,7 @@ function Carousel({books}: Props) {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 3,
+      slidesToShow: 4,
       slidesToScroll: 1,
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />
