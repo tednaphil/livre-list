@@ -14,7 +14,6 @@ function Carousel({books}: Props) {
 
     const bookCards = books?.map(book => {
         return (
-            // <div>
                 <Card
                     key={book.id}
                     id={book.id}
@@ -23,39 +22,15 @@ function Carousel({books}: Props) {
                     image={book.image_links.smallThumbnail}
                     book={book}
                 />
-            // </div>
-        )
+             )
     })
 
-    function NextArrow(props: any) {
-        const { className, style, onClick } = props;
-        return (
-          <div
-            className={className}
-            style={{ ...style, display: "block", color: "orange" }}
-            onClick={onClick}
-          />
-        );
-      }
-      
-      function PrevArrow(props: any) {
-        const { className, style, onClick } = props;
-        return (
-          <div
-            className={className}
-            style={{ ...style, display: "block", color: "orange" }}
-            onClick={onClick}
-          />
-        );
-      }
     var settings = {
       dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
-    //   nextArrow: <NextArrow />,
-    //   prevArrow: <PrevArrow />
     };
     return (
     <div className="slider-container">

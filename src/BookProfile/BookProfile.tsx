@@ -44,7 +44,6 @@ function BookProfile() {
           const recData = await getRecs(data.categories[0]);
           setRecs(recData.filter((rec: Book) => rec.title !== data.title))
         }
-        //fetch reccommendations based on data.category[0]
         //fetch user's shelves and set the shelves state with an array of shelf names
       } catch(error: any) {
         setError(`There was a problem getting the book - ${error.message}`)
@@ -98,7 +97,6 @@ function BookProfile() {
           </section>
           <footer className='recs'>
             <h4>Recommendations</h4>
-            {/* render reccommendation cards carousel here */}
             <Carousel books={recs}/>
           </footer>
           </div>
