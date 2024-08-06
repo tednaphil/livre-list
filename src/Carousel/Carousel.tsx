@@ -32,7 +32,7 @@ function Carousel({books}: Props) {
         return (
           <div
             className={className}
-            style={{ ...style, display: "block", background: "orange", color: "white" }}
+            style={{ ...style, display: "block", color: "orange" }}
             onClick={onClick}
           />
         );
@@ -43,7 +43,7 @@ function Carousel({books}: Props) {
         return (
           <div
             className={className}
-            style={{ ...style, display: "block", background: "orange", color: "white" }}
+            style={{ ...style, display: "block", color: "orange" }}
             onClick={onClick}
           />
         );
@@ -54,8 +54,8 @@ function Carousel({books}: Props) {
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
-      nextArrow: <NextArrow />,
-      prevArrow: <PrevArrow />
+    //   nextArrow: <NextArrow />,
+    //   prevArrow: <PrevArrow />
     };
     return (
     <div className="slider-container">
