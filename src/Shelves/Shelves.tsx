@@ -7,7 +7,8 @@ import ShelfCard from '../ShelfCard/ShelfCard';
 
 function Shelves() {
   const [shelves, setShelves] = useState<Bookshelf[] | null>(null);
-  // const [user, setUser] = useState()
+  // const [user, setUser] = useState(null)
+  // get user data from local storage
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

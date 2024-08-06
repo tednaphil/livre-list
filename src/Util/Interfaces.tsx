@@ -26,3 +26,8 @@ export interface Bookshelf {
     access: string;
     book_count: number;
 }
+
+// export interface RequestOptions {
+//     method: string;
+//     redirect: string;
+// }
