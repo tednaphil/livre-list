@@ -20,6 +20,26 @@ const getResults = async (searchTerm: string) => {
         throw error;
     }
 }
+const getRecs = async (category: string) => {
+    try {
+        const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/v1/books?search=${category}`,
+            //replace url once available in mock server
+            {
+              method: 'GET',
+              redirect: 'follow'
+            }
+        );
+        if (!response.ok) {
+            const status = response.status;
+            console.log(status);
+            throw new Error(`Couldn't get recommendations - ${status}`)
+        }
+        return await response.json();
+    } catch(error: any) {
+        console.log("API CALLS catch block - recommendations", error);
+        throw error;
+    }
+}
 
 const getBook = async (bookID: string | undefined) => {
     try {
@@ -63,7 +83,6 @@ const getShelves = async (userID: string | undefined = "106196942824430802445") 
 }
 
 const getShelf = async (userID: string | undefined, shelfID: string | undefined) => {
-    //get shelf info and get shelf books w/ Promise.all
     userID = "106196942824430802445";
     try {
         const requestOptions = {
@@ -113,6 +132,7 @@ const getShelf = async (userID: string | undefined, shelfID: string | undefined)
 
 export {
     getResults,
+    getRecs,
     getBook,
     getShelves,
     getShelf,

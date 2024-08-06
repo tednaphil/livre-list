@@ -53,7 +53,7 @@ function Shelf() {
       <>
         <div className='shelf-wrapper'>
           {shelf && <h2>{shelf.title}</h2>}
-          {/* <h3>{shelfID}</h3> */}
+          {/* delete shelf button */}
           <div className='book-gallery'>
             {bookCards}
           </div>

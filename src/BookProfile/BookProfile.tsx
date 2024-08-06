@@ -2,7 +2,7 @@ import './BookProfile.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Book } from '../Util/Interfaces';
-import { getBook } from '../Util/API_calls';
+import { getBook, getRecs } from '../Util/API_calls';
 import { ChevronDownIcon, AddIcon } from '@chakra-ui/icons';
 import { Button, Stack,  } from '@chakra-ui/react';
 import {
@@ -21,12 +21,15 @@ function BookProfile() {
     const id = useParams().id;
     const [book, setBook] = useState<Book | null>(null);
     // const [loading, setLoading] = useState(true);
+    // const [user, setUser] = useState();
+    // get user data from local storage
     const [shelves, setShelves] = useState<string[]>([`Bellamy's Favs`, `DNF`, `Christmas Stories`])
     const [error, setError] = useState('');
     const [recs, setRecs] = useState<Book[] | null>(null);
 
 
     useEffect(() => {
+      setError('');
       fetchData()
     }, [])
 
@@ -34,6 +37,10 @@ function BookProfile() {
       try {
         const data = await getBook(id);
         setBook(data);
+        if(data) {
+          const recData = await getRecs(data.categories[0]);
+          setRecs(recData.filter((rec: Book) => rec.title !== data.title))
+        }
         //fetch reccommendations based on data.category[0]
         //fetch user's shelves and set the shelves state with an array of shelf names
       } catch(error: any) {
@@ -49,9 +56,9 @@ function BookProfile() {
       )
     })
 
-    const userShelves = shelves.map(shelf => {
+    const userShelves = shelves.map((shelf, index) => {
       return(
-        <MenuItem onClick={() => alert(`Added to ${shelf}`)}>{shelf}</MenuItem>
+        <MenuItem key={index} onClick={() => alert(`Added to ${shelf}`)}>{shelf}</MenuItem>
       )
     })
 
