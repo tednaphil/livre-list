@@ -14,13 +14,14 @@ function Results() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    setError('')
     fetchData()
   }, [])
 
   const fetchData = async () => {
     try {
       const searchData = await getResults(searchTerm);
-      setResults(searchData);
+      setResults(searchData.sort((a: Book, b: Book) => a.title.localeCompare(b.title)));
     } catch(error: any) {
       setError(`There was a problem getting the search results - ${error.message}`)
     }
