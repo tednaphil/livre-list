@@ -11,6 +11,7 @@ function Results() {
   const [searchTerm, setSearchTerm] = useState(location.state);
   const [results, setResults] = useState<Book[]>([]);
   const [sort, setSort] = useState<string>('ascending');
+  const [filter, setFilter] = useState<string[] | null>(null);
   // const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -57,7 +58,7 @@ function Results() {
         <h2 className='results-header'>{`Search Results - ${searchTerm}`}</h2>
         <div className='results-container'>
           <section className='sort-filter'>
-            <SearchCtrl setSort={setSort}/>
+            <SearchCtrl setSort={setSort} setFilter={setFilter} filter={filter}/>
           </section>
           <section className='results-gallery'>
             {books}
