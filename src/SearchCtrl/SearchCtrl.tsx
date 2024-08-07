@@ -14,28 +14,14 @@ function SearchCtrl({ setSort, setFilter, filter }: Props) {
   }
 
   const handleFilter = (e: any, term: string) => {
-    // if(!filter?.includes(e.target.value)) {
-    //   return filter
-    // } else {
-    //   setFilter([...filter, e.target.value])
-    // }
-    // if(!filter) {
-    //   setFilter([e.target.value])
-    // } else if(filter) {
-    //   setFilter([...filter, e.target.value])
-    // }
-    console.log(e)
     if(e.target.checked && !filter) {
       setFilter([term])
     } else if(e.target.checked && filter) {
       setFilter([...filter, term])
+    } else if(!e.target.checked && filter) {
+      const updatedFilters = filter.filter((el: any) => !(el === term))
+      setFilter(updatedFilters)
     }
-    // if(e.target.checked) {
-    //   setFilter([term])
-    // }
-
-    //remove from filter array if box is checked then unchecked
-    //add to filter array if box is checked not already in array and 
 
   }
 
