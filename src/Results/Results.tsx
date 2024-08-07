@@ -57,7 +57,7 @@ function Results() {
         <h2 className='results-header'>{`Search Results - ${searchTerm}`}</h2>
         <div className='results-container'>
           <section className='sort-filter'>
-            <SearchCtrl setSort={setSort} results={results}/>
+            <SearchCtrl setSort={setSort}/>
           </section>
           <section className='results-gallery'>
             {books}

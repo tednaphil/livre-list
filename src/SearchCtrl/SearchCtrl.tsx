@@ -1,13 +1,11 @@
 import './SearchCtrl.css';
-import { Book } from '../Util/Interfaces';
 import { Select, CheckboxGroup, Stack, Checkbox } from '@chakra-ui/react';
 
 interface Props {
   setSort: (orientation: string) => void;
-  results: Book[]
 }
 
-function SearchCtrl({setSort, results}: Props) {
+function SearchCtrl({ setSort }: Props) {
   const handleSort = (e: any,) => {
     setSort(e.target.value)
   }
