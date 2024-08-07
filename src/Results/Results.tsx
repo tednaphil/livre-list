@@ -10,22 +10,35 @@ function Results() {
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState(location.state);
   const [results, setResults] = useState<Book[]>([]);
+  const [direction, setDirection] = useState<string>('ascending');
   // const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    setError('')
-    fetchData()
-  }, [])
+  const sortResults = (books: Book[], orientation: string) => {
+    if(orientation === 'descending') {
+      //return results sorted in descending alphabetical order
+      return books.sort((a, b) => b.title.localeCompare(a.title))
+    } else {
+      //return array of results sorted in ascending alphabetical order
+      return books.sort((a, b) => a.title.localeCompare(b.title))
+    }
+  }
 
+  
   const fetchData = async () => {
     try {
       const searchData = await getResults(searchTerm);
-      setResults(searchData.sort((a: Book, b: Book) => a.title.localeCompare(b.title)));
+      const sortedData = sortResults(searchData, direction);
+      setResults(sortedData);
     } catch(error: any) {
       setError(`There was a problem getting the search results - ${error.message}`)
     }
   }
+  
+  useEffect(() => {
+    setError('')
+    fetchData()
+  }, [direction])
 
   const books = results?.map(book => {
     // console.log('books map', book)
@@ -46,7 +59,7 @@ function Results() {
         <h2 className='results-header'>{`Search Results - ${searchTerm}`}</h2>
         <div className='results-container'>
           <section className='sort-filter'>
-            <SearchCtrl setResults={setResults} results={results}/>
+            <SearchCtrl setDirection={setDirection} results={results}/>
           </section>
           <section className='results-gallery'>
             {books}
