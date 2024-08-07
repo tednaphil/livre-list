@@ -23,10 +23,21 @@ function Results() {
     }
   }
 
+  const filterResults = (books: Book[], filter: string[]) => {
+    if(!filter.length) {
+      return books
+    } else {
+
+    }
+
+  }
+
   
   const fetchData = async () => {
     try {
       const searchData = await getResults(searchTerm);
+      // const filteredData = filterResults(searchData, filter);
+      //pass filtered data to sortResutls on line below
       const sortedData = sortResults(searchData, sort);
       setResults(sortedData);
     } catch(error: any) {

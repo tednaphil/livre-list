@@ -22,7 +22,6 @@ function SearchCtrl({ setSort, setFilter, filter }: Props) {
       const updatedFilters = filter.filter((el: any) => !(el === term))
       setFilter(updatedFilters)
     }
-
   }
 
     return(
