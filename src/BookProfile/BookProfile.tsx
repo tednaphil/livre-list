@@ -53,11 +53,11 @@ function BookProfile() {
       }
     }
 
-    const authors = book?.authors.map((author) => {
+    const authors = book?.authors.map((author, index) => {
       //if length === 1 return author with space at end
       //if length > 1 return author with comma and space at end
       return (
-        <p>{author}</p>
+        <p key={index}>{author}</p>
       )
     })
 
