@@ -7,19 +7,29 @@ import ShelfCard from '../ShelfCard/ShelfCard';
 
 function Shelves() {
   const [shelves, setShelves] = useState<Bookshelf[] | null>(null);
+  const [sort, setSort] = useState('ascending');
   // const [user, setUser] = useState(null)
   // get user data from local storage
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const sortShelves = (shelves: Bookshelf[], orientation: string) => {
+    if(orientation === 'descending') {
+      return shelves.sort((a, b) => b.title.localeCompare(a.title))
+    } else {
+      return shelves.sort((a, b) => a.title.localeCompare(b.title))
+    }
+  }
+
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [sort])
 
   const fetchData = async () => {
     try {
-      const response = await getShelves()
-      setShelves(response)
+      const response = await getShelves();
+      const sortedData = sortShelves(response, sort);
+      setShelves(sortedData)
     } catch(error: any) {
       setError(`There was a problem getting the shelves - ${error}`)
     }
@@ -41,7 +51,7 @@ function Shelves() {
         <>
           <div className='shelves-wrapper'>
             <section className='sort-filter'>
-              <ShelfCtrl shelves={shelves} setShelves={setShelves} />
+              <ShelfCtrl shelves={shelves} setSort={setSort} />
             </section>
             <section className='shelves-gallery'>
               {shelfNames}

@@ -4,16 +4,20 @@ import { useState } from 'react';
 import { Bookshelf } from '../Util/Interfaces';
 
 interface Props {
-  setShelves: (shelves: Bookshelf[]) => void;
+  setSort: (orientation: string) => void;
   shelves: Bookshelf[] | null;
 }
 
-function ShelfCtrl({ setShelves, shelves }: Props) {
+function ShelfCtrl({ setSort, shelves }: Props) {
   const [newShelf, setNewShelf] = useState('');
+
+  const handleSort = (e: any,) => {
+    setSort(e.target.value)
+  }
     return(
         <>
           <h2>Sort</h2>
-          <Select size='sm'>
+          <Select size='sm' onChange={(e) => {handleSort(e)}}>
             <option value='ascending'>A-Z by title</option>
             <option value='descending'>Z-A by title</option>
           </Select>
