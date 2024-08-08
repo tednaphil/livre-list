@@ -27,3 +27,16 @@
     display: flex;
     padding-bottom: 15px;
 }
+
+.recs {
+    padding: 10px;
+    background: #a9b2ac;
+}
+
+.loading {
+    padding-top: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

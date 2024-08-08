@@ -1,0 +1,9 @@
+.slick-slide > div {
+    display: flex;
+    justify-content: center;
+}
+
+.slider-container {
+    padding: 40px;
+}
+
