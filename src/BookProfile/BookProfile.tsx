@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Book, Bookshelf } from '../Util/Interfaces';
 import { getBook, getShelves, getRecs } from '../Util/API_calls';
 import { ChevronDownIcon, AddIcon } from '@chakra-ui/icons';
-import { Button, Stack,  } from '@chakra-ui/react';
+import { Button, Stack, Spinner  } from '@chakra-ui/react';
 import Carousel from '../Carousel/Carousel';
 
 
@@ -23,7 +23,7 @@ import Card from '../Card/Card';
 function BookProfile() {
     const id = useParams().id;
     const [book, setBook] = useState<Book | null>(null);
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState({ name: 'Odell', id: "106196942824430802445" });
     // get user data from local storage
     const [shelves, setShelves] = useState<string[] | null>(null);
@@ -48,6 +48,7 @@ function BookProfile() {
           const recData = await getRecs(data.categories[0]);
           setRecs(recData.filter((rec: Book) => rec.title !== data.title))
         }
+        setLoading(false)
       } catch(error: any) {
         setError(`There was a problem getting the book - ${error.message}`)
       }
@@ -67,10 +68,20 @@ function BookProfile() {
       )
     })
 
-
     return(
         <>
-          <div className='profile-wrapper'>
+          {loading &&
+          <div className='loading'>
+            <Spinner
+              thickness='4px'
+              speed='0.65s'
+              emptyColor='gray.200'
+              color='orange.500'
+              size='xl'
+              />
+              <h2>Loading</h2>
+          </div>}
+          {!loading && <div className='profile-wrapper'>
           <section className='book-profile'>
             <aside className='thumbnail-container'>
               <img src={book?.image_links.extraLarge} alt={`${book?.title} cover`}/>
@@ -102,7 +113,7 @@ function BookProfile() {
             <h4>Recommendations</h4>
             <Carousel books={recs}/>
           </footer>
-          </div>
+          </div>}
         </>
     )
 }
