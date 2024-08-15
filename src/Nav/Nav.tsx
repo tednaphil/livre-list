@@ -14,10 +14,13 @@ import {
 import Search from '../Search/Search';
 import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
+import { getUser } from '../Util/API_calls';
 
 function Nav() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [user, setUser] = useState(null);
+
+
     return(
         <>
           <nav className='navbar'>
@@ -40,7 +43,7 @@ function Nav() {
                     <Stack>
                         <NavLink to='/' onClick={onClose}>Home</NavLink>
                         <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>
-                        {!user && <Button colorScheme='orange'>Login with Google</Button>}
+                        {!user && <Button colorScheme='orange' onClick={getUser}>Login with Google</Button>}
                     </Stack>
                 </DrawerBody>
                 </DrawerContent>

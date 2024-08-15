@@ -20,6 +20,7 @@ const getResults = async (searchTerm: string) => {
         throw error;
     }
 }
+
 const getRecs = async (category: string) => {
     try {
         const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=${category}`,
@@ -107,6 +108,33 @@ const getShelf = async (userID: string | undefined, shelfID: string | undefined)
     }
 }
 
+const getUser = async (/*username: string, password: string*/) => {
+    // const userInfo = {
+    //     username,
+    //     password
+    // }
+    // alert('getUser')
+    // console.log(getUser)
+    try {
+        const response = await fetch(`REQUEST URL HERE`,
+            {
+              method: 'GET',
+              redirect: 'follow',
+            //   body: JSON.stringify(userInfo)
+            }
+        );
+        if (!response.ok) {
+            const status = response.status;
+            console.log(status);
+            throw new Error(`Couldn't log in - ${status}`)
+        }
+        return await response.json();
+    } catch(error: any) {
+        console.log("API CALLS catch block - get user", error);
+        throw error;
+    }
+}
+
 // const getShelfBooks = async (userID: string | undefined, shelfID: string | undefined) => {
 //     userID = "106196942824430802445";
 //     try {
@@ -136,5 +164,6 @@ export {
     getBook,
     getShelves,
     getShelf,
+    getUser
     // getShelfBooks
 }
