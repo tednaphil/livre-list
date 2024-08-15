@@ -3,7 +3,7 @@
 //import interfaces
 const getResults = async (searchTerm: string) => {
     try {
-        const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/v1/books?search=${searchTerm}`,
+        const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=${searchTerm}`,
             {
               method: 'GET',
               redirect: 'follow'
@@ -22,7 +22,7 @@ const getResults = async (searchTerm: string) => {
 }
 const getRecs = async (category: string) => {
     try {
-        const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/v1/books?search=${category}`,
+        const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=${category}`,
             //replace url once available in mock server
             {
               method: 'GET',
@@ -43,7 +43,7 @@ const getRecs = async (category: string) => {
 
 const getBook = async (bookID: string | undefined) => {
     try {
-        const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/v1/books/${bookID}`,
+        const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books/${bookID}`,
             {
               method: 'GET',
               redirect: 'follow'
@@ -62,8 +62,8 @@ const getBook = async (bookID: string | undefined) => {
 }
 
 const getShelves = async (userID: string | undefined = "106196942824430802445") => {
-    // userID = "106196942824430802445";
     try {
+        // const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/vi/users/${userID}/bookshelves`,
         const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/vi/users/${userID}/bookshelves`,
             {
               method: 'GET',
