@@ -66,7 +66,8 @@ function Results() {
 
     return(
         <>
-        <h2 className='results-header'>{`Search Results - ${searchTerm}`}</h2>
+        {/* <h2 className='results-header'>{`Search Results - ${searchTerm}`}</h2> */}
+        <h2 className='results-header'>{`Search Results - ${useParams().term}`}</h2>
         <div className='results-container'>
           <section className='sort-filter'>
             <SearchCtrl setSort={setSort} setFilter={setFilter} filter={filter}/>
