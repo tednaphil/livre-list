@@ -7,8 +7,7 @@ interface Props {
 function ErrorPage({error} : Props) {
     return(
         <article className='error-page'>
-          <h2>Error Page</h2>
-          <p>Uh oh!</p>
+          <h2>Uh oh!</h2>
           <p>{error}</p>
         </article>
     )
