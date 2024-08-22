@@ -14,12 +14,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-} from '@chakra-ui/react'
-import Card from '../Card/Card';
+} from '@chakra-ui/react';
 
 function BookProfile() {
     const id = useParams().id;
@@ -51,7 +46,7 @@ function BookProfile() {
         }
         setLoading(false)
       } catch(error: any) {
-        setError(`There was a problem getting the book - ${error.message}`)
+        setError(`There was a problem getting the book data - ${error.message}`)
         setLoading(false)
       }
     }
@@ -98,7 +93,6 @@ function BookProfile() {
                     <MenuItem icon={<AddIcon />} onClick={() => {alert('create a new shelf')}}>Create a New Shelf</MenuItem>
                   </MenuList>
                 </Menu>
-                {/* <Button colorScheme='orange' width='200px'>Add to Shelf</Button> */}
                 {book?.buy_link && <Button colorScheme='orange' width='200px'>Buy Book</Button>}
               </Stack>
             </aside>
