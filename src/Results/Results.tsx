@@ -9,8 +9,6 @@ import Loading from '../Loading/Loading';
 import ErrorPage from '../ErrorPage/ErrorPage';
 
 function Results() {
-  const location = useLocation();
-  const [searchTerm, setSearchTerm] = useState(location.state);
   const term = useParams().term;
   const [results, setResults] = useState<Book[]>([]);
   const [sort, setSort] = useState<string>('ascending');
@@ -36,7 +34,7 @@ function Results() {
 
   const fetchData = async () => {
     try {
-      const searchData = await getResults(searchTerm);
+      const searchData = await getResults(term);
       // const filteredData = filterResults(searchData, filter);
       //pass filtered data to sortResutls on line below
       const sortedData = sortResults(searchData, sort);
@@ -70,7 +68,6 @@ function Results() {
         <>
         {error && <ErrorPage error={error}/>}
         {loading && <Loading/>}
-        {/* <h2 className='results-header'>{`Search Results - ${searchTerm}`}</h2> */}
         {!loading && 
         <>
           <h2 className='results-header'>{`Search Results - ${term}`}</h2>
