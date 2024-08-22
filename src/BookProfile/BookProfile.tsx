@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import { Book, Bookshelf } from '../Util/Interfaces';
 import { getBook, getShelves, getRecs } from '../Util/API_calls';
 import { ChevronDownIcon, AddIcon } from '@chakra-ui/icons';
-import { Button, Stack, Spinner  } from '@chakra-ui/react';
+import { Button, Stack } from '@chakra-ui/react';
 import Carousel from '../Carousel/Carousel';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import Loading from '../Loading/Loading';
 
 
 import {
@@ -68,17 +69,7 @@ function BookProfile() {
     return(
         <>
           {error && <ErrorPage error={error}/>}
-          {loading &&
-          <div className='loading'>
-            <Spinner
-              thickness='4px'
-              speed='0.65s'
-              emptyColor='gray.200'
-              color='orange.500'
-              size='xl'
-              />
-              <h2>Loading</h2>
-          </div>}
+          {loading && <Loading/>}
           {!loading && <div className='profile-wrapper'>
           <section className='book-profile'>
             <aside className='thumbnail-container'>
