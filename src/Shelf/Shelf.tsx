@@ -55,7 +55,7 @@ function Shelf() {
         <div className='shelf-wrapper'>
           <aside className='shelf-details'>
             {shelf && <h2>{shelf.title}</h2>}
-            <Button colorScheme='orange'>Delete</Button>
+            <Button colorScheme='orange'>Delete Shelf</Button>
           </aside>
           <div className='book-gallery'>
             {bookCards}
