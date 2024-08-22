@@ -6,11 +6,11 @@ interface Props {
 
 function ErrorPage({error} : Props) {
     return(
-        <>
+        <article className='error-page'>
           <h2>Error Page</h2>
           <p>Uh oh!</p>
           <p>{error}</p>
-        </>
+        </article>
     )
 }
 
