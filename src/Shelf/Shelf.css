@@ -1,3 +1,10 @@
 .shelf-wrapper {
     padding-top: 140px;
+    display: flex;
+}
+
+.book-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }

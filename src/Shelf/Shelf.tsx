@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Bookshelf, Book } from '../Util/Interfaces';
 import { getShelf } from '../Util/API_calls';
 import Card from '../Card/Card';
+import { Button } from '@chakra-ui/react';
 
 function Shelf() {
   const shelfID = useParams().id;
@@ -52,8 +53,10 @@ function Shelf() {
     return(
       <>
         <div className='shelf-wrapper'>
-          {shelf && <h2>{shelf.title}</h2>}
-          {/* delete shelf button */}
+          <aside className='shelf-details'>
+            {shelf && <h2>{shelf.title}</h2>}
+            <Button colorScheme='orange'>Delete</Button>
+          </aside>
           <div className='book-gallery'>
             {bookCards}
           </div>
