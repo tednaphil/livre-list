@@ -15,7 +15,7 @@ See the backend repo [here](https://github.com/odellmac4/livre-list-be)!
 
 ## Preview:
 <div align="center">
-  <img src="" alt="LivreList demo">
+  <img src=".github/LivreList Demo_beta2.gif" alt="LivreList demo">
 
 </div>
 <p align="center">Technologies Used</p>
