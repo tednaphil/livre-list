@@ -41,6 +41,7 @@ function BookProfile() {
         const shelfData = await getShelves(user.id);
         setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
         const data = await getBook(id);
+        data.published_date = data.published_date.slice(0, 4);
         setBook(data);
         if(data) {
           const recData = await getRecs(data.categories[0]);
