@@ -23,7 +23,6 @@ function Search() {
               </InputLeftElement>
               <Input type='text'
               placeholder='search'
-              // variant='filled'
               required
               value={keyword}
               onChange={(e) => {setKeyword(e.target.value)}}
