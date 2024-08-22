@@ -6,6 +6,7 @@ import { getBook, getShelves, getRecs } from '../Util/API_calls';
 import { ChevronDownIcon, AddIcon } from '@chakra-ui/icons';
 import { Button, Stack, Spinner  } from '@chakra-ui/react';
 import Carousel from '../Carousel/Carousel';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
 
 import {
@@ -51,6 +52,7 @@ function BookProfile() {
         setLoading(false)
       } catch(error: any) {
         setError(`There was a problem getting the book - ${error.message}`)
+        setLoading(false)
       }
     }
 
@@ -70,6 +72,7 @@ function BookProfile() {
 
     return(
         <>
+          {error && <ErrorPage error={error}/>}
           {loading &&
           <div className='loading'>
             <Spinner
