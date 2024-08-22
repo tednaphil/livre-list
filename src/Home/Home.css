@@ -7,6 +7,7 @@
         /* width: 60%; */
         /* max-width: 60%; */
         height: 95vh;
+        position: fixed;
         /* height: 100%; */
     }
 }
@@ -16,7 +17,9 @@
     flex-direction: column;
     /* justify-content: space-evenly; */
     justify-content: center;
-    padding: 50px;
+    padding: 90px 0px;
+    margin-left: 50%;
+    width: 45%;
     /* padding-top: 150px; */
     & h2 {
         padding-bottom: 35px;
