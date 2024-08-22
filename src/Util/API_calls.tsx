@@ -1,6 +1,3 @@
-
-
-//import interfaces
 const getResults = async (searchTerm: string | undefined) => {
     try {
         const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=${searchTerm}`,
@@ -24,7 +21,6 @@ const getResults = async (searchTerm: string | undefined) => {
 const getRecs = async (category: string) => {
     try {
         const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=${category}`,
-            //replace url once available in mock server
             {
               method: 'GET',
               redirect: 'follow'
@@ -98,9 +94,6 @@ const getShelf = async (userID: string | undefined, shelfID: string | undefined)
         if (!responses.every(response => response.ok)) {
             throw new Error(`Couldn't get the shelf data`)
         }
-    
-        // console.log(bookData.json())
-        // return await 
         return await Promise.all(responses.map(res => res.json()))
 
     } catch (error: any) {
@@ -135,28 +128,6 @@ const getUser = async (/*username: string, password: string*/) => {
     }
 }
 
-// const getShelfBooks = async (userID: string | undefined, shelfID: string | undefined) => {
-//     userID = "106196942824430802445";
-//     try {
-//         const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/vi/users/${userID}/bookshelves/${shelfID}/books`,
-//             {
-//               method: 'GET',
-//               redirect: 'follow'
-//             }
-//         );
-//         if (!response.ok) {
-//             const status = response.status;
-//             console.log(status);
-//             throw new Error(`Couldn't get the shelf's books - ${status}`)
-//         }
-//         return await response.json();
-//     } catch(error: any) {
-//         console.log("API CALLS catch block - get shelf books", error);
-//         throw error;
-//     }
-// }
-
-
 
 export {
     getResults,
@@ -165,5 +136,4 @@ export {
     getShelves,
     getShelf,
     getUser
-    // getShelfBooks
 }
