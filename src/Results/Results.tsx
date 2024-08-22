@@ -49,7 +49,7 @@ function Results() {
   useEffect(() => {
     setError('')
     fetchData()
-  }, [sort, term])
+  }, [filter, sort, term])
 
   const books = results?.map(book => {
     return (

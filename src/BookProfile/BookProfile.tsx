@@ -36,6 +36,7 @@ function BookProfile() {
     }, [id])
 
     const fetchData = async () => {
+      setLoading(true)
       try {
         const shelfData = await getShelves(user.id);
         setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
@@ -73,7 +74,7 @@ function BookProfile() {
           {!loading && <div className='profile-wrapper'>
           <section className='book-profile'>
             <aside className='thumbnail-container'>
-              <img src={book?.image_links.extraLarge} alt={`${book?.title} cover`}/>
+              <img src={book?.image_links.thumbnail} alt={`${book?.title} cover`}/>
               <Stack spacing={4} direction='column' align='center'>
                 <Menu>
                   <MenuButton as={Button} colorScheme='orange' width='200px' rightIcon={<ChevronDownIcon />}>
