@@ -1,6 +1,6 @@
 import './Results.css';
 import { Book } from '../Util/Interfaces';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getResults } from '../Util/API_calls';
 import Card from '../Card/Card';
