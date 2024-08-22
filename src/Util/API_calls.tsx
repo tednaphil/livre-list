@@ -1,7 +1,7 @@
 
 
 //import interfaces
-const getResults = async (searchTerm: string) => {
+const getResults = async (searchTerm: string | undefined) => {
     try {
         const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=${searchTerm}`,
             {
