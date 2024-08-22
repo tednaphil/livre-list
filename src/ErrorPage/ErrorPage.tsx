@@ -1,10 +1,15 @@
 import './ErrorPage.css';
 
-function ErrorPage() {
+interface Props {
+  error: string
+}
+
+function ErrorPage({error} : Props) {
     return(
         <>
           <h2>Error Page</h2>
           <p>Uh oh!</p>
+          <p>{error}</p>
         </>
     )
 }
