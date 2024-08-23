@@ -14,9 +14,6 @@ export interface Book {
 export interface ImgLinks {
     smallThumbnail: string;
     thumbnail: string;
-    small: string;
-    medium: string;
-    large: string;
 }
 
 export interface Bookshelf {
