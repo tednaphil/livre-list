@@ -35,10 +35,16 @@ function Results() {
   const fetchData = async () => {
     try {
       const searchData = await getResults(term);
+      searchData.forEach((book: any) => {
+        if(!book.image_links.smallThumbnail) {
+          book.image_links.smallThumbnail = '📓'
+        }
+      })
       // const filteredData = filterResults(searchData, filter);
       //pass filtered data to sortResutls on line below
       const sortedData = sortResults(searchData, sort);
       setResults(sortedData);
+      console.log(sortedData)
       setLoading(false)
     } catch(error: any) {
       setError(`There was a problem getting the search results - ${error.message}`)
