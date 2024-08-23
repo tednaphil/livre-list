@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import { Book, Bookshelf } from '../Util/Interfaces';
 import { getBook, getShelves, getRecs } from '../Util/API_calls';
 import { ChevronDownIcon, AddIcon } from '@chakra-ui/icons';
-import { Button, Stack, Spinner  } from '@chakra-ui/react';
+import { Button, Stack } from '@chakra-ui/react';
 import Carousel from '../Carousel/Carousel';
+import ErrorPage from '../ErrorPage/ErrorPage';
+import Loading from '../Loading/Loading';
 
 
 import {
@@ -13,12 +15,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-} from '@chakra-ui/react'
-import Card from '../Card/Card';
+} from '@chakra-ui/react';
 
 function BookProfile() {
     const id = useParams().id;
@@ -39,10 +36,12 @@ function BookProfile() {
     }, [id])
 
     const fetchData = async () => {
+      setLoading(true)
       try {
         const shelfData = await getShelves(user.id);
         setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
         const data = await getBook(id);
+        data.published_date = data.published_date.slice(0, 4);
         setBook(data);
         if(data) {
           const recData = await getRecs(data.categories[0]);
@@ -50,7 +49,8 @@ function BookProfile() {
         }
         setLoading(false)
       } catch(error: any) {
-        setError(`There was a problem getting the book - ${error.message}`)
+        setError(`There was a problem getting the book data - ${error.message}`)
+        setLoading(false)
       }
     }
 
@@ -70,21 +70,12 @@ function BookProfile() {
 
     return(
         <>
-          {loading &&
-          <div className='loading'>
-            <Spinner
-              thickness='4px'
-              speed='0.65s'
-              emptyColor='gray.200'
-              color='orange.500'
-              size='xl'
-              />
-              <h2>Loading</h2>
-          </div>}
+          {error && <ErrorPage error={error}/>}
+          {loading && <Loading/>}
           {!loading && <div className='profile-wrapper'>
           <section className='book-profile'>
             <aside className='thumbnail-container'>
-              <img src={book?.image_links.extraLarge} alt={`${book?.title} cover`}/>
+              <img src={book?.image_links.thumbnail} alt={`${book?.title} cover`}/>
               <Stack spacing={4} direction='column' align='center'>
                 <Menu>
                   <MenuButton as={Button} colorScheme='orange' width='200px' rightIcon={<ChevronDownIcon />}>
@@ -95,7 +86,6 @@ function BookProfile() {
                     <MenuItem icon={<AddIcon />} onClick={() => {alert('create a new shelf')}}>Create a New Shelf</MenuItem>
                   </MenuList>
                 </Menu>
-                {/* <Button colorScheme='orange' width='200px'>Add to Shelf</Button> */}
                 {book?.buy_link && <Button colorScheme='orange' width='200px'>Buy Book</Button>}
               </Stack>
             </aside>

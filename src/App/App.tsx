@@ -19,7 +19,7 @@ function App() {
       <Route path='/shelves/:id' element={<Shelf/>}/>
       <Route path='/search/:term' element={<Results/>}/>
       <Route path='/books/:id' element={<BookProfile/>}/>
-      <Route path='*' element={<ErrorPage />}/>
+      <Route path='*' element={<ErrorPage error='Page Not Found'/>}/>
     </Routes>
     </>
   );

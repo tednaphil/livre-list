@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { Bookshelf } from '../Util/Interfaces';
 import { getShelves } from '../Util/API_calls';
 import ShelfCard from '../ShelfCard/ShelfCard';
+import ErrorPage from '../ErrorPage/ErrorPage';
+import Loading from '../Loading/Loading';
 
 function Shelves() {
   const [shelves, setShelves] = useState<Bookshelf[] | null>(null);
@@ -30,8 +32,10 @@ function Shelves() {
       const response = await getShelves();
       const sortedData = sortShelves(response, sort);
       setShelves(sortedData)
+      setLoading(false)
     } catch(error: any) {
       setError(`There was a problem getting the shelves - ${error}`)
+      setLoading(false)
     }
   }
 
@@ -43,12 +47,14 @@ function Shelves() {
       id={shelf.id}
       bookCount={shelf.book_count}
       />
-      
     )
   })
 
     return(
         <>
+        {error && <ErrorPage error={error}/>}
+        {loading && <Loading/>}
+        {!loading && <>
           <div className='shelves-wrapper'>
             <section className='sort-filter'>
               <ShelfCtrl setSort={setSort} />
@@ -57,6 +63,7 @@ function Shelves() {
               {shelfNames}
             </section>
           </div>
+        </>}
         </>
     )
 }

@@ -1,9 +1,6 @@
-
-
-//import interfaces
-const getResults = async (searchTerm: string) => {
+const getResults = async (searchTerm: string | undefined) => {
     try {
-        const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/v1/books?search=${searchTerm}`,
+        const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=${searchTerm}`,
             {
               method: 'GET',
               redirect: 'follow'
@@ -20,10 +17,10 @@ const getResults = async (searchTerm: string) => {
         throw error;
     }
 }
+
 const getRecs = async (category: string) => {
     try {
-        const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/v1/books?search=${category}`,
-            //replace url once available in mock server
+        const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=${category}`,
             {
               method: 'GET',
               redirect: 'follow'
@@ -43,7 +40,7 @@ const getRecs = async (category: string) => {
 
 const getBook = async (bookID: string | undefined) => {
     try {
-        const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/v1/books/${bookID}`,
+        const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books/${bookID}`,
             {
               method: 'GET',
               redirect: 'follow'
@@ -62,8 +59,8 @@ const getBook = async (bookID: string | undefined) => {
 }
 
 const getShelves = async (userID: string | undefined = "106196942824430802445") => {
-    // userID = "106196942824430802445";
     try {
+        // const response = await fetch(`https://livre-list-be-c61f46345338.herokuapp.com/api/vi/users/${userID}/bookshelves`,
         const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/vi/users/${userID}/bookshelves`,
             {
               method: 'GET',
@@ -97,9 +94,6 @@ const getShelf = async (userID: string | undefined, shelfID: string | undefined)
         if (!responses.every(response => response.ok)) {
             throw new Error(`Couldn't get the shelf data`)
         }
-    
-        // console.log(bookData.json())
-        // return await 
         return await Promise.all(responses.map(res => res.json()))
 
     } catch (error: any) {
@@ -107,27 +101,32 @@ const getShelf = async (userID: string | undefined, shelfID: string | undefined)
     }
 }
 
-// const getShelfBooks = async (userID: string | undefined, shelfID: string | undefined) => {
-//     userID = "106196942824430802445";
-//     try {
-//         const response = await fetch(`https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/vi/users/${userID}/bookshelves/${shelfID}/books`,
-//             {
-//               method: 'GET',
-//               redirect: 'follow'
-//             }
-//         );
-//         if (!response.ok) {
-//             const status = response.status;
-//             console.log(status);
-//             throw new Error(`Couldn't get the shelf's books - ${status}`)
-//         }
-//         return await response.json();
-//     } catch(error: any) {
-//         console.log("API CALLS catch block - get shelf books", error);
-//         throw error;
-//     }
-// }
-
+const getUser = async (/*username: string, password: string*/) => {
+    // const userInfo = {
+    //     username,
+    //     password
+    // }
+    // alert('getUser')
+    // console.log(getUser)
+    try {
+        const response = await fetch(`REQUEST URL HERE`,
+            {
+              method: 'GET',
+              redirect: 'follow',
+            //   body: JSON.stringify(userInfo)
+            }
+        );
+        if (!response.ok) {
+            const status = response.status;
+            console.log(status);
+            throw new Error(`Couldn't log in - ${status}`)
+        }
+        return await response.json();
+    } catch(error: any) {
+        console.log("API CALLS catch block - get user", error);
+        throw error;
+    }
+}
 
 
 export {
@@ -136,5 +135,5 @@ export {
     getBook,
     getShelves,
     getShelf,
-    // getShelfBooks
+    getUser
 }

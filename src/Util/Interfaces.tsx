@@ -17,7 +17,6 @@ export interface ImgLinks {
     small: string;
     medium: string;
     large: string;
-    extraLarge: string;
 }
 
 export interface Bookshelf {
