@@ -101,7 +101,7 @@ const getShelf = async (userID: string | undefined, shelfID: string | undefined)
     }
 }
 
-const getUser = async (/*username: string, password: string*/) => {
+const postUser = async (/*username: string, password: string*/) => {
     // const userInfo = {
     //     username,
     //     password
@@ -109,9 +109,9 @@ const getUser = async (/*username: string, password: string*/) => {
     // alert('getUser')
     // console.log(getUser)
     try {
-        const response = await fetch(`REQUEST URL HERE`,
+        const response = await fetch(`/auth/google_oauth2`,
             {
-              method: 'GET',
+              method: 'POST',
               redirect: 'follow',
             //   body: JSON.stringify(userInfo)
             }
@@ -123,7 +123,7 @@ const getUser = async (/*username: string, password: string*/) => {
         }
         return await response.json();
     } catch(error: any) {
-        console.log("API CALLS catch block - get user", error);
+        console.log("API CALLS catch block - post user", error);
         throw error;
     }
 }
@@ -135,5 +135,5 @@ export {
     getBook,
     getShelves,
     getShelf,
-    getUser
+    postUser
 }
