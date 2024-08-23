@@ -36,9 +36,9 @@ function Results() {
     try {
       const searchData = await getResults(term);
       searchData.forEach((book: any) => {
-        if(!book.image_links.smallThumbnail) {
-          book.image_links.smallThumbnail = '📓'
-        }
+        if(!book.image_links) {
+          book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+       }
       })
       // const filteredData = filterResults(searchData, filter);
       //pass filtered data to sortResutls on line below
