@@ -41,6 +41,9 @@ function BookProfile() {
         const shelfData = await getShelves(user.id);
         setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
         const data = await getBook(id);
+        if(!data.image_links) {
+          data.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+        };
         data.published_date = data.published_date.slice(0, 4);
         setBook(data);
         if(data) {
@@ -54,13 +57,13 @@ function BookProfile() {
       }
     }
 
-    const authors = book?.authors.map((author, index) => {
+    const authors = book?.authors ? book?.authors.map((author, index) => {
       //if length === 1 return author with space at end
       //if length > 1 return author with comma and space at end
       return (
         <p key={index}>{author}</p>
       )
-    })
+    }) : <p>No Author Listed</p>
 
     const userShelves = shelves?.map((shelf, index) => {
       return(
@@ -75,7 +78,7 @@ function BookProfile() {
           {!loading && <div className='profile-wrapper'>
           <section className='book-profile'>
             <aside className='thumbnail-container'>
-              <img src={book?.image_links.thumbnail} alt={`${book?.title} cover`}/>
+              <img src={book?.image_links.smallThumbnail} alt={`${book?.title} cover`}/>
               <Stack spacing={4} direction='column' align='center'>
                 <Menu>
                   <MenuButton as={Button} colorScheme='orange' width='200px' rightIcon={<ChevronDownIcon />}>

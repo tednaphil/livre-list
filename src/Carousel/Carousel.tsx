@@ -19,7 +19,7 @@ function Carousel({books}: Props) {
                     id={book.id}
                     title={book.title}
                     authors={book.authors}
-                    image={book.image_links.smallThumbnail}
+                    image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
                     book={book}
                 />
              )
