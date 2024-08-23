@@ -36,8 +36,8 @@ function Results() {
     try {
       const searchData = await getResults(term);
       searchData.forEach((book: any) => {
-        if(!book.image_links.smallThumbnail) {
-          book.image_links.smallThumbnail = '📓'
+        if(!book.image_links) {
+           book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
         }
       })
       // const filteredData = filterResults(searchData, filter);
@@ -53,6 +53,7 @@ function Results() {
   
   useEffect(() => {
     setError('')
+    setResults([])
     fetchData()
   }, [filter, sort, term])
 
@@ -71,7 +72,6 @@ function Results() {
 
     return(
         <>
-        {error && <ErrorPage error={error}/>}
         {loading && <Loading/>}
         {!loading && 
         <>
@@ -81,6 +81,7 @@ function Results() {
               <SearchCtrl setSort={setSort} setFilter={setFilter} filter={filter}/>
             </section>
             <section className='results-gallery'>
+              {error && <ErrorPage error={error}/>}
               {books}
             </section>
           </div>
