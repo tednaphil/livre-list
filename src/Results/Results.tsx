@@ -66,7 +66,6 @@ function Results() {
 
     return(
         <>
-        {error && <ErrorPage error={error}/>}
         {loading && <Loading/>}
         {!loading && 
         <>
@@ -76,6 +75,7 @@ function Results() {
               <SearchCtrl setSort={setSort} setFilter={setFilter} filter={filter}/>
             </section>
             <section className='results-gallery'>
+              {error && <ErrorPage error={error}/>}
               {books}
             </section>
           </div>
