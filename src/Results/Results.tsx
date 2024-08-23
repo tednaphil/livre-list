@@ -35,11 +35,6 @@ function Results() {
   const fetchData = async () => {
     try {
       const searchData = await getResults(term);
-      searchData.forEach((book: any) => {
-        if(!book.image_links) {
-          book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-       }
-      })
       // const filteredData = filterResults(searchData, filter);
       //pass filtered data to sortResutls on line below
       const sortedData = sortResults(searchData, sort);
@@ -63,7 +58,7 @@ function Results() {
         id={book.id}
         title={book.title}
         authors={book.authors}
-        image={book.image_links.smallThumbnail}
+        image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
         book={book}
       />
     )
