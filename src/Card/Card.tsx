@@ -12,10 +12,11 @@ interface Props {
 
 function Card({id, title, authors, image, book}: Props) {
 
-  const authorList = authors.map(author => {
+  const authorList = authors ? authors.map(author => {
     return(
       <p className='author'>{author}</p>
-    )});
+    )}) :
+    <p className='author'>No Author Listed</p>
 
     return(
         <>

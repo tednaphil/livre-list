@@ -37,6 +37,7 @@ function Results() {
       const searchData = await getResults(term);
       // const filteredData = filterResults(searchData, filter);
       //pass filtered data to sortResutls on line below
+      console.log(searchData)
       const sortedData = sortResults(searchData, sort);
       setResults(sortedData);
       setLoading(false)
@@ -48,6 +49,7 @@ function Results() {
   
   useEffect(() => {
     setError('')
+    setResults([])
     fetchData()
   }, [filter, sort, term])
 
