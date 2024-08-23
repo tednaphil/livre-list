@@ -15,11 +15,21 @@ import {
 import Search from '../Search/Search';
 import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
-import { getUser } from '../Util/API_calls';
+import { postUser } from '../Util/API_calls';
 
 function Nav() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [user, setUser] = useState(null);
+
+
+    const login = async () => {
+      try {
+        const response = await postUser();
+        console.log(response)
+      } catch(error) {
+        console.log(error)
+      }
+    }
 
 
     return(
@@ -53,7 +63,7 @@ function Nav() {
                     <Stack>
                         <NavLink to='/' onClick={onClose}>Home</NavLink>
                         <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>
-                        {!user && <Button colorScheme='orange' onClick={getUser}>Login with Google</Button>}
+                        {!user && <Button colorScheme='orange' onClick={login}>Login with Google</Button>}
                     </Stack>
                 </DrawerBody>
                 </DrawerContent>
