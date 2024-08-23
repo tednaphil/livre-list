@@ -44,7 +44,6 @@ function Results() {
       //pass filtered data to sortResutls on line below
       const sortedData = sortResults(searchData, sort);
       setResults(sortedData);
-      console.log(sortedData)
       setLoading(false)
     } catch(error: any) {
       setError(`There was a problem getting the search results - ${error.message}`)
@@ -72,7 +71,6 @@ function Results() {
 
     return(
         <>
-        {error && <ErrorPage error={error}/>}
         {loading && <Loading/>}
         {!loading && 
         <>
@@ -82,6 +80,7 @@ function Results() {
               <SearchCtrl setSort={setSort} setFilter={setFilter} filter={filter}/>
             </section>
             <section className='results-gallery'>
+              {error && <ErrorPage error={error}/>}
               {books}
             </section>
           </div>

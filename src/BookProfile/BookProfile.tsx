@@ -41,10 +41,18 @@ function BookProfile() {
         const shelfData = await getShelves(user.id);
         setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
         const data = await getBook(id);
+        if(!data.image_links) {
+          data.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+        };
         data.published_date = data.published_date.slice(0, 4);
         setBook(data);
         if(data) {
           const recData = await getRecs(data.categories[0]);
+          recData.forEach((book: any) => {
+            if(!book.image_links) {
+              book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+           }
+          })
           setRecs(recData.filter((rec: Book) => rec.title !== data.title))
         }
         setLoading(false)
@@ -75,7 +83,7 @@ function BookProfile() {
           {!loading && <div className='profile-wrapper'>
           <section className='book-profile'>
             <aside className='thumbnail-container'>
-              <img src={book?.image_links.thumbnail} alt={`${book?.title} cover`}/>
+              <img src={book?.image_links.smallThumbnail} alt={`${book?.title} cover`}/>
               <Stack spacing={4} direction='column' align='center'>
                 <Menu>
                   <MenuButton as={Button} colorScheme='orange' width='200px' rightIcon={<ChevronDownIcon />}>
