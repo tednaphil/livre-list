@@ -4,23 +4,23 @@ import { Select, CheckboxGroup, Stack, Checkbox } from '@chakra-ui/react';
 
 interface Props {
   setSort: (orientation: string) => void;
-  setFilter: (conditions: string[]) => void;
-  filter: string[] | null;
+  setFilters: (conditions: string[]) => void;
+  filters: string[] | null;
 }
 
-function SearchCtrl({ setSort, setFilter, filter }: Props) {
+function SearchCtrl({ setSort, setFilters, filters }: Props) {
   const handleSort = (e: any,) => {
     setSort(e.target.value)
   }
 
   const handleFilter = (e: any, term: string) => {
-    if(e.target.checked && !filter) {
-      setFilter([term])
-    } else if(e.target.checked && filter) {
-      setFilter([...filter, term])
-    } else if(!e.target.checked && filter) {
-      const updatedFilters = filter.filter((el: any) => !(el === term))
-      setFilter(updatedFilters)
+    if(e.target.checked && !filters) {
+      setFilters([term])
+    } else if(e.target.checked && filters) {
+      setFilters([...filters, term])
+    } else if(!e.target.checked && filters) {
+      const updatedFilters = filters.filter((el: any) => !(el === term))
+      setFilters(updatedFilters)
     }
   }
 

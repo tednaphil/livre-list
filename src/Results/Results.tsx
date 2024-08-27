@@ -12,7 +12,7 @@ function Results() {
   const term = useParams().term;
   const [results, setResults] = useState<Book[]>([]);
   const [sort, setSort] = useState<string>('ascending');
-  const [filter, setFilter] = useState<string[] | null>(null);
+  const [filters, setFilters] = useState<string[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -24,10 +24,17 @@ function Results() {
     }
   }
 
-  const filterResults = (books: Book[], filter: string[]) => {
-    if(!filter.length) {
+  const filterResults = (books: Book[], filters: string[] | null) => {
+    if(!filters?.length) {
       return books
     } else {
+      return filters.reduce((acc: Book[], filter) => {
+        if(filter === 'purchaseable') {
+          const purchaseable = books.filter(book => book.buy_link);
+          acc = purchaseable
+        }
+        return acc
+      }, [])
 
     }
   }
@@ -40,9 +47,9 @@ function Results() {
            book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
         }
       })
-      // const filteredData = filterResults(searchData, filter);
+      const filteredData = filterResults(searchData, filters);
+      console.log(filteredData)
       //pass filtered data to sortResutls on line below
-      console.log(searchData)
       const sortedData = sortResults(searchData, sort);
       setResults(sortedData);
       setLoading(false)
@@ -56,7 +63,7 @@ function Results() {
     setError('')
     setResults([])
     fetchData()
-  }, [filter, sort, term])
+  }, [filters, sort, term])
 
   const books = results?.map(book => {
     return (
@@ -79,7 +86,7 @@ function Results() {
           <h2 className='results-header'>{`Search Results - ${term}`}</h2>
           <div className='results-container'>
             <section className='sort-filter'>
-              <SearchCtrl setSort={setSort} setFilter={setFilter} filter={filter}/>
+              <SearchCtrl setSort={setSort} setFilters={setFilters} filters={filters}/>
             </section>
             <section className='results-gallery'>
               {error && <ErrorPage error={error}/>}
