@@ -1,4 +1,4 @@
-describe('template spec', () => {
+describe('Error Handling Spec', () => {
   it('displays error componenet', () => {
     cy.visit('localhost:3000/badpath')
     .get('h2').contains('Uh oh!')
