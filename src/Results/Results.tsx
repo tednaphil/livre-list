@@ -31,8 +31,11 @@ function Results() {
       return filters.reduce((acc: Book[], filter) => {
         if(filter === 'purchaseable') {
           const purchaseable = books.filter(book => book.buy_link);
-          acc = purchaseable
+          acc = [...acc, ...purchaseable]
         }
+        // else if(filter === 'ebook') {
+        //   // const ebooks = books.filter(book => )
+        // }
         return acc
       }, [])
 
@@ -48,9 +51,7 @@ function Results() {
         }
       })
       const filteredData = filterResults(searchData, filters);
-      console.log(filteredData)
-      //pass filtered data to sortResutls on line below
-      const sortedData = sortResults(searchData, sort);
+      const sortedData = sortResults(filteredData, sort);
       setResults(sortedData);
       setLoading(false)
     } catch(error: any) {
