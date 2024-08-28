@@ -25,6 +25,7 @@ function BookProfile() {
     // get user data from local storage
     const [shelves, setShelves] = useState<string[] | null>(null);
     const [error, setError] = useState('');
+    const [recsError, setRecsError] = useState('');
     const [recs, setRecs] = useState<Book[] | null>(null);
 
 
@@ -52,8 +53,13 @@ function BookProfile() {
         }
         setLoading(false)
       } catch(error: any) {
-        setError(`There was a problem getting the book data - ${error.message}`)
-        setLoading(false)
+        if(error.message.includes('recommendations')) {
+          setRecsError(error.message)
+          setLoading(false)
+        } else{
+          setError(`There was a problem getting the book data - ${error.message}`)
+          setLoading(false)
+        }
       }
     }
 
@@ -104,7 +110,8 @@ function BookProfile() {
           </section>
           <footer className='recs'>
             <h4>Recommendations</h4>
-            <Carousel books={recs}/>
+            {recsError ? <ErrorPage error={recsError}/> : <Carousel books={recs}/>}
+            
           </footer>
           </div>}
         </>
