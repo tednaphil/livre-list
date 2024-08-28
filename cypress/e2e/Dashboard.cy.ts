@@ -15,11 +15,16 @@ describe('General User Stories Spec', () => {
         statusCode: 200,
         fixture: "book_response",
       }).as('getBook') 
-    cy.intercept("GET", "https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=Juvenile Fiction / Holidays %26 Celebrations / Halloween"
+    cy.intercept("GET", "https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=Juvenile%20Fiction%20/%20Holidays%20&%20Celebrations%20/%20Halloween"
       , {
         statusCode: 200,
         fixture: "recommendations_response",
       }).as('getRecs') 
+    cy.intercept("GET", "https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/vi/users/106196942824430802445/bookshelves"
+      , {
+        statusCode: 200,
+        fixture: "shelves",
+      }).as('getShelves') 
     cy.visit('http://localhost:3000')
   })
   it('Displays landing page', () => {
@@ -66,6 +71,8 @@ describe('General User Stories Spec', () => {
   })
   it('Displays book profile', () => {
     cy.get('input[type="text"]').type('halloween{enter}')
+    .get('a[href="/books/IJDQwQEACAAJ"]').click()
+    .url().should('eq', 'http://localhost:3000/books/IJDQwQEACAAJ')
 
   })
   it('Displays results when initiating a search from a different page', () => {

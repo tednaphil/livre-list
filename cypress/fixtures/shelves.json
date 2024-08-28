@@ -1,0 +1,14 @@
+[
+    {
+        "id": 0,
+        "title": "Favorites",
+        "access": "PUBLIC",
+        "book_count": 0
+    },
+    {
+        "id": 1001,
+        "title": "For the Culture",
+        "access": "PUBLIC",
+        "book_count": 6
+    }
+]
