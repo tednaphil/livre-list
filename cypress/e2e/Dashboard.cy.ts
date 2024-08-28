@@ -47,9 +47,25 @@ describe('General User Stories Spec', () => {
     .get('img').last().should('have.attr', 'alt').should('equal', 'Witches, Pumpkins, and Grinning Ghosts book cover')
   })
   it('Filters and sorts search results', () => {
-
+    cy.get('input[type="text"]').type('halloween{enter}')
+    .get('select').select('descending')
+    .get('.card').first().contains('h3', 'Witches, Pumpkins, and Grinning Ghosts')
+    .get('.card').first().contains('p', 'Edna Barth')
+    .get('img').first().should('have.attr', 'alt').should('equal', 'Witches, Pumpkins, and Grinning Ghosts book cover')
+    .get('.card').last().contains('h3', 'Clifford\'s First Halloween')
+    .get('.card').last().contains('p', 'Norman Bridwell')
+    .get('img').last().should('have.attr', 'alt').should('equal', 'Clifford\'s First Halloween book cover')
+    .get('.chakra-checkbox__control').click()
+    .get('.results-gallery').children().should('have.length', 7)
+    .get('.card').first().contains('h3', 'Mommy, Why Don\'t We Celebrate Halloween?')
+    .get('.card').first().contains('p', 'Linda Winwood')
+    .get('img').first().should('have.attr', 'alt').should('equal', 'Mommy, Why Don\'t We Celebrate Halloween? book cover')
+    .get('.card').last().contains('h3', 'Clifford\'s First Halloween')
+    .get('.card').last().contains('p', 'Norman Bridwell')
+    .get('img').last().should('have.attr', 'alt').should('equal', 'Clifford\'s First Halloween book cover')
   })
   it('Displays book profile', () => {
+    cy.get('input[type="text"]').type('halloween{enter}')
 
   })
   it('Displays results when initiating a search from a different page', () => {
