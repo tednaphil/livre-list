@@ -75,7 +75,7 @@ function BookProfile() {
         <>
           {error && <ErrorPage error={error}/>}
           {loading && <Loading/>}
-          {!loading && <div className='profile-wrapper'>
+          {!loading && !error && <div className='profile-wrapper'>
           <section className='book-profile'>
             <aside className='thumbnail-container'>
               <img src={book?.image_links.smallThumbnail} alt={`${book?.title} cover`}/>
