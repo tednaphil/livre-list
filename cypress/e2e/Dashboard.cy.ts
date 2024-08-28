@@ -20,14 +20,31 @@ describe('General User Stories Spec', () => {
         statusCode: 200,
         fixture: "recommendations_response",
       }).as('getRecs') 
+    cy.visit('http://localhost:3000')
   })
   it('Displays landing page', () => {
-    cy.visit('http://localhost:3000')
-    .get('h1').contains('LivreList')
+    cy.get('h1').contains('LivreList')
     .get('input[type="text"]').should('have.attr', 'placeholder').should('eq', 'search')
+    .get('button').should('be.visible')
+    .get('img').should('have.attr', 'alt').should('equal', 'illustration of book spines')
+    .get('.home-info').contains(`Welcome to LivreList – Your Ultimate Book Organizer!`)
   })
   it('Shows search results', () => {
-
+    cy.get('input[type="text"]').should('have.value', '').type('halloween').should('have.value', 'halloween')
+    .type('{enter}')
+    .url().should('eq', 'http://localhost:3000/search/halloween')
+    .get('h2').contains('Search Results - halloween')
+    .get('.sort-filter').contains('Sort')
+    .get('select').should('have.value', 'ascending')
+    .get('.sort-filter').contains('Filter')
+    .get('input[type="checkbox"]').should('have.value', 'purchaseable')
+    .get('.results-gallery').children().should('have.length', 10)
+    .get('.card').first().contains('h3', 'Clifford\'s First Halloween')
+    .get('.card').first().contains('p', 'Norman Bridwell')
+    .get('img').first().should('have.attr', 'alt').should('equal', 'Clifford\'s First Halloween book cover')
+    .get('.card').last().contains('h3', 'Witches, Pumpkins, and Grinning Ghosts')
+    .get('.card').last().contains('p', 'Edna Barth')
+    .get('img').last().should('have.attr', 'alt').should('equal', 'Witches, Pumpkins, and Grinning Ghosts book cover')
   })
   it('Filters and sorts search results', () => {
 
