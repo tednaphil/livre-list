@@ -12,14 +12,15 @@ interface Props {
 
 function Card({id, title, authors, image, book}: Props) {
 
-  const authorList = authors.map(author => {
+  const authorList = authors ? authors.map((author, index) => {
     return(
-      <p className='author'>{author}</p>
-    )});
+      <p className='author' key={index}>{author}</p>
+    )}) :
+    <p className='author'>No Author Listed</p>
 
     return(
         <>
-        <div className='book-card'>
+        <div className='card book-card'>
           <Link to={`/books/${id}`}>
             <img src={image} alt={`${title} book cover`}/>
             <h3>{title}</h3>

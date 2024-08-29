@@ -1,0 +1,26 @@
+.shelf-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    margin: 8px;
+    width: 200px;
+    height: 300px;
+    outline: black solid 1px;
+    border-radius: 10px;
+    & img {
+        margin: 0 auto;
+    }
+    & h3 {
+        font-size: 1rem;
+    }
+    & p {
+        font-size: .8rem;
+    }
+}
+
+.card:hover {
+    transform: scale(.95);
+    cursor: pointer;
+}

@@ -1,0 +1,29 @@
+.shelf-wrapper {
+    padding-top: 140px;
+    display: flex;
+}
+
+.shelf-details {
+    position: fixed;
+    width: 20%;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & h2 {
+        writing-mode: vertical-rl;
+        text-orientation: sideways;
+        font-size: 2.8rem;
+        font-weight: bold;
+        color: lightgray;
+        padding-bottom: 30px;
+    }
+    
+}
+
+.book-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 20%;
+}

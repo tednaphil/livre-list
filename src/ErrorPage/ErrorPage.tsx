@@ -1,11 +1,18 @@
 import './ErrorPage.css';
+import { Button } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
-function ErrorPage() {
+interface Props {
+  error: string
+}
+
+function ErrorPage({error} : Props) {
     return(
-        <>
-          <h2>Error Page</h2>
-          <p>Uh oh!</p>
-        </>
+        <article className='error-page'>
+          <h2>Uh oh!</h2>
+          <p>{error}</p>
+          {error === 'Page Not Found' && <Button colorScheme='orange'><Link to='/'>Go Home</Link></Button>}
+        </article>
     )
 }
 

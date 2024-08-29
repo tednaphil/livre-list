@@ -27,3 +27,10 @@
     display: flex;
     padding-bottom: 15px;
 }
+
+.recs {
+    margin-top: 5%;
+    padding: 10px;
+    background: #a9b2ac;
+    
+}

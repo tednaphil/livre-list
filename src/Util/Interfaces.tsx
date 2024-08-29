@@ -8,13 +8,22 @@ export interface Book {
     publisher: string;
     subtitle: string;
     title: string;
+    buy_link: string;
 }
 
 export interface ImgLinks {
     smallThumbnail: string;
     thumbnail: string;
-    small: string;
-    medium: string;
-    large: string;
-    extraLarge: string;
 }
+
+export interface Bookshelf {
+    id: number;
+    title: string;
+    access: string;
+    book_count: number;
+}
+
+// export interface RequestOptions {
+//     method: string;
+//     redirect: string;
+// }

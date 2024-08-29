@@ -1,0 +1,15 @@
+.shelves-wrapper {
+    padding-top: 140px;
+    display: flex;
+    flex-direction: row;
+}
+
+.shelves-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    & p {
+        margin: 10px;
+    }
+}

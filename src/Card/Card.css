@@ -1,4 +1,5 @@
 .book-card {
+    background: rgba(255, 255, 255, 0.72);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,6 +21,6 @@
     }
 }
 
-.book-card:hover {
+.card:hover {
     transform: scale(.95);
 }
