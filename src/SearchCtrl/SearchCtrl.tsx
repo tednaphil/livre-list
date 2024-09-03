@@ -36,9 +36,9 @@ function SearchCtrl({ setSort, setFilters, filters }: Props) {
           <CheckboxGroup colorScheme='orange' defaultValue={[]}>
             <Stack spacing={[1, 2]} direction={['column']}>
               <Checkbox value='purchaseable' onChange={(e) => {handleFilter(e, 'purchaseable')}}>Purchaseable</Checkbox>
-              <Checkbox value='fiction' onChange={(e) => {handleFilter(e, 'fiction')}}>Fiction</Checkbox>
-              <Checkbox value='non-fiction' onChange={(e) => {handleFilter(e, 'non-fiction')}}>Non-Fiction</Checkbox>
-              <Checkbox value='juvenile' onChange={(e) => {handleFilter(e, 'juvenile')}}>Children's Literature</Checkbox>
+              <Checkbox value='Fiction' onChange={(e) => {handleFilter(e, 'Fiction')}}>Fiction</Checkbox>
+              <Checkbox value='Nonfiction' onChange={(e) => {handleFilter(e, 'Nonfiction')}}>Non-Fiction</Checkbox>
+              <Checkbox value='Juvenile' onChange={(e) => {handleFilter(e, 'Juvenile')}}>Children's Literature</Checkbox>
             </Stack>
           </CheckboxGroup>
         {/* </section> */}

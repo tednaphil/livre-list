@@ -11,6 +11,7 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 function Results() {
   const term = useParams().term;
   const [results, setResults] = useState<Book[]>([]);
+  const [sortedResults, setSortedResults] = useState<Book[]>([]);
   const [sort, setSort] = useState<string>('ascending');
   const [filters, setFilters] = useState<string[] | null>(null);
   const [loading, setLoading] = useState(true);
@@ -34,8 +35,13 @@ function Results() {
           acc = [...acc, ...purchaseable]
         }
         // else if(filter === 'ebook') {
-        //   // const ebooks = books.filter(book => )
+        //   // const ebooks = books.filter(book => book.categories.some((category) => category.includes(filter)))
         // }
+        else {
+          const genreFiltered = books.filter(book => book.categories.some((category) => category.includes(filter)));
+          console.log({genreFiltered})
+          acc = [...acc, ...genreFiltered]
+        }
         return acc
       }, [])
 
@@ -50,21 +56,33 @@ function Results() {
            book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
         }
       })
-      const filteredData = filterResults(searchData, filters);
-      const sortedData = sortResults(filteredData, sort);
+      const sortedData = sortResults(searchData, sort);
       setResults(sortedData);
+      // const filteredData = filterResults(searchData, filters);
+      // setResults(sortedData);
       setLoading(false)
     } catch(error: any) {
       setError(`There was a problem getting the search results - ${error.message}`)
       setLoading(false)
     }
   }
+
+  const handleCriteria = () => {
+    const filteredData = filterResults(results, filters);
+    const sortedData = sortResults(filteredData, sort);
+    setSortedResults(sortedData);
+  }
   
   useEffect(() => {
     setError('')
+    // setLoading(true)
     setResults([])
     fetchData()
-  }, [filters, sort, term])
+  }, [term])
+
+  // useEffect(() => {
+  //   handleCriteria()
+  // }, [filters, sort])
 
   const books = results?.map(book => {
     return (
@@ -78,6 +96,30 @@ function Results() {
       />
     )
   })
+  // const books = sortedResults.length > 0 ? sortedResults.map(book => {
+  //   return (
+  //     <Card
+  //       key={book.id}
+  //       id={book.id}
+  //       title={book.title}
+  //       authors={book.authors}
+  //       image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+  //       book={book}
+  //     />
+  //   )
+  // }) : results.map(book => {
+  //   return (
+  //     <Card
+  //       key={book.id}
+  //       id={book.id}
+  //       title={book.title}
+  //       authors={book.authors}
+  //       image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+  //       book={book}
+  //     />
+  //   )
+  // })
+
 
     return(
         <>
