@@ -15,7 +15,17 @@ describe('General User Stories Spec', () => {
         statusCode: 200,
         fixture: "book_response",
       }).as('getBook') 
+    cy.intercept("GET", "https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books/FTpsDwAAQBAJ"
+      , {
+        statusCode: 200,
+        fixture: "purchaseable_book_response",
+      }).as('getPurchaseableBook') 
     cy.intercept("GET", "https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=Juvenile%20Fiction%20/%20Holidays%20&%20Celebrations%20/%20Halloween"
+      , {
+        statusCode: 200,
+        fixture: "recommendations_response",
+      }).as('getRecs') 
+    cy.intercept("GET", "https://livre-list-be-c61f46345338.herokuapp.com/api/v1/books?search=Body,%20Mind%20&%20Spirit"
       , {
         statusCode: 200,
         fixture: "recommendations_response",
@@ -82,6 +92,7 @@ describe('General User Stories Spec', () => {
     .get('button[id="menu-list-:r7:-menuitem-:r9:"]').contains('Favorites')
     .get('button[id="menu-list-:r7:-menuitem-:rb:"]').contains('For the Culture')
     .get('button[id="menu-list-:r7:-menuitem-:rd:"]').contains('Create a New Shelf')
+    .get('.chakra-button').contains('Buy Book').should('not.exist')
     .get('h4').contains('Recommendations')
     .get('.slick-prev').should('be.visible')
     .get('.slick-next').should('be.visible')
@@ -93,9 +104,29 @@ describe('General User Stories Spec', () => {
     .get('div[data-index="4"]').contains('p', 'Martha Finley')
     .get('img[src="http://books.google.com/books/content?id=yhk6TPU3j3IC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"]').should('have.attr', 'alt').should('equal', 'Holidays at Roselands. [With Plates.] book cover')
   })
-  /*it('Displays buy button for purchaseable books', () => {
+  it('Displays buy button for purchaseable books', () => {
+    cy.visit('http://localhost:3000/books/FTpsDwAAQBAJ')
+    .get('img[src="http://books.google.com/books/content?id=FTpsDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"]').should('have.attr', 'alt').should('equal', 'Llewellyn\'s Little Book of Halloween cover')
+    .get('h3').contains('Llewellyn\'s Little Book of Halloween')
+    .get('.book-details').contains('p', 'Mickie Mueller')
+    .get('.book-details').contains('p', 'Llewellyn Worldwide | Published: 2018')
+    .get('.book-info').contains('p', 'This fun, pocket-size book shares everything you need to know to celebrate the festival')
+    .get('.chakra-menu__menu-button').click()
+    .get('button[id="menu-list-:r7:-menuitem-:r9:"]').contains('Favorites')
+    .get('button[id="menu-list-:r7:-menuitem-:rb:"]').contains('For the Culture')
+    .get('button[id="menu-list-:r7:-menuitem-:rd:"]').contains('Create a New Shelf')
+    .get('.chakra-button').contains('Buy Book')
+    .get('h4').contains('Recommendations')
+    .get('.slick-prev').should('be.visible')
+    .get('.slick-next').should('be.visible')
+    .get('div[data-index="0"]').contains('h3', 'Celebrate the Season: Home for the Holidays')
+    .get('div[data-index="0"]').contains('p', 'Taylor Garland')
+    .get('img[src="http://books.google.com/books/content?id=4IA3swEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"]').should('have.attr', 'alt').should('equal', 'Celebrate the Season: Home for the Holidays book cover')
+    .get('.slick-next').click()
+    .get('div[data-index="4"]').contains('h3', 'Holidays at Roselands. [With Plates.]')
+    .get('div[data-index="4"]').contains('p', 'Martha Finley')
+    .get('img[src="http://books.google.com/books/content?id=yhk6TPU3j3IC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"]').should('have.attr', 'alt').should('equal', 'Holidays at Roselands. [With Plates.] book cover')
   })
-  */
   it('Displays results when initiating a search from a different page', () => {
     cy.visit('http://localhost:3000/books/IJDQwQEACAAJ')
     cy.get('input[type="text"]').type('christmas{enter}')
@@ -113,6 +144,5 @@ describe('General User Stories Spec', () => {
   it('Displays message if no results match filter criteria', () => {
     cy.get('input[type="text"]').type('christmas{enter}')
     .get('.chakra-checkbox__control').click()
-
   })
 })
