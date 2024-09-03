@@ -91,6 +91,7 @@ function Results() {
             </section>
             <section className='results-gallery'>
               {error && <ErrorPage error={error}/>}
+              {!results.length && <p>No Results</p>}
               {books}
             </section>
           </div>
