@@ -93,6 +93,9 @@ describe('General User Stories Spec', () => {
     .get('div[data-index="4"]').contains('p', 'Martha Finley')
     .get('img[src="http://books.google.com/books/content?id=yhk6TPU3j3IC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"]').should('have.attr', 'alt').should('equal', 'Holidays at Roselands. [With Plates.] book cover')
   })
+  /*it('Displays buy button for purchaseable books', () => {
+  })
+  */
   it('Displays results when initiating a search from a different page', () => {
     cy.visit('http://localhost:3000/books/IJDQwQEACAAJ')
     cy.get('input[type="text"]').type('christmas{enter}')
@@ -106,5 +109,10 @@ describe('General User Stories Spec', () => {
     .get('.card').last().contains('p', 'Madeleine L\'Engle')
     .get('.card').last().contains('p', 'Luci Shaw')
     .get('img').last().should('have.attr', 'alt').should('equal', 'WinterSong book cover')
+  })
+  it('Displays message if no results match filter criteria', () => {
+    cy.get('input[type="text"]').type('christmas{enter}')
+    .get('.chakra-checkbox__control').click()
+
   })
 })
