@@ -31,12 +31,22 @@ function Results() {
       return filters.reduce((acc: Book[], filter) => {
         if(filter === 'purchaseable') {
           const purchaseable = books.filter(book => book.buy_link);
-          acc = [...acc, ...purchaseable]
+          purchaseable.forEach(book => {
+            if(!acc.includes(book)) {
+              acc.push(book)
+            }
+          })
+          // acc = [...acc, ...purchaseable]
         }
         else {
           const genreFiltered = books.filter(book => book.categories.some((category) => category.includes(filter)));
           console.log({genreFiltered})
-          acc = [...acc, ...genreFiltered]
+          genreFiltered.forEach(book => {
+            if(!acc.includes(book)) {
+              acc.push(book)
+            }
+          })
+          // acc = [...acc, ...genreFiltered]
         }
         return acc
       }, [])
