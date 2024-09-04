@@ -36,7 +36,6 @@ function Results() {
               acc.push(book)
             }
           })
-          // acc = [...acc, ...purchaseable]
         }
         else {
           const genreFiltered = books.filter(book => book.categories.some((category) => category.includes(filter)));
@@ -46,13 +45,28 @@ function Results() {
               acc.push(book)
             }
           })
-          // acc = [...acc, ...genreFiltered]
         }
         return acc
       }, [])
-
     }
   }
+
+  //REFACTOR W/ RECURSION
+  // const filterResults = (books: Book[], filters: string[] | null, newArr: Book[] = [], counter: number = 0 ) => {
+  //   let filtered = newArr;
+  //   let i = counter;
+  //   if(filters) {
+  //     if(i >= filters.length) {
+  //       return filtered
+  //     } else if(i < filters.length /*&& books.length*/) {
+  //       //check for matches of current condition (filters[i])
+  //       //push books that match condition to `filtered` array
+  //       //return invokation of filterResults passing filtered, filters, filtered, and i + 1
+  //     }
+  //   } else {
+  //     return books
+  //   }
+  // }
 
   const fetchData = async () => {
     try {
@@ -92,7 +106,7 @@ function Results() {
   
   useEffect(() => {
     setError('')
-    // setLoading(true)
+    setLoading(true)
     setResults([])
     fetchData()
   }, [term])
