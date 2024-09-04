@@ -11,17 +11,16 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 function Results() {
   const term = useParams().term;
   const [results, setResults] = useState<Book[]>([]);
-  const [sortedResults, setSortedResults] = useState<Book[]>([]);
   const [sort, setSort] = useState<string>('ascending');
   const [filters, setFilters] = useState<string[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const sortResults = (books: Book[], orientation: string) => {
+  const sortResults = (books: any, orientation: string) => {
     if(orientation === 'descending') {
-      return books.sort((a, b) => b.title.localeCompare(a.title))
+      return books.toSorted((a: any, b: any) => b.title.localeCompare(a.title))
     } else {
-      return books.sort((a, b) => a.title.localeCompare(b.title))
+      return books.toSorted((a: any, b: any) => a.title.localeCompare(b.title))
     }
   }
 
@@ -34,9 +33,6 @@ function Results() {
           const purchaseable = books.filter(book => book.buy_link);
           acc = [...acc, ...purchaseable]
         }
-        // else if(filter === 'ebook') {
-        //   // const ebooks = books.filter(book => book.categories.some((category) => category.includes(filter)))
-        // }
         else {
           const genreFiltered = books.filter(book => book.categories.some((category) => category.includes(filter)));
           console.log({genreFiltered})
@@ -58,8 +54,6 @@ function Results() {
       })
       const sortedData = sortResults(searchData, sort);
       setResults(sortedData);
-      // const filteredData = filterResults(searchData, filters);
-      // setResults(sortedData);
       setLoading(false)
     } catch(error: any) {
       setError(`There was a problem getting the search results - ${error.message}`)
@@ -67,10 +61,23 @@ function Results() {
     }
   }
 
-  const handleCriteria = () => {
+  const sortedFilteredBooks = () => {
     const filteredData = filterResults(results, filters);
     const sortedData = sortResults(filteredData, sort);
-    setSortedResults(sortedData);
+    console.log({sortedData})
+    const books = sortedData?.map((book: Book) => {
+      return (
+        <Card
+          key={book.id}
+          id={book.id}
+          title={book.title}
+          authors={book.authors}
+          image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+          book={book}
+        />
+      )
+    })
+    return books.length ? books : <p>No results</p>
   }
   
   useEffect(() => {
@@ -80,45 +87,9 @@ function Results() {
     fetchData()
   }, [term])
 
-  // useEffect(() => {
-  //   handleCriteria()
-  // }, [filters, sort])
-
-  const books = results?.map(book => {
-    return (
-      <Card
-        key={book.id}
-        id={book.id}
-        title={book.title}
-        authors={book.authors}
-        image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-        book={book}
-      />
-    )
-  })
-  // const books = sortedResults.length > 0 ? sortedResults.map(book => {
-  //   return (
-  //     <Card
-  //       key={book.id}
-  //       id={book.id}
-  //       title={book.title}
-  //       authors={book.authors}
-  //       image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-  //       book={book}
-  //     />
-  //   )
-  // }) : results.map(book => {
-  //   return (
-  //     <Card
-  //       key={book.id}
-  //       id={book.id}
-  //       title={book.title}
-  //       authors={book.authors}
-  //       image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-  //       book={book}
-  //     />
-  //   )
-  // })
+  useEffect(() => {
+    // setLoading(true)
+  }, [filters, sort])
 
 
     return(
@@ -133,8 +104,7 @@ function Results() {
             </section>
             <section className='results-gallery'>
               {error && <ErrorPage error={error}/>}
-              {!results.length && <p>No Results</p>}
-              {books}
+              {sortedFilteredBooks()}
             </section>
           </div>
         </>}
