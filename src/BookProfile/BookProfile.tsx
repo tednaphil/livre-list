@@ -21,8 +21,7 @@ function BookProfile() {
     const id = useParams().id;
     const [book, setBook] = useState<Book | null>(null);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState({ name: 'Odell', id: "106196942824430802445" });
-    // get user data from local storage
+    const [user, setUser] = useState<null | string>(null);
     const [shelves, setShelves] = useState<string[] | null>(null);
     const [error, setError] = useState('');
     const [recsError, setRecsError] = useState('');
@@ -33,13 +32,16 @@ function BookProfile() {
       setBook(null);
       setRecs(null);
       setError('');
+      //move user statements to separate useEffect
+      const sessionUser = sessionStorage.getItem('userID');
+      setUser(sessionUser)
       fetchData()
     }, [id])
 
     const fetchData = async () => {
       setLoading(true)
       try {
-        const shelfData = await getShelves(user.id);
+        const shelfData = await getShelves(user);
         setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
         const data = await getBook(id);
         if(!data.image_links) {
@@ -77,6 +79,20 @@ function BookProfile() {
       )
     })
 
+    const login = async () => {
+      try {
+        //TO DO: uncomment block below to replace hardcoded lines
+        // const response = await postUser();
+        // console.log(response)
+        // sessionStorage.setItem('userID', response)
+        // setUser(response)
+        sessionStorage.setItem('userID', '106196942824430802445')
+        setUser('106196942824430802445')
+      } catch(error) {
+        console.log(error)
+      }
+    }
+
     return(
         <>
           {error && <ErrorPage error={error}/>}
@@ -86,7 +102,8 @@ function BookProfile() {
             <aside className='thumbnail-container'>
               <img src={book?.image_links.smallThumbnail} alt={`${book?.title} cover`}/>
               <Stack spacing={4} direction='column' align='center'>
-                <Menu>
+                {!user && <Button colorScheme='orange' width='200px' onClick={login}>Login to add to shelf</Button>}
+                {user && <Menu>
                   <MenuButton as={Button} colorScheme='orange' width='200px' rightIcon={<ChevronDownIcon />}>
                     Add to Shelf
                   </MenuButton>
@@ -94,8 +111,8 @@ function BookProfile() {
                     {userShelves}
                     <MenuItem icon={<AddIcon />} onClick={() => {alert('create a new shelf')}}>Create a New Shelf</MenuItem>
                   </MenuList>
-                </Menu>
-                {book?.buy_link && <Button colorScheme='orange' width='200px'>Buy Book</Button>}
+                </Menu>}
+                {book?.buy_link && <Button colorScheme='orange' width='200px'><a target="_blank" rel="noreferrer" href={book.buy_link}>Buy Book</a></Button>}
               </Stack>
             </aside>
             <article className='book-info'>
