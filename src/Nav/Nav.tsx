@@ -19,18 +19,27 @@ import { postUser } from '../Util/API_calls';
 
 function Nav() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<string | null>(null);
 
 
     const login = async () => {
       try {
-        const response = await postUser();
-        console.log(response)
+        //TO DO: uncomment block below to replace hardcoded lines
+        // const response = await postUser();
+        // console.log(response)
+        // sessionStorage.setItem('userID', response)
+        // setUser(response)
+        sessionStorage.setItem('userID', '106196942824430802445')
+        setUser('106196942824430802445')
       } catch(error) {
         console.log(error)
       }
     }
 
+    const logout = () => {
+      setUser(null)
+      //navigate to home or logout confirmation page
+    }
 
     return(
         <>
@@ -62,8 +71,9 @@ function Nav() {
                 <DrawerBody>
                     <Stack>
                         <NavLink to='/' onClick={onClose}>Home</NavLink>
-                        <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>
+                        {user && <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>}
                         {!user && <Button colorScheme='orange' onClick={login}>Login with Google</Button>}
+                        {user && <Button colorScheme='orange' onClick={logout}>Logout</Button>}
                     </Stack>
                 </DrawerBody>
                 </DrawerContent>
