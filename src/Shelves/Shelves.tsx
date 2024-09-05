@@ -10,8 +10,7 @@ import Loading from '../Loading/Loading';
 function Shelves() {
   const [shelves, setShelves] = useState<Bookshelf[] | null>(null);
   const [sort, setSort] = useState('ascending');
-  // const [user, setUser] = useState(null)
-  // get user data from local storage
+  const [user, setUser] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,12 +23,14 @@ function Shelves() {
   }
 
   useEffect(() => {
+    const sessionUser = sessionStorage.getItem('userID')
+    setUser(sessionUser)
     fetchData()
   }, [sort])
 
   const fetchData = async () => {
     try {
-      const response = await getShelves();
+      const response = await getShelves(user);
       const sortedData = sortShelves(response, sort);
       setShelves(sortedData)
       setLoading(false)
