@@ -46,13 +46,14 @@ function Results() {
           //check filteredBooks array - if a book's categories property doesn't contain the current filter, remove it from array
         //return filteredBooks array
       //return filteredBooks (this will be executed if genrefilters has no length)
+      const booksToFilter = [...purchaseableBooks]
       let filteredBooks = purchaseableBooks;
       const genreFilters = filters.filter(filter => filter !== FilterValues.purchaseable);
       console.log({genreFilters})
       // console.log('Juvenile Fiction'.includes('Nonfiction'))
       if(genreFilters.length) {
         for (const filter of genreFilters) {
-          filteredBooks.forEach(book => {
+          booksToFilter.forEach(book => {
             console.log({filter})
             console.log(book.categories)
             if(!book.categories.some((category) => category.includes(filter))) {
@@ -71,7 +72,7 @@ function Results() {
           //check filteredBooks array - if a book's categories property doesn't contain the current filter, remove it from array
       //return filteredBooks array
       // console.log('Juvenile Fiction'.includes('Nonfiction'))
-      let booksToFilter = [...books];
+      const booksToFilter = [...books];
       let filteredBooks = [...books];
       // for (const book of filteredBooks) {
       //   filters.forEach(filter => {
