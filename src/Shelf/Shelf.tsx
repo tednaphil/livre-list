@@ -10,7 +10,7 @@ import Loading from '../Loading/Loading';
 
 function Shelf() {
   const shelfID = useParams().id;
-  const [user, setUser] = useState<string | null>(null);
+  // const [user, setUser] = useState<string | null>(null);
   const [shelf, setShelf] = useState<Bookshelf | undefined>();
   const [books, setBooks] = useState<Book[] | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -20,14 +20,15 @@ function Shelf() {
   useEffect(() => {
     // setError('')
     //move to sessionUser statements separate useEffect
-    const sessionUser = sessionStorage.getItem('userID')
-    setUser(sessionUser)
+    // const sessionUser = sessionStorage.getItem('userID')
+    // setUser(sessionUser)
     fetchData()
   }, [shelfID])
 
   const fetchData = async () => {
     try {
-      const shelfData = await getShelf(user, shelfID);
+      const sessionUser = sessionStorage.getItem('userID')
+      const shelfData = await getShelf(sessionUser, shelfID);
       if(shelfData) {
         setShelf(shelfData[0])
         setBooks(shelfData[1])

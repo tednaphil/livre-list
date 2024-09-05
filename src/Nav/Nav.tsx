@@ -15,7 +15,7 @@ import {
 import Search from '../Search/Search';
 import { NavLink, Link } from 'react-router-dom';
 import { useState } from 'react';
-import { postUser } from '../Util/API_calls';
+// import { postUser } from '../Util/API_calls';
 
 function Nav() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,7 +40,6 @@ function Nav() {
     const logout = () => {
       sessionStorage.removeItem('userID')
       setUser(null)
-      //remove from sessionStorage
       //navigate to home or logout confirmation page
     }
 
