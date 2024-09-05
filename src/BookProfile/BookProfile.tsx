@@ -36,13 +36,17 @@ function BookProfile() {
       const sessionUser = sessionStorage.getItem('userID');
       setUser(sessionUser)
       fetchData()
+      //if user, fetchShelves
+      if(user) {
+        fetchShelves()
+      }
     }, [id])
 
     const fetchData = async () => {
       setLoading(true)
       try {
-        const shelfData = await getShelves(user);
-        setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
+        // const shelfData = await getShelves(user);
+        // setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
         const data = await getBook(id);
         if(!data.image_links) {
           data.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
@@ -62,6 +66,15 @@ function BookProfile() {
           setError(`There was a problem getting the book data - ${error.message}`)
           setLoading(false)
         }
+      }
+    }
+
+    const fetchShelves = async () => {
+      try {
+        const shelfData = await getShelves(user);
+        setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
+      } catch(error: any) {
+        setError(error.message)
       }
     }
 
