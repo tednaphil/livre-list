@@ -23,11 +23,12 @@ function Results() {
     childrens = 'Juvenile'
   };
 
+  //books parameter has type any since the method toSorted throws an error when called on Book[] type
   const sortResults = (books: any, orientation: string) => {
     if(orientation === 'descending') {
-      return books.toSorted((a: any, b: any) => b.title.localeCompare(a.title))
+      return books.toSorted((a: Book, b: Book) => b.title.localeCompare(a.title))
     } else {
-      return books.toSorted((a: any, b: any) => a.title.localeCompare(b.title))
+      return books.toSorted((a: Book, b: Book) => a.title.localeCompare(b.title))
     }
   }
 
@@ -37,7 +38,7 @@ function Results() {
     if(!filters?.length) {
       return books
     }
-    return filters.reduce((acc: Book[], filter) => {
+    return filters.reduce((acc: Book[], filter: string) => {
       if(filter === FilterValues.purchaseable) {
         const purchaseable = books.filter(book => book.buy_link);
         purchaseable.forEach(book => {
