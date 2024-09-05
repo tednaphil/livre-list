@@ -19,7 +19,8 @@ import { postUser } from '../Util/API_calls';
 
 function Nav() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [user, setUser] = useState<string | null>(null);
+    const sessionUser = sessionStorage.getItem('userID')
+    const [user, setUser] = useState<string | null>(sessionUser);
 
 
     const login = async () => {
@@ -37,7 +38,9 @@ function Nav() {
     }
 
     const logout = () => {
+      sessionStorage.removeItem('userID')
       setUser(null)
+      //remove from sessionStorage
       //navigate to home or logout confirmation page
     }
 
@@ -55,7 +58,7 @@ function Nav() {
                 <Link to='/'><h1>LivreList</h1></Link>
               </motion.div>
               <Search/>
-              <Button /*ref={btnRef}*/ colorScheme='whiteAlpha' variant='ghost' onClick={onOpen}>
+              <Button colorScheme='whiteAlpha' variant='ghost' onClick={onOpen}>
                 <HamburgerIcon w={6} h={6} color='white' />
               </Button>
               <Drawer
