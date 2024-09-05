@@ -16,6 +16,13 @@ function Results() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  enum FilterValues {
+    purchaseable = 'purchaseable',
+    fiction = 'Fiction',
+    nonFiction = 'Nonfiction',
+    childrens = 'Juvenile'
+  };
+
   const sortResults = (books: any, orientation: string) => {
     if(orientation === 'descending') {
       return books.toSorted((a: any, b: any) => b.title.localeCompare(a.title))
@@ -24,7 +31,6 @@ function Results() {
     }
   }
 
-  //define a filters enum
   //refactor filterResults with for of loop
 
   const filterResults = (books: Book[], filters: string[] | null) => {
@@ -32,7 +38,7 @@ function Results() {
       return books
     }
     return filters.reduce((acc: Book[], filter) => {
-      if(filter === 'purchaseable') {
+      if(filter === FilterValues.purchaseable) {
         const purchaseable = books.filter(book => book.buy_link);
         purchaseable.forEach(book => {
           if(!acc.includes(book)) {

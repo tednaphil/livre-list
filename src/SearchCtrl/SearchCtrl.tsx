@@ -13,6 +13,7 @@ function SearchCtrl({ setSort, setFilters, filters }: Props) {
     setSort(e.target.value)
   }
 
+  //TO DO - refactor with e.target.value instead of separate term parameter
   const handleFilter = (e: any, term: string) => {
     if(e.target.checked && !filters) {
       setFilters([term])
