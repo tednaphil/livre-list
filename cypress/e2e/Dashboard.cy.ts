@@ -83,6 +83,20 @@ describe('General User Stories Spec', () => {
     .get('.card').last().contains('p', 'Norman Bridwell')
     .get('img').last().should('have.attr', 'alt').should('equal', 'Clifford\'s First Halloween book cover')
   })
+  it('Applies multiple filters', () => {
+    cy.get('input[type="text"]').type('halloween{enter}')
+    .get('.chakra-checkbox__control').first().click()
+    .get('.results-gallery').children().should('have.length', 7)
+    .get('.chakra-checkbox__control').last().click()
+    .get('.results-gallery').children().should('have.length', 4)
+    .get('.card').first().contains('h3', 'Clifford\'s First Halloween')
+    .get('.card').first().contains('p', 'Norman Bridwell')
+    .get('img').first().should('have.attr', 'alt').should('equal', 'Clifford\'s First Halloween book cover')
+    .get('.card').last().contains('h3', 'Mommy, Why Don\'t We Celebrate Halloween?')
+    .get('.card').last().contains('p', 'Linda Winwood')
+    .get('img').last().should('have.attr', 'alt').should('equal', 'Mommy, Why Don\'t We Celebrate Halloween? book cover')
+     
+  })
   it('Displays book profile', () => {
     cy.get('input[type="text"]').type('halloween{enter}')
     .get('a[href="/books/IJDQwQEACAAJ"]').click()
