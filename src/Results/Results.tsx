@@ -24,31 +24,34 @@ function Results() {
     }
   }
 
+  //define a filters enum
+  //refactor filterResults with for of loop
+
   const filterResults = (books: Book[], filters: string[] | null) => {
     if(!filters?.length) {
       return books
-    } else {
-      return filters.reduce((acc: Book[], filter) => {
-        if(filter === 'purchaseable') {
-          const purchaseable = books.filter(book => book.buy_link);
-          purchaseable.forEach(book => {
-            if(!acc.includes(book)) {
-              acc.push(book)
-            }
-          })
-        }
-        else {
-          const genreFiltered = books.filter(book => book.categories.some((category) => category.includes(filter)));
-          console.log({genreFiltered})
-          genreFiltered.forEach(book => {
-            if(!acc.includes(book)) {
-              acc.push(book)
-            }
-          })
-        }
-        return acc
-      }, [])
     }
+    return filters.reduce((acc: Book[], filter) => {
+      if(filter === 'purchaseable') {
+        const purchaseable = books.filter(book => book.buy_link);
+        purchaseable.forEach(book => {
+          if(!acc.includes(book)) {
+            acc.push(book)
+          }
+        })
+      }
+      else {
+        const genreFiltered = books.filter(book => book.categories.some((category) => category.includes(filter)));
+        console.log({genreFiltered})
+        genreFiltered.forEach(book => {
+          if(!acc.includes(book)) {
+            acc.push(book)
+          }
+        })
+      }
+      return acc
+    }, [])
+    
   }
 
   //REFACTOR W/ RECURSION
@@ -88,7 +91,7 @@ function Results() {
   const sortedFilteredBooks = () => {
     const filteredData = filterResults(results, filters);
     const sortedData = sortResults(filteredData, sort);
-    console.log({sortedData})
+    // console.log({sortedData})
     const books = sortedData?.map((book: Book) => {
       return (
         <Card
