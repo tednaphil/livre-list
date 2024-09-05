@@ -70,7 +70,7 @@ describe('General User Stories Spec', () => {
     .get('.card').last().contains('h3', 'Clifford\'s First Halloween')
     .get('.card').last().contains('p', 'Norman Bridwell')
     .get('img').last().should('have.attr', 'alt').should('equal', 'Clifford\'s First Halloween book cover')
-    .get('.chakra-checkbox__control').click()
+    .get('.chakra-checkbox__control').first().click()
     .get('.results-gallery').children().should('have.length', 7)
     .get('.card').first().contains('h3', 'Mommy, Why Don\'t We Celebrate Halloween?')
     .get('.card').first().contains('p', 'Linda Winwood')
@@ -143,6 +143,7 @@ describe('General User Stories Spec', () => {
   })
   it('Displays message if no results match filter criteria', () => {
     cy.get('input[type="text"]').type('christmas{enter}')
-    .get('.chakra-checkbox__control').click()
+    .get('.chakra-checkbox__control').first().click()
+    .get('p').contains('No results')
   })
 })
