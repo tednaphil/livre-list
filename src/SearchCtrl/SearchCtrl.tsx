@@ -13,14 +13,13 @@ function SearchCtrl({ setSort, setFilters, filters }: Props) {
     setSort(e.target.value)
   }
 
-  //TO DO - refactor with e.target.value instead of separate term parameter
-  const handleFilter = (e: any, term: string) => {
+  const handleFilter = (e: any) => {
     if(e.target.checked && !filters) {
-      setFilters([term])
+      setFilters([e.target.value])
     } else if(e.target.checked && filters) {
-      setFilters([...filters, term])
+      setFilters([...filters, e.target.value])
     } else if(!e.target.checked && filters) {
-      const updatedFilters = filters.filter((el: any) => !(el === term))
+      const updatedFilters = filters.filter((el: any) => !(el === e.target.value))
       setFilters(updatedFilters)
     }
   }
@@ -36,10 +35,10 @@ function SearchCtrl({ setSort, setFilters, filters }: Props) {
           <h2>Filter</h2>
           <CheckboxGroup colorScheme='orange' defaultValue={[]}>
             <Stack spacing={[1, 2]} direction={['column']}>
-              <Checkbox value='purchaseable' onChange={(e) => {handleFilter(e, 'purchaseable')}}>Purchaseable</Checkbox>
-              <Checkbox value='Fiction' onChange={(e) => {handleFilter(e, 'Fiction')}}>Fiction</Checkbox>
-              <Checkbox value='Nonfiction' onChange={(e) => {handleFilter(e, 'Nonfiction')}}>Non-Fiction</Checkbox>
-              <Checkbox value='Juvenile' onChange={(e) => {handleFilter(e, 'Juvenile')}}>Children's Literature</Checkbox>
+              <Checkbox value='purchaseable' onChange={(e) => {handleFilter(e)}}>Purchaseable</Checkbox>
+              <Checkbox value='Fiction' onChange={(e) => {handleFilter(e)}}>Fiction</Checkbox>
+              <Checkbox value='Nonfiction' onChange={(e) => {handleFilter(e)}}>Non-Fiction</Checkbox>
+              <Checkbox value='Juvenile' onChange={(e) => {handleFilter(e)}}>Children's Literature</Checkbox>
             </Stack>
           </CheckboxGroup>
         {/* </section> */}
