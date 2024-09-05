@@ -39,93 +39,31 @@ function Results() {
     }
 
     if(filters.includes(FilterValues.purchaseable)) {
-      //define filteredBooks array initialized with purchaseableBooks
-      //make copy of filters array with just the genre filters (remove purchaseable filter)
-      //if genreFilters has length
-        //iterate through genre filters
-          //check filteredBooks array - if a book's categories property doesn't contain the current filter, remove it from array
-        //return filteredBooks array
-      //return filteredBooks (this will be executed if genrefilters has no length)
-      const booksToFilter = [...purchaseableBooks]
-      let filteredBooks = purchaseableBooks;
+      let filteredBooks = [...purchaseableBooks];
       const genreFilters = filters.filter(filter => filter !== FilterValues.purchaseable);
-      console.log({genreFilters})
-      // console.log('Juvenile Fiction'.includes('Nonfiction'))
       if(genreFilters.length) {
         for (const filter of genreFilters) {
-          booksToFilter.forEach(book => {
-            console.log({filter})
-            console.log(book.categories)
+          purchaseableBooks.forEach(book => {
             if(!book.categories.some((category) => category.includes(filter))) {
               filteredBooks.splice(filteredBooks.indexOf(book), 1)
             }
           })
         }
-        console.log({filteredBooks})
         return filteredBooks
       }
-      // console.log({filteredBooks})
       return filteredBooks
     } else if(!filters.includes(FilterValues.purchaseable)) {
-      //define filteredBooks array initialized with books
-      //iterate through filters
-          //check filteredBooks array - if a book's categories property doesn't contain the current filter, remove it from array
-      //return filteredBooks array
-      // console.log('Juvenile Fiction'.includes('Nonfiction'))
-      const booksToFilter = [...books];
       let filteredBooks = [...books];
-      // for (const book of filteredBooks) {
-      //   filters.forEach(filter => {
-      //     if(!book.categories.some((category) => category.includes(filter))) {
-      //       filteredBooks.splice(filteredBooks.indexOf(book), 1)
-      //     }
-      //   })
-      // }
       for (const filter of filters) {
-        console.log({filteredBooks})
-        // console.log({filter})
-        booksToFilter.forEach(book => {
-          console.log({filteredBooks})
-          console.log(book.title, book.categories)
-          console.log('at least one category includes the filter', book.categories.some((category) => category.includes(filter)))
-          console.log('categories don\'t include the filter', !book.categories.some((category) => category.includes(filter)))
+        books.forEach(book => {
           if(!book.categories.some((category) => category.includes(filter))) {
-            console.log('remove this book', book)
             filteredBooks.splice(filteredBooks.indexOf(book), 1)
-            console.log(filteredBooks)
           }
         })
       }
-      console.log('returned books', filteredBooks)
       return filteredBooks
     }
   }
-
-  // const filterResults = (books: Book[], filters: string[] | null) => {
-  //   if(!filters?.length) {
-  //     return books
-  //   }
-  //   return filters.reduce((acc: Book[], filter: string) => {
-  //     if(filter === FilterValues.purchaseable) {
-  //       const purchaseable = books.filter(book => book.buy_link);
-  //       purchaseable.forEach(book => {
-  //         if(!acc.includes(book)) {
-  //           acc.push(book)
-  //         }
-  //       })
-  //     }
-  //     else {
-  //       const genreFiltered = books.filter(book => book.categories.some((category) => category.includes(filter)));
-  //       console.log({genreFiltered})
-  //       genreFiltered.forEach(book => {
-  //         if(!acc.includes(book)) {
-  //           acc.push(book)
-  //         }
-  //       })
-  //     }
-  //     return acc
-  //   }, [])
-  // }
 
   const fetchData = async () => {
     try {
