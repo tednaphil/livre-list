@@ -129,6 +129,10 @@ describe('Logged-in User Stories Spec', () => {
 
     // }) 
     it('Logs a user out', () => {
-
+        cy.get('button').click()
+        .get('.chakra-button').contains('Login with Google').click()
+        .get('.chakra-button').contains('Logout').click()
+        .get('.chakra-button').contains('Logout').should('not.exist')
+        .get('.chakra-button').contains('Login with Google').should('be.visible')
     })
 })
