@@ -32,15 +32,19 @@ function BookProfile() {
       setBook(null);
       setRecs(null);
       setError('');
-      //move user statements to separate useEffect
       const sessionUser = sessionStorage.getItem('userID');
       setUser(sessionUser)
+      // if(sessionUser) {
+      //   fetchShelves(sessionUser)
+      // }
       fetchData()
-      //if user, fetchShelves
+    }, [id/*, user*/])
+
+    useEffect(() => {
       if(user) {
-        fetchShelves()
+        fetchShelves(user)
       }
-    }, [id])
+    }, [user])
 
     const fetchData = async () => {
       setLoading(true)
@@ -69,9 +73,9 @@ function BookProfile() {
       }
     }
 
-    const fetchShelves = async () => {
+    const fetchShelves = async (userID: string | null) => {
       try {
-        const shelfData = await getShelves(user);
+        const shelfData = await getShelves(userID);
         setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
       } catch(error: any) {
         setError(error.message)
