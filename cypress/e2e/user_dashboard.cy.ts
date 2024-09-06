@@ -71,19 +71,39 @@ describe('Logged-in User Stories Spec', () => {
     // it('Allows user to create a new shelf from a book profile menu', () => {
 
     // })
-    // it('Displays a user\'s bookshelves', () => {
-        
-    // })
+    it('Displays and sorts a user\'s bookshelves', () => {
+        cy.get('button').click()
+        .get('.chakra-button').contains('Login with Google').click()
+        .get('a[href="/shelves"]').contains('Shelves').click()
+        .get('.shelves-gallery').children().should('have.length', 2)
+        .get('.card').first().contains('h3', 'Favorites')
+        .get('.card').first().contains('p', '0 Books')
+        .get('img').first().should('have.attr', 'alt').should('equal', 'illustration of book spines')
+        .get('.card').last().contains('h3', 'For the Culture')
+        .get('.card').last().contains('p', '6 Books')
+        .get('img').last().should('have.attr', 'alt').should('equal', 'illustration of book spines')
+        .get('.sort-filter').contains('Sort')
+        .get('select').should('have.value', 'ascending').select('descending')
+        .get('.card').first().contains('h3', 'For the Culture')
+        .get('.card').first().contains('p', '6 Books')
+        .get('img').first().should('have.attr', 'alt').should('equal', 'illustration of book spines')
+        .get('.card').last().contains('h3', 'Favorites')
+        .get('.card').last().contains('p', '0 Books')
+        .get('img').last().should('have.attr', 'alt').should('equal', 'illustration of book spines')
+        .get('.sort-filter').contains('Create a New Shelf')
+        .get('input.chakra-input.css-1cjy4zv').should('have.attr', 'placeholder').should('eq', 'Loaned Books')
+        .get('.chakra-button').contains('Submit')
+    })
     // it('Allows user to create a new shelf from Shelves page', () => {
 
     // })
-    // it('Displays a bookshelve\'s books', () => {
+    it('Displays a bookshelve\'s books', () => {
       
-    // })
+    })
     // it('Allows a user to remove a book from a bookshelf', () => {
 
     // })
-    // it('Logs a user out', () => {
+    it('Logs a user out', () => {
 
-    // })
+    })
 })

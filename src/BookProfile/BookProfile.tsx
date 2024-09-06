@@ -34,11 +34,8 @@ function BookProfile() {
       setError('');
       const sessionUser = sessionStorage.getItem('userID');
       setUser(sessionUser)
-      // if(sessionUser) {
-      //   fetchShelves(sessionUser)
-      // }
       fetchData()
-    }, [id/*, user*/])
+    }, [id])
 
     useEffect(() => {
       if(user) {
