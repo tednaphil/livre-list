@@ -96,26 +96,5 @@
             "thumbnail": "http://books.google.com/books/content?id=BmqJzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
         },
         "buy_link": null
-    },
-    {
-        "id": "S-JAtt8aHaUC",
-        "title": "The Freedom Writers Diary (20th Anniversary Edition)",
-        "subtitle": "How a Teacher and 150 Teens Used Writing to Change Themselves and the World Around Them",
-        "authors": [
-            "The Freedom Writers",
-            "Erin Gruwell"
-        ],
-        "publisher": "Crown",
-        "published_date": "2007-04-24",
-        "description": "#1 NEW YORK TIMES BESTSELLER • The twentieth anniversary edition of the classic story of an incredible group of students and the teacher who inspired them, featuring updates on the students’ lives, new journal entries, and an introduction by Erin ...",
-        "categories": [
-            "Education"
-        ],
-        "avg_rating": 4.5,
-        "image_links": {
-            "smallThumbnail": "http://books.google.com/books/content?id=S-JAtt8aHaUC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-            "thumbnail": "http://books.google.com/books/content?id=S-JAtt8aHaUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-        },
-        "buy_link": "https://play.google.com/store/books/details?id=S-JAtt8aHaUC&rdid=book-S-JAtt8aHaUC&rdot=1&source=gbs_api"
     }
 ]

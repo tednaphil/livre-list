@@ -35,6 +35,16 @@ describe('Logged-in User Stories Spec', () => {
             statusCode: 200,
             fixture: "shelves",
           }).as('getShelves') 
+        cy.intercept("GET", "https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/vi/users/106196942824430802445/bookshelves/1001"
+          , {
+            statusCode: 200,
+            fixture: "bookshelf",
+          }).as('getShelf') 
+        cy.intercept("GET", "https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/vi/users/106196942824430802445/bookshelves/1001/books"
+          , {
+            statusCode: 200,
+            fixture: "bookshelf_books",
+          }).as('getShelfBooks') 
         cy.visit('http://localhost:3000')
       })
     it('Logs a user in', () => {
@@ -80,12 +90,12 @@ describe('Logged-in User Stories Spec', () => {
         .get('.card').first().contains('p', '0 Books')
         .get('img').first().should('have.attr', 'alt').should('equal', 'illustration of book spines')
         .get('.card').last().contains('h3', 'For the Culture')
-        .get('.card').last().contains('p', '6 Books')
+        .get('.card').last().contains('p', '5 Books')
         .get('img').last().should('have.attr', 'alt').should('equal', 'illustration of book spines')
         .get('.sort-filter').contains('Sort')
         .get('select').should('have.value', 'ascending').select('descending')
         .get('.card').first().contains('h3', 'For the Culture')
-        .get('.card').first().contains('p', '6 Books')
+        .get('.card').first().contains('p', '5 Books')
         .get('img').first().should('have.attr', 'alt').should('equal', 'illustration of book spines')
         .get('.card').last().contains('h3', 'Favorites')
         .get('.card').last().contains('p', '0 Books')
@@ -98,11 +108,26 @@ describe('Logged-in User Stories Spec', () => {
 
     // })
     it('Displays a bookshelve\'s books', () => {
-      
+        cy.get('button').click()
+        .get('.chakra-button').contains('Login with Google').click()
+        .get('a[href="/shelves"]').contains('Shelves').click()
+        .get('.card').last().click()
+        .get('h2').contains('For the Culture')
+        .get('button').contains('Delete Shelf').should('be.visible')
+        .get('.book-gallery').children().should('have.length', 5)
+        .get('.card').first().contains('h3', 'The Wealth Cure')
+        .get('.card').first().contains('p', 'Hill Harper')
+        .get('img').first().should('have.attr', 'alt').should('equal', 'The Wealth Cure book cover')
+        .get('.card').last().contains('h3', 'The Color Purple')
+        .get('.card').last().contains('p', 'Alice Walker')
+        .get('img').last().should('have.attr', 'alt').should('equal', 'The Color Purple book cover')
     })
     // it('Allows a user to remove a book from a bookshelf', () => {
 
     // })
+    // it('Allows a user to delete a bookshelf', () => {
+
+    // }) 
     it('Logs a user out', () => {
 
     })
