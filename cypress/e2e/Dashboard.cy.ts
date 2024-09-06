@@ -95,7 +95,6 @@ describe('General User Stories Spec', () => {
     .get('.card').last().contains('h3', 'Mommy, Why Don\'t We Celebrate Halloween?')
     .get('.card').last().contains('p', 'Linda Winwood')
     .get('img').last().should('have.attr', 'alt').should('equal', 'Mommy, Why Don\'t We Celebrate Halloween? book cover')
-     
   })
   it('Displays book profile', () => {
     cy.get('input[type="text"]').type('halloween{enter}')
