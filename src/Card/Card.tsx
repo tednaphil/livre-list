@@ -12,7 +12,7 @@ interface Props {
 
 function Card({id, title, authors, image, book}: Props) {
 
-  const authorList = authors ? authors.map((author, index) => {
+  const authorList: React.ReactNode | React.ReactNode[] = authors ? authors.map((author, index) => {
     return(
       <p className='author' key={index}>{author}</p>
     )}) :
