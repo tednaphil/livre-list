@@ -13,7 +13,6 @@ export interface Book {
 
 export interface ImgLinks {
     smallThumbnail: string;
-    thumbnail: string;
 }
 
 export interface Bookshelf {
