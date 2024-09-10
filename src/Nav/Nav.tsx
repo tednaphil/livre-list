@@ -23,7 +23,7 @@ function Nav() {
     const [user, setUser] = useState<string | null>(sessionUser);
 
 
-    const login = async () => {
+    const login = async (): Promise<void> => {
       try {
         //TO DO: uncomment block below to replace hardcoded lines
         // const response = await postUser();
@@ -32,12 +32,12 @@ function Nav() {
         // setUser(response)
         sessionStorage.setItem('userID', '106196942824430802445')
         setUser('106196942824430802445')
-      } catch(error) {
+      } catch(error: any) {
         console.log(error)
       }
     }
 
-    const logout = () => {
+    const logout = (): void => {
       sessionStorage.removeItem('userID')
       setUser(null)
       //navigate to home or logout confirmation page
