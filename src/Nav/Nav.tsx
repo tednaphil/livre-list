@@ -13,14 +13,15 @@ import {
   Stack
 } from '@chakra-ui/react'
 import Search from '../Search/Search';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // import { postUser } from '../Util/API_calls';
 
 function Nav() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const sessionUser = sessionStorage.getItem('userID')
+    const sessionUser: string | null = sessionStorage.getItem('userID')
     const [user, setUser] = useState<string | null>(sessionUser);
+    const navigate = useNavigate();
 
 
     const login = async (): Promise<void> => {
@@ -32,6 +33,8 @@ function Nav() {
         // setUser(response)
         sessionStorage.setItem('userID', '106196942824430802445')
         setUser('106196942824430802445')
+        //close drawer after confirmation + brief timeout
+        onClose()
       } catch(error: any) {
         console.log(error)
       }
@@ -40,7 +43,9 @@ function Nav() {
     const logout = (): void => {
       sessionStorage.removeItem('userID')
       setUser(null)
-      //navigate to home or logout confirmation page
+      navigate('/');
+      //show logout confirmation then close after brief timeout
+      onClose()
     }
 
     return(
