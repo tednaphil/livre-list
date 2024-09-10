@@ -1,16 +1,14 @@
 import './Card.css';
 import { Link } from 'react-router-dom';
-import { Book } from '../Util/Interfaces';
 
 interface Props {
   id: string;
   title: string;
   authors: string[];
   image: string;
-  book: Book;
 }
 
-function Card({id, title, authors, image, book}: Props) {
+function Card({id, title, authors, image}: Props) {
 
   const authorList: React.ReactNode | React.ReactNode[] = authors ? authors.map((author, index) => {
     return(

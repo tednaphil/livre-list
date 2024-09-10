@@ -75,7 +75,7 @@ function BookProfile() {
       }
     }
 
-    const authors = book?.authors ? book?.authors.map((author, index) => {
+    const authors: React.ReactNode | React.ReactNode[] = book?.authors ? book?.authors.map((author, index) => {
       //if length === 1 return author with space at end
       //if length > 1 return author with comma and space at end
       return (
@@ -83,7 +83,7 @@ function BookProfile() {
       )
     }) : <p>No Author Listed</p>
 
-    const userShelves = shelves?.map((shelf, index) => {
+    const userShelves: React.ReactNode | React.ReactNode[] = shelves?.map((shelf, index) => {
       return(
         <MenuItem key={index} onClick={() => alert(`Added to ${shelf}`)}>{shelf}</MenuItem>
       )
@@ -98,7 +98,7 @@ function BookProfile() {
         // setUser(response)
         sessionStorage.setItem('userID', '106196942824430802445')
         setUser('106196942824430802445')
-      } catch(error) {
+      } catch(error: any) {
         console.log(error)
       }
     }
