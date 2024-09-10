@@ -34,7 +34,10 @@ function Nav() {
         sessionStorage.setItem('userID', '106196942824430802445')
         setUser('106196942824430802445')
         //close drawer after confirmation + brief timeout
-        onClose()
+        setTimeout(() => {
+          onClose()
+        }, 1500)
+        // onClose()
       } catch(error: any) {
         console.log(error)
       }
@@ -44,8 +47,10 @@ function Nav() {
       sessionStorage.removeItem('userID')
       setUser(null)
       navigate('/');
-      //show logout confirmation then close after brief timeout
-      onClose()
+      //close drawer after confirmation + brief timeout
+      setTimeout(() => {
+        onClose()
+      }, 1500)
     }
 
     return(
