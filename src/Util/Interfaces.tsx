@@ -23,7 +23,6 @@ export interface Bookshelf {
     book_count: number;
 }
 
-// export interface RequestOptions {
-//     method: string;
-//     redirect: string;
+// export interface User {
+//     id: string;
 // }
