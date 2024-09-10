@@ -22,7 +22,6 @@ function Card({id, title, authors, image}: Props) {
           <Link to={`/books/${id}`}>
             <img src={image} alt={`${title} book cover`}/>
             <h3>{title}</h3>
-            {/* <p>Author(s)</p> */}
             {authorList}
           </Link>
         </div>
