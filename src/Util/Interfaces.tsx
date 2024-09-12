@@ -22,6 +22,10 @@ export interface Bookshelf {
     book_count: number;
 }
 
+export interface AlertStatus {
+    status: "info" | "warning" | "success" | "error" | "loading" | undefined
+}
+
 // export interface User {
 //     id: string;
 // }
