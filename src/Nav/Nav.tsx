@@ -23,6 +23,7 @@ function Nav() {
     const sessionUser: string | null = sessionStorage.getItem('userID')
     const [user, setUser] = useState<string | null>(sessionUser);
     const [showAlert, setShowAlert] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
     const navigate = useNavigate();
 
 
@@ -39,19 +40,18 @@ function Nav() {
         setTimeout(() => {
           onClose()
         }, 2800)
-        // onClose()
       } catch(error: any) {
-        console.log(error)
+        setError(error.message)
       }
     }
 
     const logout = (): void => {
       sessionStorage.removeItem('userID')
       setUser(null)
-      navigate('/');
       setShowAlert(true)
       setTimeout(() => {
         onClose()
+        navigate('/');
       }, 2800)
     }
 
