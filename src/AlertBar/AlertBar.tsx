@@ -7,10 +7,11 @@ import {
     AlertDescription,
     Box,
 } from '@chakra-ui/react';
+import { AlertStatus } from '@chakra-ui/react';
 
 interface Props {
     message: string,
-    status: "info" | "warning" | "success" | "error" | "loading" | undefined
+    status: AlertStatus
 }
 
 function AlertBar ({message, status}: Props) {
@@ -27,7 +28,7 @@ function AlertBar ({message, status}: Props) {
             <Alert status={status}>
             <AlertIcon />
             <Box>
-                <AlertTitle>Success!</AlertTitle>
+                <AlertTitle>{status}!</AlertTitle>
                 <AlertDescription>
                 {message}
                 </AlertDescription>
