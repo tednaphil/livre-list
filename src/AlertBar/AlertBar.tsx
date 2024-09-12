@@ -4,7 +4,8 @@ import {
     Alert,
     AlertIcon,
     AlertTitle,
-    AlertDescription
+    AlertDescription,
+    Box,
 } from '@chakra-ui/react';
 
 interface Props {
@@ -15,8 +16,13 @@ function AlertBar ({message}: Props) {
     return (
         <>
             <Alert status='success'>
-                <AlertIcon />
+            <AlertIcon />
+            <Box>
+                <AlertTitle>Success!</AlertTitle>
+                <AlertDescription>
                 {message}
+                </AlertDescription>
+            </Box>
             </Alert>
         </>
     )

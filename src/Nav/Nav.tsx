@@ -88,6 +88,7 @@ function Nav() {
                         {user && <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>}
                         {!user && <Button colorScheme='orange' onClick={login}>Login with Google</Button>}
                         {user && <Button colorScheme='orange' onClick={logout}>Logout</Button>}
+                        <AlertBar message='Successful operation'/>
                     </Stack>
                 </DrawerBody>
                 </DrawerContent>
