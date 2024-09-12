@@ -9,10 +9,11 @@ import {
 } from '@chakra-ui/react';
 
 interface Props {
-    message: string
+    message: string,
+    status: "info" | "warning" | "success" | "error" | "loading" | undefined
 }
 
-function AlertBar ({message}: Props) {
+function AlertBar ({message, status}: Props) {
     return (
         <>
         <motion.div
@@ -23,7 +24,7 @@ function AlertBar ({message}: Props) {
                 delay: 0.2,
                 ease: [0, 0.71, 0.2, 1.01]
               }}>
-            <Alert status='success'>
+            <Alert status={status}>
             <AlertIcon />
             <Box>
                 <AlertTitle>Success!</AlertTitle>

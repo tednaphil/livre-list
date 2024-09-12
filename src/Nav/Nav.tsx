@@ -63,6 +63,18 @@ function Nav() {
       }
     }, [showAlert])
 
+    const createAlert = (): React.ReactNode => {
+      if(error) {
+        return (<AlertBar status='error' message="Something went wrong. Please try again"/>)
+      }
+      if(user && !error) {
+        return (<AlertBar status='success' message="You're logged in! Welcome"/>)
+      }
+      if(!user && !error) {
+        return (<AlertBar status='success' message="You've logged out! See ya"/>)
+      }
+    }
+
     return(
         <>
           <nav className='navbar'>
@@ -96,7 +108,7 @@ function Nav() {
                         {user && <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>}
                         {!user && <Button colorScheme='orange' onClick={login}>Login with Google</Button>}
                         {user && <Button colorScheme='orange' onClick={logout}>Logout</Button>}
-                        {showAlert && <AlertBar message='Successful operation'/>}
+                        {showAlert && createAlert()}
                     </Stack>
                 </DrawerBody>
                 </DrawerContent>
