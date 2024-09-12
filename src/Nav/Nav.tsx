@@ -26,6 +26,14 @@ function Nav() {
     const [error, setError] = useState<string>('');
     const navigate = useNavigate();
 
+    enum Status {
+      info = "info",
+      warning = "warning",
+      success = "success",
+      error = "error",
+      loading = "loading",
+  }
+
 
     const login = async (): Promise<void> => {
       try {
@@ -65,13 +73,13 @@ function Nav() {
 
     const createAlert = (): React.ReactNode => {
       if(error) {
-        return (<AlertBar status='error' message="Something went wrong. Please try again"/>)
+        return (<AlertBar status={Status.error} message="Something went wrong. Please try again"/>)
       }
       if(user && !error) {
-        return (<AlertBar status='success' message="You're logged in! Welcome"/>)
+        return (<AlertBar status={Status.success} message="You're logged in! Welcome"/>)
       }
       if(!user && !error) {
-        return (<AlertBar status='success' message="You've logged out! See ya"/>)
+        return (<AlertBar status={Status.success} message="You've logged out! See ya"/>)
       }
     }
 
