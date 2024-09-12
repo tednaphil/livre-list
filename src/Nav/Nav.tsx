@@ -10,9 +10,10 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Stack
+  Stack,
 } from '@chakra-ui/react'
 import Search from '../Search/Search';
+import AlertBar from '../AlertBar/AlertBar';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // import { postUser } from '../Util/API_calls';
@@ -51,6 +52,7 @@ function Nav() {
       setTimeout(() => {
         onClose()
       }, 1500)
+      // onClose()
     }
 
     return(
