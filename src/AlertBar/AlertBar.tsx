@@ -28,7 +28,7 @@ function AlertBar ({message, status}: Props) {
             <Alert status={status}>
             <AlertIcon />
             <Box>
-                <AlertTitle>{status}!</AlertTitle>
+                <AlertTitle>{status.toUpperCase()}!</AlertTitle>
                 <AlertDescription>
                 {message}
                 </AlertDescription>
