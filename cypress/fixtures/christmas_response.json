@@ -38,7 +38,7 @@
             "smallThumbnail": "http://books.google.com/books/content?id=AHeg9gYAK6wC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
             "thumbnail": "http://books.google.com/books/content?id=AHeg9gYAK6wC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         },
-        "buy_link": "https://play.google.com/store/books/details?id=AHeg9gYAK6wC&rdid=book-AHeg9gYAK6wC&rdot=1&source=gbs_api"
+        "buy_link": null
     },
     {
         "id": "94BTAgAAQBAJ",
@@ -58,7 +58,7 @@
             "smallThumbnail": "http://books.google.com/books/content?id=94BTAgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
             "thumbnail": "http://books.google.com/books/content?id=94BTAgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         },
-        "buy_link": "https://play.google.com/store/books/details?id=94BTAgAAQBAJ&rdid=book-94BTAgAAQBAJ&rdot=1&source=gbs_api"
+        "buy_link": null
     },
     {
         "id": "VbX4G2CRlKcC",
@@ -121,7 +121,7 @@
             "smallThumbnail": "http://books.google.com/books/content?id=hCzbr9hxZkMC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
             "thumbnail": "http://books.google.com/books/content?id=hCzbr9hxZkMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         },
-        "buy_link": "https://play.google.com/store/books/details?id=hCzbr9hxZkMC&rdid=book-hCzbr9hxZkMC&rdot=1&source=gbs_api"
+        "buy_link": null
     },
     {
         "id": "zA53CgAAQBAJ",
@@ -141,7 +141,7 @@
             "smallThumbnail": "http://books.google.com/books/content?id=zA53CgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
             "thumbnail": "http://books.google.com/books/content?id=zA53CgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         },
-        "buy_link": "https://play.google.com/store/books/details?id=zA53CgAAQBAJ&rdid=book-zA53CgAAQBAJ&rdot=1&source=gbs_api"
+        "buy_link": null
     },
     {
         "id": "Nmk-Msxf2SwC",
@@ -199,6 +199,6 @@
             "smallThumbnail": "http://books.google.com/books/content?id=sMqxEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
             "thumbnail": "http://books.google.com/books/content?id=sMqxEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
         },
-        "buy_link": "https://play.google.com/store/books/details?id=sMqxEAAAQBAJ&rdid=book-sMqxEAAAQBAJ&rdot=1&source=gbs_api"
+        "buy_link": null
     }
 ]

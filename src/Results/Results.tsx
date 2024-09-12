@@ -16,29 +16,52 @@ function Results() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const sortResults = (books: Book[], orientation: string) => {
+  enum FilterValues {
+    purchaseable = 'purchaseable',
+    fiction = 'Fiction',
+    nonFiction = 'Nonfiction',
+    childrens = 'Juvenile'
+  };
+
+  //books parameter has type any since the method toSorted throws an error when called on Book[] type
+  const sortResults = (books: any, orientation: string) => {
     if(orientation === 'descending') {
-      return books.sort((a, b) => b.title.localeCompare(a.title))
+      return books.toSorted((a: Book, b: Book) => b.title.localeCompare(a.title))
     } else {
-      return books.sort((a, b) => a.title.localeCompare(b.title))
+      return books.toSorted((a: Book, b: Book) => a.title.localeCompare(b.title))
     }
   }
 
   const filterResults = (books: Book[], filters: string[] | null) => {
+    const purchaseableBooks = books.filter(book => book.buy_link)
     if(!filters?.length) {
       return books
-    } else {
-      return filters.reduce((acc: Book[], filter) => {
-        if(filter === 'purchaseable') {
-          const purchaseable = books.filter(book => book.buy_link);
-          acc = [...acc, ...purchaseable]
-        }
-        // else if(filter === 'ebook') {
-        //   // const ebooks = books.filter(book => )
-        // }
-        return acc
-      }, [])
+    }
 
+    if(filters.includes(FilterValues.purchaseable)) {
+      let filteredBooks = [...purchaseableBooks];
+      const genreFilters = filters.filter(filter => filter !== FilterValues.purchaseable);
+      if(genreFilters.length) {
+        for (const filter of genreFilters) {
+          purchaseableBooks.forEach(book => {
+            if(!book.categories.some((category) => category.includes(filter))) {
+              filteredBooks.splice(filteredBooks.indexOf(book), 1)
+            }
+          })
+        }
+        return filteredBooks
+      }
+      return filteredBooks
+    } else if(!filters.includes(FilterValues.purchaseable)) {
+      let filteredBooks = [...books];
+      for (const filter of filters) {
+        books.forEach(book => {
+          if(!book.categories.some((category) => category.includes(filter))) {
+            filteredBooks.splice(filteredBooks.indexOf(book), 1)
+          }
+        })
+      }
+      return filteredBooks
     }
   }
 
@@ -50,8 +73,7 @@ function Results() {
            book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
         }
       })
-      const filteredData = filterResults(searchData, filters);
-      const sortedData = sortResults(filteredData, sort);
+      const sortedData = sortResults(searchData, sort);
       setResults(sortedData);
       setLoading(false)
     } catch(error: any) {
@@ -59,25 +81,36 @@ function Results() {
       setLoading(false)
     }
   }
+
+  const sortedFilteredBooks = () => {
+    const filteredData = filterResults(results, filters);
+    const sortedData = sortResults(filteredData, sort);
+    const books = sortedData?.map((book: Book) => {
+      return (
+        <Card
+          key={book.id}
+          id={book.id}
+          title={book.title}
+          authors={book.authors}
+          image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+          book={book}
+        />
+      )
+    })
+    return books.length ? books : <p>No results</p>
+  }
   
   useEffect(() => {
     setError('')
+    setLoading(true)
     setResults([])
     fetchData()
-  }, [filters, sort, term])
+  }, [term])
 
-  const books = results?.map(book => {
-    return (
-      <Card
-        key={book.id}
-        id={book.id}
-        title={book.title}
-        authors={book.authors}
-        image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-        book={book}
-      />
-    )
-  })
+  useEffect(() => {
+    // setLoading(true)
+  }, [filters, sort])
+
 
     return(
         <>
@@ -91,7 +124,7 @@ function Results() {
             </section>
             <section className='results-gallery'>
               {error && <ErrorPage error={error}/>}
-              {books}
+              {sortedFilteredBooks()}
             </section>
           </div>
         </>}

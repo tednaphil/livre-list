@@ -13,13 +13,13 @@ function SearchCtrl({ setSort, setFilters, filters }: Props) {
     setSort(e.target.value)
   }
 
-  const handleFilter = (e: any, term: string) => {
+  const handleFilter = (e: any) => {
     if(e.target.checked && !filters) {
-      setFilters([term])
+      setFilters([e.target.value])
     } else if(e.target.checked && filters) {
-      setFilters([...filters, term])
+      setFilters([...filters, e.target.value])
     } else if(!e.target.checked && filters) {
-      const updatedFilters = filters.filter((el: any) => !(el === term))
+      const updatedFilters = filters.filter((el: any) => !(el === e.target.value))
       setFilters(updatedFilters)
     }
   }
@@ -35,9 +35,10 @@ function SearchCtrl({ setSort, setFilters, filters }: Props) {
           <h2>Filter</h2>
           <CheckboxGroup colorScheme='orange' defaultValue={[]}>
             <Stack spacing={[1, 2]} direction={['column']}>
-              {/* <Checkbox value='ebook' onChange={(e) => {handleFilter(e, 'ebook')}}>Ebooks</Checkbox> */}
-              <Checkbox value='purchaseable' onChange={(e) => {handleFilter(e, 'purchaseable')}}>Purchaseable</Checkbox>
-              {/* <Checkbox value='term3'>Filter Term 3</Checkbox> */}
+              <Checkbox id="purchaseable-filter" value='purchaseable' onChange={(e) => {handleFilter(e)}}>Purchaseable</Checkbox>
+              <Checkbox id="fiction-filter" value='Fiction' onChange={(e) => {handleFilter(e)}}>Fiction</Checkbox>
+              <Checkbox id="nonfiction-filter" value='Nonfiction' onChange={(e) => {handleFilter(e)}}>Non-Fiction</Checkbox>
+              <Checkbox id='childrens-filter' value='Juvenile' onChange={(e) => {handleFilter(e)}}>Children's Literature</Checkbox>
             </Stack>
           </CheckboxGroup>
         {/* </section> */}
