@@ -15,13 +15,14 @@ import {
 import Search from '../Search/Search';
 import AlertBar from '../AlertBar/AlertBar';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { postUser } from '../Util/API_calls';
 
 function Nav() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const sessionUser: string | null = sessionStorage.getItem('userID')
     const [user, setUser] = useState<string | null>(sessionUser);
+    const [showAlert, setShowAlert] = useState<boolean>(false);
     const navigate = useNavigate();
 
 
@@ -34,10 +35,10 @@ function Nav() {
         // setUser(response)
         sessionStorage.setItem('userID', '106196942824430802445')
         setUser('106196942824430802445')
-        //close drawer after confirmation + brief timeout
+        setShowAlert(true);
         setTimeout(() => {
           onClose()
-        }, 1500)
+        }, 2800)
         // onClose()
       } catch(error: any) {
         console.log(error)
@@ -48,12 +49,19 @@ function Nav() {
       sessionStorage.removeItem('userID')
       setUser(null)
       navigate('/');
-      //close drawer after confirmation + brief timeout
+      setShowAlert(true)
       setTimeout(() => {
         onClose()
-      }, 1500)
-      // onClose()
+      }, 2800)
     }
+
+    useEffect(() => {
+      if(showAlert) {
+        setTimeout(() => {
+          setShowAlert(false)
+        }, 2500)
+      }
+    }, [showAlert])
 
     return(
         <>
@@ -88,7 +96,7 @@ function Nav() {
                         {user && <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>}
                         {!user && <Button colorScheme='orange' onClick={login}>Login with Google</Button>}
                         {user && <Button colorScheme='orange' onClick={logout}>Logout</Button>}
-                        <AlertBar message='Successful operation'/>
+                        {showAlert && <AlertBar message='Successful operation'/>}
                     </Stack>
                 </DrawerBody>
                 </DrawerContent>
