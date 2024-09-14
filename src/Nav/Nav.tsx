@@ -60,14 +60,14 @@ function Nav() {
       setTimeout(() => {
         onClose()
         navigate('/');
-      }, 2800)
+      }, 3000)
     }
 
     useEffect(() => {
       if(showAlert) {
         setTimeout(() => {
           setShowAlert(false)
-        }, 2500)
+        }, 2800)
       }
     }, [showAlert])
 
