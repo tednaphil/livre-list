@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Search() {
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState<string>('');
   const navigate = useNavigate();
 
-  function submitSearch(e: any) {
+  function submitSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     navigate(`/search/${keyword}`, { state: keyword });
     setKeyword('');
@@ -16,7 +16,7 @@ function Search() {
 
     return(
         <>
-          <form className='search-form' onSubmit={(e) => {submitSearch(e)}}>
+          <form className='search-form' onSubmit={(e: React.FormEvent<HTMLFormElement>) => {submitSearch(e)}}>
             <InputGroup>
               <InputLeftElement pointerEvents='none'>
                 <SearchIcon color='gray.300'/>
@@ -25,7 +25,7 @@ function Search() {
               placeholder='search'
               required
               value={keyword}
-              onChange={(e) => {setKeyword(e.target.value)}}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setKeyword(e.target.value)}}
               />
             </InputGroup> 
           </form>
