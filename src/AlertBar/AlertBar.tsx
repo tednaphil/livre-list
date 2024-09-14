@@ -23,6 +23,9 @@ function AlertBar ({message, status}: Props) {
               transition={{
                 duration: 0.8,
                 delay: 0.2,
+                repeat: 1,
+                repeatType: "reverse",
+                repeatDelay: 1,
                 ease: [0, 0.71, 0.2, 1.01]
               }}>
             <Alert status={status}>
