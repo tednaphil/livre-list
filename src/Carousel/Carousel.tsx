@@ -12,7 +12,7 @@ interface Props {
 
 function Carousel({books}: Props) {
 
-    const bookCards: React.ReactNode | React.ReactNode[] = books?.map(book => {
+    const bookCards: React.ReactNode | React.ReactNode[] = books?.map((book: Book) => {
         return (
                 <Card
                     key={book.id}
