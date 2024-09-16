@@ -7,15 +7,15 @@ interface Props {
 }
 
 function ShelfCtrl({ setSort }: Props) {
-  const [newShelf, setNewShelf] = useState('');
+  const [newShelf, setNewShelf] = useState<string>('');
 
-  const handleSort = (e: any,) => {
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setSort(e.target.value)
   }
     return(
         <>
           <h2>Sort</h2>
-          <Select size='sm' onChange={(e) => {handleSort(e)}}>
+          <Select size='sm' onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {handleSort(e)}}>
             <option value='ascending'>A-Z by title</option>
             <option value='descending'>Z-A by title</option>
           </Select>
@@ -26,7 +26,7 @@ function ShelfCtrl({ setSort }: Props) {
             placeholder='Loaned Books'
             required
             value={newShelf}
-            onChange={(e) => {setNewShelf(e.target.value)}}/>
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {setNewShelf(e.target.value)}}/>
             <Button colorScheme='orange'>Submit</Button>
             </Stack>
           </form>
