@@ -9,12 +9,12 @@ import Loading from '../Loading/Loading';
 
 function Shelves() {
   const [shelves, setShelves] = useState<Bookshelf[] | null>(null);
-  const [sort, setSort] = useState('ascending');
+  const [sort, setSort] = useState<string>('ascending');
   // const [user, setUser] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const sortShelves = (shelves: Bookshelf[], orientation: string) => {
+  const sortShelves = (shelves: Bookshelf[], orientation: string): Bookshelf[] => {
     if(orientation === 'descending') {
       return shelves.sort((a, b) => b.title.localeCompare(a.title))
     } else {
@@ -29,11 +29,11 @@ function Shelves() {
     fetchData()
   }, [sort])
 
-  const fetchData = async () => {
+  const fetchData = async (): Promise<void> => {
     try {
-      const sessionUser = sessionStorage.getItem('userID')
-      const response = await getShelves(sessionUser);
-      const sortedData = sortShelves(response, sort);
+      const sessionUser: string | null = sessionStorage.getItem('userID')
+      const response: Bookshelf[] = await getShelves(sessionUser);
+      const sortedData: Bookshelf[] = sortShelves(response, sort);
       setShelves(sortedData)
       setLoading(false)
     } catch(error: any) {
@@ -42,7 +42,7 @@ function Shelves() {
     }
   }
 
-  const shelfNames = shelves?.map((shelf) => {
+  const shelfNames: React.ReactNode = shelves?.map((shelf: Bookshelf) => {
     return(
       <ShelfCard
       key={shelf.id}
