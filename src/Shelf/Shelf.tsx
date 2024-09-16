@@ -9,7 +9,7 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 import Loading from '../Loading/Loading';
 
 function Shelf() {
-  const shelfID = useParams().id;
+  const shelfID: string | undefined = useParams().id;
   // const [user, setUser] = useState<string | null>(null);
   const [shelf, setShelf] = useState<Bookshelf | undefined>();
   const [books, setBooks] = useState<Book[] | undefined>();
@@ -19,16 +19,17 @@ function Shelf() {
 
   useEffect(() => {
     // setError('')
-    //move to sessionUser statements separate useEffect
+    //move sessionUser statements to separate useEffect
     // const sessionUser = sessionStorage.getItem('userID')
     // setUser(sessionUser)
     fetchData()
   }, [shelfID])
 
-  const fetchData = async () => {
+
+  const fetchData = async (): Promise<void> => {
     try {
-      const sessionUser = sessionStorage.getItem('userID')
-      const shelfData = await getShelf(sessionUser, shelfID);
+      const sessionUser: string | null = sessionStorage.getItem('userID')
+      const shelfData: any[] | undefined = await getShelf(sessionUser, shelfID);
       if(shelfData) {
         setShelf(shelfData[0])
         setBooks(shelfData[1])
@@ -40,7 +41,7 @@ function Shelf() {
     }
   }
 
-  const bookCards = books?.map((book: Book) => {
+  const bookCards = books?.map((book: Book): React.ReactNode => {
     return(
       <Card
         key={book.id}
@@ -52,7 +53,7 @@ function Shelf() {
     )
   })
 
-  const handleDelete = (shelfID: string | undefined) => {
+  const handleDelete = (shelfID: string | undefined): void => {
     //PLACEHOLDER
     alert(`Shelf ${shelfID} will be deleted`)
     //invoke network request to delete shelf
