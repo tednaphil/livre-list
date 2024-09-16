@@ -65,23 +65,6 @@ function Results() {
     }
   }
 
-  const fetchData = async (): Promise<void> => {
-    try {
-      const searchData: Book[] = await getResults(term);
-      searchData.forEach((book: Book) => {
-        if(!book.image_links) {
-           book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-        }
-      })
-      const sortedData: Book[] = sortResults(searchData, sort);
-      setResults(sortedData);
-      setLoading(false)
-    } catch(error: any) {
-      setError(`There was a problem getting the search results - ${error.message}`)
-      setLoading(false)
-    }
-  }
-
   const sortedFilteredBooks = (): React.ReactNode => {
     const filteredData: Book[] | undefined = filterResults(results, filters);
     const sortedData: Book[] = sortResults(filteredData, sort);
@@ -103,6 +86,21 @@ function Results() {
     setError('')
     setLoading(true)
     setResults([])
+    const fetchData = async (): Promise<void> => {
+      try {
+        const searchData: Book[] = await getResults(term);
+        searchData.forEach((book: Book) => {
+          if(!book.image_links) {
+             book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+          }
+        })
+        setResults(searchData);
+        setLoading(false)
+      } catch(error: any) {
+        setError(`There was a problem getting the search results - ${error.message}`)
+        setLoading(false)
+      }
+    }
     fetchData()
   }, [term])
 
