@@ -1,4 +1,3 @@
-import { ReactEventHandler } from 'react';
 import './SearchCtrl.css';
 import { Select, CheckboxGroup, Stack, Checkbox } from '@chakra-ui/react';
 
