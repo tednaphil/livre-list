@@ -106,11 +106,6 @@ function Results() {
     fetchData()
   }, [term])
 
-  useEffect(() => {
-    // setLoading(true)
-  }, [filters, sort])
-
-
     return(
         <>
         {loading && <Loading/>}
