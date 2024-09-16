@@ -106,20 +106,17 @@ function Results() {
 
     return(
         <>
-        {loading && <Loading/>}
-        {!loading && 
-        <>
           <h2 className='results-header'>{`Search Results - ${term}`}</h2>
           <div className='results-container'>
             <section className='sort-filter'>
               <SearchCtrl setSort={setSort} setFilters={setFilters} filters={filters}/>
             </section>
             <section className='results-gallery'>
+              {loading && <Loading/>}
               {error && <ErrorPage error={error}/>}
-              {sortedFilteredBooks()}
+              {!loading && sortedFilteredBooks()}
             </section>
           </div>
-        </>}
         </>
     )
 }
