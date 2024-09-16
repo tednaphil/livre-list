@@ -32,30 +32,6 @@ function BookProfile() {
       setError('');
       const sessionUser: string | null = sessionStorage.getItem('userID');
       setUser(sessionUser)
-      const fetchData = async (): Promise<void> => {
-        setLoading(true)
-        try {
-          const data: Book = await getBook(id);
-          if(!data.image_links) {
-            data.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-          };
-          data.published_date = data.published_date.slice(0, 4);
-          setBook(data);
-          if(data) {
-            const recData: Book[] = await getRecs(data.categories[0]);
-            setRecs(recData.filter((rec: Book) => rec.title !== data.title))
-          }
-          setLoading(false)
-        } catch(error: any) {
-          if(error.message.includes('recommendations')) {
-            setRecsError(error.message)
-            setLoading(false)
-          } else{
-            setError(`There was a problem getting the book data - ${error.message}`)
-            setLoading(false)
-          }
-        }
-      }
       fetchData()
     }, [id])
 
@@ -64,6 +40,31 @@ function BookProfile() {
         fetchShelves(user)
       }
     }, [user])
+
+    const fetchData = async (): Promise<void> => {
+      setLoading(true)
+      try {
+        const data: Book = await getBook(id);
+        if(!data.image_links) {
+          data.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+        };
+        data.published_date = data.published_date.slice(0, 4);
+        setBook(data);
+        if(data) {
+          const recData: Book[] = await getRecs(data.categories[0]);
+          setRecs(recData.filter((rec: Book) => rec.title !== data.title))
+        }
+        setLoading(false)
+      } catch(error: any) {
+        if(error.message.includes('recommendations')) {
+          setRecsError(error.message)
+          setLoading(false)
+        } else{
+          setError(`There was a problem getting the book data - ${error.message}`)
+          setLoading(false)
+        }
+      }
+    }
 
     const fetchShelves = async (userID: string | null) : Promise<void> => {
       try {

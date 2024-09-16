@@ -10,4 +10,7 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  {rules: {
+    exhaustive: "ignore"
+  }}
 ];
