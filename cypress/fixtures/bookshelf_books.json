@@ -1,0 +1,100 @@
+[
+    {
+        "id": "otPZCwAAQBAJ",
+        "title": "The Wealth Cure",
+        "subtitle": "Putting Money in Its Place",
+        "authors": [
+            "Hill Harper"
+        ],
+        "publisher": "Avery",
+        "published_date": "2012-09-04",
+        "description": "In his second book for adults, the perennial New York Times bestselling author helps readers discover how to put money in its place and use wealth-building as a tool for joy and fulfillment. Hill Harper is uniquely poised to guide readers through ...",
+        "categories": [
+            "Biography & Autobiography"
+        ],
+        "avg_rating": null,
+        "image_links": {
+            "smallThumbnail": "http://books.google.com/books/content?id=otPZCwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=otPZCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "buy_link": null
+    },
+    {
+        "id": "y0T6DAAAQBAJ",
+        "title": "Black Privilege",
+        "subtitle": "Opportunity Comes to Those Who Create It",
+        "authors": [
+            "Charlamagne Tha God"
+        ],
+        "publisher": "Simon and Schuster",
+        "published_date": "2017-04-18",
+        "description": "An instant New York Times bestseller! Charlamagne Tha God—the self-proclaimed “Prince of Pissing People Off,” cohost of Power 105.1’s The Breakfast Club, and “the most important voice in hip-hop”—shares his eight principles for unlocking your ...",
+        "categories": [
+            "Self-Help"
+        ],
+        "avg_rating": 5,
+        "image_links": {
+            "smallThumbnail": "http://books.google.com/books/content?id=y0T6DAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=y0T6DAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "buy_link": "https://play.google.com/store/books/details?id=y0T6DAAAQBAJ&rdid=book-y0T6DAAAQBAJ&rdot=1&source=gbs_api"
+    },
+    {
+        "id": "dt6JDQAAQBAJ",
+        "title": "The Warmth of Other Suns",
+        "subtitle": "The Epic Story of America's Great Migration",
+        "authors": [
+            "Isabel Wilkerson"
+        ],
+        "publisher": "Vintage",
+        "published_date": "2011-10-04",
+        "description": "NATIONAL BOOK CRITICS CIRCLE AWARD WINNER • NEW YORK TIMES BESTSELLER • In this beautifully written masterwork, the Pulitzer Prize–winnner and bestselling author of Caste chronicles one of the great untold stories of American history: the decades ...",
+        "categories": [
+            "History"
+        ],
+        "avg_rating": null,
+        "image_links": {
+            "smallThumbnail": "http://books.google.com/books/content?id=dt6JDQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=dt6JDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "buy_link": null
+    },
+    {
+        "id": "OT-dEAAAQBAJ",
+        "title": "Caste",
+        "subtitle": "The Origins of Our Discontents",
+        "authors": [
+            "Isabel Wilkerson"
+        ],
+        "publisher": "Random House Trade Paperbacks",
+        "published_date": "2023-02-14",
+        "description": "#1 NEW YORK TIMES BESTSELLER • OPRAH’S BOOK CLUB PICK • “An instant American classic and almost certainly the keynote nonfiction book of the American century thus far.”—Dwight Garner, The New York Times The Pulitzer Prize–winning, bestselling ...",
+        "categories": [
+            "Social Science"
+        ],
+        "avg_rating": null,
+        "image_links": {
+            "smallThumbnail": "http://books.google.com/books/content?id=OT-dEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=OT-dEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "buy_link": null
+    },
+    {
+        "id": "BmqJzgEACAAJ",
+        "title": "The Color Purple",
+        "subtitle": "The Classic, Pulitzer Prize-winning Novel",
+        "authors": [
+            "Alice Walker"
+        ],
+        "publisher": null,
+        "published_date": "2022-08-04",
+        "description": "ONE OF THE BBC '100 NOVELS THAT SHAPED OUR WORLD' 'A lush celebration of all that it means to be a black female' Chimamanda Ngozi Adichie 'A story about Black women living in the intersections of racialized and gendered violence, who find ...",
+        "categories": null,
+        "avg_rating": null,
+        "image_links": {
+            "smallThumbnail": "http://books.google.com/books/content?id=BmqJzgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+            "thumbnail": "http://books.google.com/books/content?id=BmqJzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "buy_link": null
+    }
+]

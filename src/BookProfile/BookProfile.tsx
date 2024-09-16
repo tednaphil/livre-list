@@ -8,8 +8,6 @@ import { Button, Stack } from '@chakra-ui/react';
 import Carousel from '../Carousel/Carousel';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import Loading from '../Loading/Loading';
-
-
 import {
   Menu,
   MenuButton,
@@ -18,14 +16,13 @@ import {
 } from '@chakra-ui/react';
 
 function BookProfile() {
-    const id = useParams().id;
+    const id: string | undefined = useParams().id;
     const [book, setBook] = useState<Book | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState({ name: 'Odell', id: "106196942824430802445" });
-    // get user data from local storage
+    const [loading, setLoading] = useState<boolean>(true);
+    const [user, setUser] = useState<null | string>(null);
     const [shelves, setShelves] = useState<string[] | null>(null);
-    const [error, setError] = useState('');
-    const [recsError, setRecsError] = useState('');
+    const [error, setError] = useState<string>('');
+    const [recsError, setRecsError] = useState<string>('');
     const [recs, setRecs] = useState<Book[] | null>(null);
 
 
@@ -33,22 +30,28 @@ function BookProfile() {
       setBook(null);
       setRecs(null);
       setError('');
+      const sessionUser: string | null = sessionStorage.getItem('userID');
+      setUser(sessionUser)
       fetchData()
     }, [id])
 
-    const fetchData = async () => {
+    useEffect(() => {
+      if(user) {
+        fetchShelves(user)
+      }
+    }, [user])
+
+    const fetchData = async (): Promise<void> => {
       setLoading(true)
       try {
-        const shelfData = await getShelves(user.id);
-        setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
-        const data = await getBook(id);
+        const data: Book = await getBook(id);
         if(!data.image_links) {
           data.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
         };
         data.published_date = data.published_date.slice(0, 4);
         setBook(data);
         if(data) {
-          const recData = await getRecs(data.categories[0]);
+          const recData: Book[] = await getRecs(data.categories[0]);
           setRecs(recData.filter((rec: Book) => rec.title !== data.title))
         }
         setLoading(false)
@@ -63,7 +66,16 @@ function BookProfile() {
       }
     }
 
-    const authors = book?.authors ? book?.authors.map((author, index) => {
+    const fetchShelves = async (userID: string | null) : Promise<void> => {
+      try {
+        const shelfData: Bookshelf[] = await getShelves(userID);
+        setShelves(shelfData.map((shelf: Bookshelf) => shelf.title))
+      } catch(error: any) {
+        setError(error.message)
+      }
+    }
+
+    const authors: React.ReactNode | React.ReactNode[] = book?.authors ? book?.authors.map((author, index) => {
       //if length === 1 return author with space at end
       //if length > 1 return author with comma and space at end
       return (
@@ -71,11 +83,25 @@ function BookProfile() {
       )
     }) : <p>No Author Listed</p>
 
-    const userShelves = shelves?.map((shelf, index) => {
+    const userShelves: React.ReactNode | React.ReactNode[] = shelves?.map((shelf, index) => {
       return(
         <MenuItem key={index} onClick={() => alert(`Added to ${shelf}`)}>{shelf}</MenuItem>
       )
     })
+
+    const login = async () : Promise<void> => {
+      try {
+        //TO DO: uncomment block below to replace hardcoded lines
+        // const response = await postUser();
+        // console.log(response)
+        // sessionStorage.setItem('userID', response)
+        // setUser(response)
+        sessionStorage.setItem('userID', '106196942824430802445')
+        setUser('106196942824430802445')
+      } catch(error: any) {
+        console.log(error)
+      }
+    }
 
     return(
         <>
@@ -86,7 +112,8 @@ function BookProfile() {
             <aside className='thumbnail-container'>
               <img src={book?.image_links.smallThumbnail} alt={`${book?.title} cover`}/>
               <Stack spacing={4} direction='column' align='center'>
-                <Menu>
+                {!user && <Button colorScheme='orange' width='200px' onClick={login}>Login to add to shelf</Button>}
+                {user && <Menu>
                   <MenuButton as={Button} colorScheme='orange' width='200px' rightIcon={<ChevronDownIcon />}>
                     Add to Shelf
                   </MenuButton>
@@ -94,8 +121,8 @@ function BookProfile() {
                     {userShelves}
                     <MenuItem icon={<AddIcon />} onClick={() => {alert('create a new shelf')}}>Create a New Shelf</MenuItem>
                   </MenuList>
-                </Menu>
-                {book?.buy_link && <Button colorScheme='orange' width='200px'>Buy Book</Button>}
+                </Menu>}
+                {book?.buy_link && <Button colorScheme='orange' width='200px'><a target="_blank" rel="noreferrer" href={book.buy_link}>Buy Book</a></Button>}
               </Stack>
             </aside>
             <article className='book-info'>

@@ -9,9 +9,8 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 import Loading from '../Loading/Loading';
 
 function Shelf() {
-  const shelfID = useParams().id;
-  // const [user, setUser] = useState(null);
-  //get user data from sessionstorage or local storage
+  const shelfID: string | undefined = useParams().id;
+  // const [user, setUser] = useState<string | null>(null);
   const [shelf, setShelf] = useState<Bookshelf | undefined>();
   const [books, setBooks] = useState<Book[] | undefined>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -20,12 +19,17 @@ function Shelf() {
 
   useEffect(() => {
     // setError('')
+    //move sessionUser statements to separate useEffect
+    // const sessionUser = sessionStorage.getItem('userID')
+    // setUser(sessionUser)
     fetchData()
   }, [shelfID])
 
-  const fetchData = async () => {
+
+  const fetchData = async (): Promise<void> => {
     try {
-      const shelfData = await getShelf("userID", shelfID);
+      const sessionUser: string | null = sessionStorage.getItem('userID')
+      const shelfData: any[] | undefined = await getShelf(sessionUser, shelfID);
       if(shelfData) {
         setShelf(shelfData[0])
         setBooks(shelfData[1])
@@ -37,7 +41,7 @@ function Shelf() {
     }
   }
 
-  const bookCards = books?.map((book: Book) => {
+  const bookCards = books?.map((book: Book): React.ReactNode => {
     return(
       <Card
         key={book.id}
@@ -45,12 +49,11 @@ function Shelf() {
         title={book.title}
         authors={book.authors}
         image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-        book={book}
       />
     )
   })
 
-  const handleDelete = (shelfID: string | undefined) => {
+  const handleDelete = (shelfID: string | undefined): void => {
     //PLACEHOLDER
     alert(`Shelf ${shelfID} will be deleted`)
     //invoke network request to delete shelf

@@ -1,6 +1,6 @@
 import './ShelfCard.css';
 import { Link } from 'react-router-dom';
-import { Book } from '../Util/Interfaces';
+// import { Book } from '../Util/Interfaces';
 import shelflogo from '../Images/bookspines.jpg';
 
 interface Props {

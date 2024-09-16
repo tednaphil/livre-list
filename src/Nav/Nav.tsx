@@ -10,27 +10,78 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Stack
+  Stack,
 } from '@chakra-ui/react'
 import Search from '../Search/Search';
-import { NavLink, Link } from 'react-router-dom';
-import { useState } from 'react';
-import { postUser } from '../Util/API_calls';
+import AlertBar from '../AlertBar/AlertBar';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+// import { postUser } from '../Util/API_calls';
 
 function Nav() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [user, setUser] = useState(null);
+    const sessionUser: string | null = sessionStorage.getItem('userID')
+    const [user, setUser] = useState<string | null>(sessionUser);
+    const [showAlert, setShowAlert] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
+    const navigate = useNavigate();
+
+    enum Status {
+      info = "info",
+      warning = "warning",
+      success = "success",
+      error = "error",
+      loading = "loading",
+  }
 
 
-    const login = async () => {
+    const login = async (): Promise<void> => {
       try {
-        const response = await postUser();
-        console.log(response)
-      } catch(error) {
-        console.log(error)
+        //TO DO: uncomment block below to replace hardcoded lines
+        // const response = await postUser();
+        // console.log(response)
+        // sessionStorage.setItem('userID', response)
+        // setUser(response)
+        sessionStorage.setItem('userID', '106196942824430802445')
+        setUser('106196942824430802445')
+        setShowAlert(true);
+        setTimeout(() => {
+          onClose()
+        }, 2800)
+      } catch(error: any) {
+        setError(error.message)
       }
     }
 
+    const logout = (): void => {
+      sessionStorage.removeItem('userID')
+      setUser(null)
+      setShowAlert(true)
+      setTimeout(() => {
+        onClose()
+        navigate('/');
+      }, 3000)
+    }
+
+    useEffect(() => {
+      if(showAlert) {
+        setTimeout(() => {
+          setShowAlert(false)
+        }, 2800)
+      }
+    }, [showAlert])
+
+    const createAlert = (): React.ReactNode => {
+      if(error) {
+        return (<AlertBar status={Status.error} message="Something went wrong. Please try again"/>)
+      }
+      if(user && !error) {
+        return (<AlertBar status={Status.success} message="You're logged in! Welcome"/>)
+      }
+      if(!user && !error) {
+        return (<AlertBar status={Status.success} message="You've logged out! See ya"/>)
+      }
+    }
 
     return(
         <>
@@ -46,7 +97,7 @@ function Nav() {
                 <Link to='/'><h1>LivreList</h1></Link>
               </motion.div>
               <Search/>
-              <Button /*ref={btnRef}*/ colorScheme='whiteAlpha' variant='ghost' onClick={onOpen}>
+              <Button colorScheme='whiteAlpha' variant='ghost' onClick={onOpen}>
                 <HamburgerIcon w={6} h={6} color='white' />
               </Button>
               <Drawer
@@ -62,8 +113,10 @@ function Nav() {
                 <DrawerBody>
                     <Stack>
                         <NavLink to='/' onClick={onClose}>Home</NavLink>
-                        <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>
+                        {user && <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>}
                         {!user && <Button colorScheme='orange' onClick={login}>Login with Google</Button>}
+                        {user && <Button colorScheme='orange' onClick={logout}>Logout</Button>}
+                        {showAlert && createAlert()}
                     </Stack>
                 </DrawerBody>
                 </DrawerContent>
