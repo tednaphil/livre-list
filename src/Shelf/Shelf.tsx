@@ -22,24 +22,23 @@ function Shelf() {
     //move sessionUser statements to separate useEffect
     // const sessionUser = sessionStorage.getItem('userID')
     // setUser(sessionUser)
+    const fetchData = async (): Promise<void> => {
+      try {
+        const sessionUser: string | null = sessionStorage.getItem('userID')
+        const shelfData: any[] | undefined = await getShelf(sessionUser, shelfID);
+        if(shelfData) {
+          setShelf(shelfData[0])
+          setBooks(shelfData[1])
+          setLoading(false)
+        }
+      } catch(error: any) {
+        setError(`There was a problem getting the shelf data - ${error}`)
+        setLoading(false)
+      }
+    }
     fetchData()
   }, [shelfID])
 
-
-  const fetchData = async (): Promise<void> => {
-    try {
-      const sessionUser: string | null = sessionStorage.getItem('userID')
-      const shelfData: any[] | undefined = await getShelf(sessionUser, shelfID);
-      if(shelfData) {
-        setShelf(shelfData[0])
-        setBooks(shelfData[1])
-        setLoading(false)
-      }
-    } catch(error: any) {
-      setError(`There was a problem getting the shelf data - ${error}`)
-      setLoading(false)
-    }
-  }
 
   const bookCards = books?.map((book: Book): React.ReactNode => {
     return(

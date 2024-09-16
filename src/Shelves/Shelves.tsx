@@ -26,21 +26,20 @@ function Shelves() {
     // const sessionUser = sessionStorage.getItem('userID')
     // setUser(sessionUser)
     setError('')
+    const fetchData = async (): Promise<void> => {
+      try {
+        const sessionUser: string | null = sessionStorage.getItem('userID')
+        const response: Bookshelf[] = await getShelves(sessionUser);
+        const sortedData: Bookshelf[] = sortShelves(response, sort);
+        setShelves(sortedData)
+        setLoading(false)
+      } catch(error: any) {
+        setError(`There was a problem getting the shelves - ${error}`)
+        setLoading(false)
+      }
+    }
     fetchData()
   }, [sort])
-
-  const fetchData = async (): Promise<void> => {
-    try {
-      const sessionUser: string | null = sessionStorage.getItem('userID')
-      const response: Bookshelf[] = await getShelves(sessionUser);
-      const sortedData: Bookshelf[] = sortShelves(response, sort);
-      setShelves(sortedData)
-      setLoading(false)
-    } catch(error: any) {
-      setError(`There was a problem getting the shelves - ${error}`)
-      setLoading(false)
-    }
-  }
 
   const shelfNames: React.ReactNode = shelves?.map((shelf: Bookshelf) => {
     return(
