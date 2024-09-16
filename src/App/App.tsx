@@ -9,6 +9,9 @@ import ErrorPage from '../ErrorPage/ErrorPage';
 import Nav from '../Nav/Nav';
 
 function App() {
+  //define user state
+  //pass setUser to book profile, and nav
+  //pass user to book profile, nav
 
   return (
     <>

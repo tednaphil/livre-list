@@ -24,7 +24,7 @@ function Results() {
   };
 
   //books parameter has type any since the method toSorted throws an error when called on Book[] type
-  const sortResults = (books: any, orientation: string) => {
+  const sortResults = (books: any, orientation: string): Book[] => {
     if(orientation === 'descending') {
       return books.toSorted((a: Book, b: Book) => b.title.localeCompare(a.title))
     } else {
@@ -32,19 +32,19 @@ function Results() {
     }
   }
 
-  const filterResults = (books: Book[], filters: string[] | null) => {
-    const purchaseableBooks = books.filter(book => book.buy_link)
+  const filterResults = (books: Book[], filters: string[] | null): Book[] | undefined => {
+    const purchaseableBooks: Book[] = books.filter((book: Book) => book.buy_link)
     if(!filters?.length) {
       return books
     }
 
     if(filters.includes(FilterValues.purchaseable)) {
-      let filteredBooks = [...purchaseableBooks];
-      const genreFilters = filters.filter(filter => filter !== FilterValues.purchaseable);
+      let filteredBooks: Book[] = [...purchaseableBooks];
+      const genreFilters: string[] = filters.filter((filter: string) => filter !== FilterValues.purchaseable);
       if(genreFilters.length) {
         for (const filter of genreFilters) {
-          purchaseableBooks.forEach(book => {
-            if(!book.categories.some((category) => category.includes(filter))) {
+          purchaseableBooks.forEach((book: Book) => {
+            if(!book.categories.some((category: string) => category.includes(filter))) {
               filteredBooks.splice(filteredBooks.indexOf(book), 1)
             }
           })
@@ -53,10 +53,10 @@ function Results() {
       }
       return filteredBooks
     } else if(!filters.includes(FilterValues.purchaseable)) {
-      let filteredBooks = [...books];
+      let filteredBooks: Book[] = [...books];
       for (const filter of filters) {
-        books.forEach(book => {
-          if(!book.categories.some((category) => category.includes(filter))) {
+        books.forEach((book: Book) => {
+          if(!book.categories.some((category: string) => category.includes(filter))) {
             filteredBooks.splice(filteredBooks.indexOf(book), 1)
           }
         })
@@ -65,27 +65,10 @@ function Results() {
     }
   }
 
-  const fetchData = async () => {
-    try {
-      const searchData = await getResults(term);
-      searchData.forEach((book: any) => {
-        if(!book.image_links) {
-           book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-        }
-      })
-      const sortedData = sortResults(searchData, sort);
-      setResults(sortedData);
-      setLoading(false)
-    } catch(error: any) {
-      setError(`There was a problem getting the search results - ${error.message}`)
-      setLoading(false)
-    }
-  }
-
-  const sortedFilteredBooks = () => {
-    const filteredData = filterResults(results, filters);
-    const sortedData = sortResults(filteredData, sort);
-    const books = sortedData?.map((book: Book) => {
+  const sortedFilteredBooks = (): React.ReactNode => {
+    const filteredData: Book[] | undefined = filterResults(results, filters);
+    const sortedData: Book[] = sortResults(filteredData, sort);
+    const books: JSX.Element[] = sortedData?.map((book: Book) => {
       return (
         <Card
           key={book.id}
@@ -93,7 +76,6 @@ function Results() {
           title={book.title}
           authors={book.authors}
           image={book.image_links ? book.image_links.smallThumbnail : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
-          book={book}
         />
       )
     })
@@ -104,13 +86,23 @@ function Results() {
     setError('')
     setLoading(true)
     setResults([])
+    const fetchData = async (): Promise<void> => {
+      try {
+        const searchData: Book[] = await getResults(term);
+        searchData.forEach((book: Book) => {
+          if(!book.image_links) {
+             book.image_links = {smallThumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaQakHOfrZN4cKsNq6Lpu9L435U9q4l3OJMA&s'}
+          }
+        })
+        setResults(searchData);
+        setLoading(false)
+      } catch(error: any) {
+        setError(`There was a problem getting the search results - ${error.message}`)
+        setLoading(false)
+      }
+    }
     fetchData()
   }, [term])
-
-  useEffect(() => {
-    // setLoading(true)
-  }, [filters, sort])
-
 
     return(
         <>

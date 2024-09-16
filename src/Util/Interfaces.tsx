@@ -13,7 +13,6 @@ export interface Book {
 
 export interface ImgLinks {
     smallThumbnail: string;
-    thumbnail: string;
 }
 
 export interface Bookshelf {
@@ -23,7 +22,10 @@ export interface Bookshelf {
     book_count: number;
 }
 
-// export interface RequestOptions {
-//     method: string;
-//     redirect: string;
+export interface AlertStatus {
+    status: "info" | "warning" | "success" | "error" | "loading" | undefined
+}
+
+// export interface User {
+//     id: string;
 // }

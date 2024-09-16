@@ -30,17 +30,17 @@ describe('General User Stories Spec', () => {
         statusCode: 200,
         fixture: "recommendations_response",
       }).as('getRecs') 
-    cy.intercept("GET", "https://5ed7ccd5-b752-4d30-bd73-96ddec3fba58.mock.pstmn.io/api/vi/users/106196942824430802445/bookshelves"
-      , {
-        statusCode: 200,
-        fixture: "shelves",
-      }).as('getShelves') 
     cy.visit('http://localhost:3000')
   })
   it('Displays landing page', () => {
     cy.get('h1').contains('LivreList')
     .get('input[type="text"]').should('have.attr', 'placeholder').should('eq', 'search')
-    .get('button').should('be.visible')
+    .get('button').should('be.visible').click()
+    .get('a[href="/"]').contains('Home')
+    .get('.chakra-button').contains('Login with Google')
+    .get('.chakra-modal__close-btn').click()
+    .get('a[href="/"]').contains('Home').should('not.be.visible')
+    .get('.chakra-button').contains('Login with Google').should('not.be.visible')
     .get('img').should('have.attr', 'alt').should('equal', 'illustration of book spines')
     .get('.home-info').contains(`Welcome to LivreList – Your Ultimate Book Organizer!`)
   })
@@ -105,10 +105,8 @@ describe('General User Stories Spec', () => {
     .get('.book-details').contains('p', 'P.K. Hallinan')
     .get('.book-details').contains('p', 'Sky Pony | Published: 2019')
     .get('.book-info').contains('p', 'Encourage safe yet exciting Halloween fun for your child')
-    .get('.chakra-menu__menu-button').click()
-    .get('button[id="menu-list-:r7:-menuitem-:r9:"]').contains('Favorites')
-    .get('button[id="menu-list-:r7:-menuitem-:rb:"]').contains('For the Culture')
-    .get('button[id="menu-list-:r7:-menuitem-:rd:"]').contains('Create a New Shelf')
+    .get('.chakra-button').contains('Login to add to shelf').should('be.visible')
+    .get('.chakra-menu__menu-button').should('not.exist')
     .get('.chakra-button').contains('Buy Book').should('not.exist')
     .get('h4').contains('Recommendations')
     .get('.slick-prev').should('be.visible')
@@ -128,11 +126,7 @@ describe('General User Stories Spec', () => {
     .get('.book-details').contains('p', 'Mickie Mueller')
     .get('.book-details').contains('p', 'Llewellyn Worldwide | Published: 2018')
     .get('.book-info').contains('p', 'This fun, pocket-size book shares everything you need to know to celebrate the festival')
-    .get('.chakra-menu__menu-button').click()
-    .get('button[id="menu-list-:r7:-menuitem-:r9:"]').contains('Favorites')
-    .get('button[id="menu-list-:r7:-menuitem-:rb:"]').contains('For the Culture')
-    .get('button[id="menu-list-:r7:-menuitem-:rd:"]').contains('Create a New Shelf')
-    .get('.chakra-button').contains('Buy Book')
+    .get('.chakra-button').contains('Buy Book').should('be.visible')
     .get('h4').contains('Recommendations')
     .get('.slick-prev').should('be.visible')
     .get('.slick-next').should('be.visible')
