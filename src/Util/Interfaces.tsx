@@ -26,6 +26,13 @@ export interface AlertStatus {
     status: "info" | "warning" | "success" | "error" | "loading" | undefined
 }
 
+export enum FilterValues {
+    purchaseable = 'purchaseable',
+    fiction = 'Fiction',
+    nonFiction = 'Nonfiction',
+    childrens = 'Juvenile'
+  };
+
 // export interface User {
 //     id: string;
 // }

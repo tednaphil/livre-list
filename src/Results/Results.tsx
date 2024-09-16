@@ -1,5 +1,5 @@
 import './Results.css';
-import { Book } from '../Util/Interfaces';
+import { Book, FilterValues } from '../Util/Interfaces';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getResults } from '../Util/API_calls';
@@ -15,13 +15,6 @@ function Results() {
   const [filters, setFilters] = useState<string[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
-  enum FilterValues {
-    purchaseable = 'purchaseable',
-    fiction = 'Fiction',
-    nonFiction = 'Nonfiction',
-    childrens = 'Juvenile'
-  };
 
   //books parameter has type any since the method toSorted throws an error when called on Book[] type
   const sortResults = (books: any, orientation: string): Book[] => {
