@@ -5,13 +5,11 @@ on:
   pull_request:
     branches:
       - main
-  
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
     environment: Test
-    env:
-      CI: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
