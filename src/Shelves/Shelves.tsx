@@ -20,7 +20,7 @@ function Shelves() {
     } else {
       return shelves.toSorted((a: Bookshelf, b: Bookshelf) => a.title.localeCompare(b.title))
     }
-  }
+  };
 
   useEffect(() => {
     // const sessionUser = sessionStorage.getItem('userID')
@@ -30,7 +30,6 @@ function Shelves() {
       try {
         const sessionUser: string | null = sessionStorage.getItem('userID')
         const response: Bookshelf[] = await getShelves(sessionUser);
-        // const sortedData: Bookshelf[] = sortShelves(response, sort);
         setShelves(response)
         setLoading(false)
       } catch(error: any) {
@@ -39,18 +38,7 @@ function Shelves() {
       }
     }
     fetchData()
-  }, [])
-
-  // const shelfNames: React.ReactNode = shelves?.map((shelf: Bookshelf) => {
-  //   return(
-  //     <ShelfCard
-  //     key={shelf.id}
-  //     title={shelf.title}
-  //     id={shelf.id}
-  //     bookCount={shelf.book_count}
-  //     />
-  //   )
-  // })
+  }, []);
 
   const sortedShelves = (shelves: Bookshelf[] | null) => {
     if(shelves) {
@@ -78,7 +66,6 @@ function Shelves() {
               <ShelfCtrl setSort={setSort} />
             </section>
             <section className='shelves-gallery'>
-              {/* {shelfNames} */}
               {sortedShelves(shelves)}
             </section>
           </div>
