@@ -30,8 +30,8 @@ function Shelves() {
       try {
         const sessionUser: string | null = sessionStorage.getItem('userID')
         const response: Bookshelf[] = await getShelves(sessionUser);
-        const sortedData: Bookshelf[] = sortShelves(response, sort);
-        setShelves(sortedData)
+        // const sortedData: Bookshelf[] = sortShelves(response, sort);
+        setShelves(response)
         setLoading(false)
       } catch(error: any) {
         setError(`There was a problem getting the shelves - ${error}`)
@@ -39,18 +39,34 @@ function Shelves() {
       }
     }
     fetchData()
-  }, [sort])
+  }, [])
 
-  const shelfNames: React.ReactNode = shelves?.map((shelf: Bookshelf) => {
-    return(
-      <ShelfCard
-      key={shelf.id}
-      title={shelf.title}
-      id={shelf.id}
-      bookCount={shelf.book_count}
-      />
-    )
-  })
+  // const shelfNames: React.ReactNode = shelves?.map((shelf: Bookshelf) => {
+  //   return(
+  //     <ShelfCard
+  //     key={shelf.id}
+  //     title={shelf.title}
+  //     id={shelf.id}
+  //     bookCount={shelf.book_count}
+  //     />
+  //   )
+  // })
+
+  const sortedShelves = (shelves: Bookshelf[] | null) => {
+    if(shelves) {
+      const sorted = sortShelves(shelves, sort);
+      return sorted.map((shelf: Bookshelf) => {
+        return(
+          <ShelfCard
+          key={shelf.id}
+          title={shelf.title}
+          id={shelf.id}
+          bookCount={shelf.book_count}
+          />
+        )
+      })
+    }
+  };
 
     return(
         <>
@@ -62,7 +78,8 @@ function Shelves() {
               <ShelfCtrl setSort={setSort} />
             </section>
             <section className='shelves-gallery'>
-              {shelfNames}
+              {/* {shelfNames} */}
+              {sortedShelves(shelves)}
             </section>
           </div>
         </>}
