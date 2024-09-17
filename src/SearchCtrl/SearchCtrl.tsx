@@ -28,6 +28,8 @@ function SearchCtrl({ setSort, setFilters, filters }: Props) {
   const checkboxes: JSX.Element[] = Object.keys(FilterValues)
     .map((key, index) => {
       const values = Object.values(FilterValues)
+      console.log('key', key)
+      console.log('value', values[index])
       return (
           <Checkbox key={key} id={`${key}-filter`} value={values[index]} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {handleFilter(e)}}>{key[0].toUpperCase() + key.slice(1)}</Checkbox>
             )
