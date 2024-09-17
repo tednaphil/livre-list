@@ -1,6 +1,5 @@
 import './SearchCtrl.css';
 import { FilterValues } from '../Util/Interfaces';
-import { forIn } from 'lodash';
 import { Select, CheckboxGroup, Stack, Checkbox } from '@chakra-ui/react';
 
 
