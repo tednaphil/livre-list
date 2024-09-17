@@ -86,3 +86,8 @@ An explicit typing approach was adopted in this project for the benefits that se
   ```
   
 </details>
+
+## Wireframe:
+<div align="center">
+  <img src=".github/LivreList Wireframe.png" alt="mvp wireframe">
+</div>
