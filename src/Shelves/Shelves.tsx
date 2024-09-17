@@ -14,11 +14,11 @@ function Shelves() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const sortShelves = (shelves: Bookshelf[], orientation: string): Bookshelf[] => {
+  const sortShelves = (shelves: any, orientation: string): Bookshelf[] => {
     if(orientation === 'descending') {
-      return shelves.sort((a, b) => b.title.localeCompare(a.title))
+      return shelves.toSorted((a: Bookshelf, b: Bookshelf) => b.title.localeCompare(a.title))
     } else {
-      return shelves.sort((a, b) => a.title.localeCompare(b.title))
+      return shelves.toSorted((a: Bookshelf, b: Bookshelf) => a.title.localeCompare(b.title))
     }
   }
 
