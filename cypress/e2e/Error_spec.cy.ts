@@ -59,4 +59,7 @@ describe('Error Handling Spec', () => {
     cy.visit('http://localhost:3000/books/IJDQwQEACAAJ')
     .get('.recs').contains('Couldn\'t get recommendations - 500')
     })
+    // it('Display error alert if login unsuccessful', () => {
+
+    // })
   })
