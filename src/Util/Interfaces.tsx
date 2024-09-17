@@ -27,7 +27,7 @@ export interface AlertStatus {
 }
 
 export enum FilterValues {
-    purchaseable = 'purchaseable',
+    purchaseable = 'Purchaseable',
     fiction = 'Fiction',
     nonFiction = 'Nonfiction',
     childrens = 'Juvenile'
