@@ -1,23 +1,33 @@
 .book-card {
-    background: rgba(255, 255, 255, 0.72);
+    /* background: rgba(255, 255, 255, 0.72); */
+    background:#f3f0e6;
+    overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 10px;
-    margin: 8px;
-    width: 200px;
-    height: 300px;
-    outline: black solid 1px;
+    /* align-items: center; */
+    /* text-align: center; */
+    /* padding: 10px; */
+    margin: 10px;
+    width: 230px;
+    height: 380px;
+    /* outline: black solid 1px; */
     border-radius: 10px;
     & img {
-        margin: 0 auto;
+        /* margin: 0 auto; */
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+
     }
     & h3 {
         font-size: 1rem;
+        font-weight: 400;
+        padding: 10px 5px 5px 5px;
     }
     & p {
-        font-size: .8rem;
+        font-size: .7rem;
+        padding-left: 5px
     }
 }
 
