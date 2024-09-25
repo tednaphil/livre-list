@@ -11,7 +11,7 @@ interface Props {
 function Card({id, title, authors, image}: Props) {
 
     const author = (): JSX.Element => {
-      if(authors.length > 1) {
+      if(authors?.length > 1) {
         return <p className='author'>{`${authors[0]} et al.`}</p>
       } else if(!authors) {
         return <p className='author'>No Author Listed</p>
