@@ -98,7 +98,7 @@ function Results() {
   }, [term])
 
     return(
-        <>
+        <main className='results'>
           <h2 className='results-header'>{`Search Results - ${term}`}</h2>
           <div className='results-container'>
             <section className='sort-filter'>
@@ -110,7 +110,7 @@ function Results() {
               {!loading && sortedFilteredBooks()}
             </section>
           </div>
-        </>
+        </main>
     )
 }
 
