@@ -10,11 +10,15 @@ interface Props {
 
 function Card({id, title, authors, image}: Props) {
 
-  const authorList: React.ReactNode | React.ReactNode[] = authors ? authors.map((author, index) => {
-    return(
-      <p className='author' key={index}>{author}</p>
-    )}) :
-    <p className='author'>No Author Listed</p>
+    const author = (): JSX.Element => {
+      if(authors?.length > 1) {
+        return <p className='author'>{`${authors[0]} et al.`}</p>
+      } else if(!authors) {
+        return <p className='author'>No Author Listed</p>
+      } else {
+        return <p className='author'>{authors[0]}</p>
+      }
+    }
 
     return(
         <>
@@ -22,7 +26,7 @@ function Card({id, title, authors, image}: Props) {
           <Link to={`/books/${id}`}>
             <img src={image} alt={`${title} book cover`}/>
             <h3>{title}</h3>
-            {authorList}
+            {author()}
           </Link>
         </div>
         </>

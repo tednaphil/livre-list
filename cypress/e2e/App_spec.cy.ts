@@ -148,8 +148,7 @@ describe('General User Stories Spec', () => {
     .get('.card').first().contains('p', 'Lowell Swortzell')
     .get('img').first().should('have.attr', 'alt').should('equal', 'A Visit from St. Nicholas, Or, The Night Before Christmas book cover')
     .get('.card').last().contains('h3', 'WinterSong')
-    .get('.card').last().contains('p', 'Madeleine L\'Engle')
-    .get('.card').last().contains('p', 'Luci Shaw')
+    .get('.card').last().contains('p', 'Madeleine L\'Engle et al.')
     .get('img').last().should('have.attr', 'alt').should('equal', 'WinterSong book cover')
   })
   it('Displays message if no results match filter criteria', () => {

@@ -135,7 +135,7 @@ function BookProfile() {
             </article>
           </section>
           <footer className='recs'>
-            <h4>Recommendations</h4>
+            <h4 className='recs-header'>Recommendations</h4>
             {recsError ? <ErrorPage error={recsError}/> : <Carousel books={recs}/>}
             
           </footer>
