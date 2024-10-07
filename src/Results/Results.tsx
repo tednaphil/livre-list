@@ -107,7 +107,7 @@ function Results() {
             <section className='results-gallery'>
               {loading && <Loading/>}
               {error && <ErrorPage error={error}/>}
-              {!loading && sortedFilteredBooks()}
+              {!loading && !error && sortedFilteredBooks()}
             </section>
           </div>
         </main>

@@ -1,5 +1,5 @@
 .book-card {
-    background:#f3f0e6;
+    background:rgba(243, 240, 230, .6);
     overflow: hidden;
     display: flex;
     justify-content: center;
