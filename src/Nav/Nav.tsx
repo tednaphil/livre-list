@@ -17,6 +17,11 @@ import AlertBar from '../AlertBar/AlertBar';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 // import { postUser } from '../Util/API_calls';
+interface GoogleResponse {
+  credential: string;
+}
+
+const clientID = process.env.REACT_APP_CLIENT_ID;
 
 function Nav() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,6 +29,7 @@ function Nav() {
     const [user, setUser] = useState<string | null>(sessionUser);
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
+    const [googleResponse, setGoogleResponse] = useState<any>('');
     const navigate = useNavigate();
 
     enum Status {
@@ -33,6 +39,28 @@ function Nav() {
       error = "error",
       loading = "loading",
   }
+
+    const handleCallbackResponse = (response: GoogleResponse): void => {
+      console.log("Enabled JWT ID Token: " + response.credential)
+      console.log("Initializing Google accounts with Client ID:", clientID);
+    };
+
+    useEffect(() => {
+      window.google.accounts.id.initialize({
+        client_id: clientID,
+        callback: handleCallbackResponse,
+      });
+      const signInDiv = document.getElementById('sign-in-div');
+      if (signInDiv) {
+        // @ts-expect-error
+        window.google.accounts.id.renderButton(signInDiv, {
+          theme: 'outline',
+          size: 'large',
+        });
+      } else {
+        console.error('Sign-in div not found');
+      }
+    }, [clientID]);
 
 
     const login = async (): Promise<void> => {
@@ -114,7 +142,8 @@ function Nav() {
                     <Stack>
                         <NavLink to='/' onClick={onClose}>Home</NavLink>
                         {user && <NavLink to='/shelves' onClick={onClose}>Shelves</NavLink>}
-                        {!user && <Button colorScheme='orange' onClick={login}>Login with Google</Button>}
+                        <div id='sign-in-div'></div>
+                        {!user && <Button colorScheme='orange' onClick = {() => {handleCallbackResponse(googleResponse)}}>Login with Google</Button>}
                         {user && <Button colorScheme='orange' onClick={logout}>Logout</Button>}
                         {showAlert && createAlert()}
                     </Stack>
